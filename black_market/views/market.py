@@ -50,3 +50,10 @@ def clear_user(id_):
     wechat_user.delete()
     wechat_session.delete()
     return normal_jsonify({'status': 'Student %s has been removed.' % name})
+
+
+@bp.route('/<int:student_id>/<int:supply>/<int:demand>', methods=['GET'])
+def existed(student_id, supply, demand):
+    from black_market.model.post.course import CoursePost
+    r = CoursePost.existed(student_id, supply, demand)
+    return normal_jsonify(dict(result=r))
