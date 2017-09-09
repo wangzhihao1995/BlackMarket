@@ -4,7 +4,7 @@ from task.celery import app
 from datetime import datetime
 
 from black_market.ext import db
-from black_market.libs.cache.redis import mc, ONE_HOUR, ONE_DAY, ONE_WEEK
+from black_market.libs.cache.redis import mc, rd, ONE_HOUR, ONE_DAY, ONE_WEEK
 from black_market.model.wechat.user import WechatUser
 from black_market.model.utils import validator
 from black_market.model.user.consts import AccountStatus
@@ -141,21 +141,21 @@ class Student(db.Model):
     @property
     def remaining_viewcount(self):
         cache_key = self._remaining_viewcount_by_student_cache_key % self.id
-        if mc.get(cache_key):
-            viewcount = int(mc.get(cache_key))
+        if rd.get(cache_key):
+            viewcount = int(rd.get(cache_key))
             return viewcount
         else:
-            mc.set(cache_key, self.MAX_VIEWCOUNT)
-            mc.expire(cache_key, ONE_DAY)
+            rd.set(cache_key, self.MAX_VIEWCOUNT)
+            rd.expire(cache_key, ONE_DAY)
             return self.MAX_VIEWCOUNT
 
     def decr_viewcount(self):
         cache_key = self._remaining_viewcount_by_student_cache_key % self.id
-        if mc.get(cache_key):
-            viewcount = int(mc.get(cache_key))
+        if rd.get(cache_key):
+            viewcount = int(rd.get(cache_key))
             if viewcount <= 0:
                 raise CannotViewPostContactError()
-            mc.decr(cache_key)
+            rd.decr(cache_key)
 
     def need_verify(self):
         return self.account_status is AccountStatus.need_verify
@@ -177,4 +177,4 @@ class Student(db.Model):
     def clear_cache(self):
         mc.delete(self._student_cache_key % self.id)
         mc.delete(self._avatar_cache_key % self.id)
-        mc.delete(self._remaining_viewcount_by_student_cache_key % self.id)
+        rd.delete(self._remaining_viewcount_by_student_cache_key % self.id)
