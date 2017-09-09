@@ -110,8 +110,9 @@ class CoursePost(db.Model):
                    offset=offset, limit=limit))
         if not closed:
             sql = ('select course_supply.post_id as post_id '
-                   'from course_supply join course_demand join course_post '
+                   'from course_supply join course_demand '
                    'on course_supply.post_id=course_demand.post_id '
+                   'join course_post on course_post.id=course_supply.post_id '
                    'where course_supply.course_id={supply} '
                    'and course_demand.course_id={demand} '
                    'and course_post.status_={status} '
@@ -132,8 +133,9 @@ class CoursePost(db.Model):
                    supply=supply, desc=desc, offset=offset, limit=limit))
         if not closed:
             sql = ('select course_supply.post_id as post_id '
-                   'from course_supply join course_demand join course_post '
+                   'from course_supply join course_demand '
                    'on course_supply.post_id=course_demand.post_id '
+                   'join course_post on course_post.id=course_supply.post_id '
                    'where course_supply.course_id={supply} '
                    'and course_post.status_={status} '
                    'order by post_id {desc} limit {offset}, {limit}'.format(
@@ -153,8 +155,9 @@ class CoursePost(db.Model):
                    demand=demand, desc=desc, offset=offset, limit=limit))
         if not closed:
             sql = ('select course_supply.post_id as post_id '
-                   'from course_supply join course_demand join course_post '
+                   'from course_supply join course_demand '
                    'on course_supply.post_id=course_demand.post_id '
+                   'join course_post on course_post.id=course_supply.post_id '
                    'where course_demand.course_id={demand} '
                    'and course_post.status_={status} '
                    'order by post_id {desc} limit {offset}, {limit}'.format(
