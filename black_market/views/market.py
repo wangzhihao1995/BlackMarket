@@ -55,5 +55,5 @@ def clear_user(id_):
 @bp.route('/<int:student_id>/<int:supply>/<int:demand>', methods=['GET'])
 def existed(student_id, supply, demand):
     from black_market.model.post.course import CoursePost
-    r, rs = CoursePost.existed(student_id, supply, demand)
-    return normal_jsonify(dict(result=r, rs=rs))
+    r = CoursePost.existed(student_id, supply, demand)
+    return normal_jsonify(dict(result=r))
