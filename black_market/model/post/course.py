@@ -208,6 +208,28 @@ class CoursePost(db.Model):
         return False
 
     @classmethod
+    def _existed(cls, student_id, supply, demand):
+        sql = ('select course_supply.post_id as post_id '
+               'from course_supply join course_demand '
+               'on course_supply.post_id=course_demand.post_id '
+               'where course_supply.course_id={supply} '
+               'and course_demand.course_id={demand}').format(
+                   supply=supply, demand=demand)
+        rs = db.engine.execute(sql)
+        post_ids = [str(post_id) for (post_id,) in rs]
+        if post_ids:
+            sql = ('select id from course_post '
+                   'where id in {post_ids} '
+                   'and status_={status} '
+                   'and student_id={student_id}').format(
+                post_ids='(%s)' % ','.join(post_ids),
+                student_id=student_id,
+                status=PostStatus.normal.value)
+            rs = db.engine.execute(sql)
+            return bool(rs), rs
+        return False, rs
+
+    @classmethod
     def validate_new_post(cls, student_id, supply_course_id, demand_course_id):
         cls.validate_supply_and_demand(supply_course_id, demand_course_id)
         if cls.existed(student_id, supply_course_id, demand_course_id):
