@@ -101,9 +101,9 @@ class CoursePost(db.Model):
     def gets_by_supply_and_demand(cls, limit, offset, order, supply, demand, closed):
         desc = 'desc' if order is OrderType.descending else ''
         sql = ('select course_supply.post_id as post_id '
-               'from course_supply join course_demand'
-               'where course_supply.post_id=course_demand.post_id '
-               'and course_supply.course_id={supply} '
+               'from course_supply join course_demand '
+               'on course_supply.post_id=course_demand.post_id '
+               'where course_supply.course_id={supply} '
                'and course_demand.course_id={demand} '
                'order by post_id {desc} limit {offset}, {limit}'.format(
                    supply=supply, demand=demand, desc=desc,
@@ -111,8 +111,8 @@ class CoursePost(db.Model):
         if not closed:
             sql = ('select course_supply.post_id as post_id '
                    'from course_supply join course_demand join course_post '
-                   'where course_supply.post_id=course_demand.post_id '
-                   'and course_supply.course_id={supply} '
+                   'on course_supply.post_id=course_demand.post_id '
+                   'where course_supply.course_id={supply} '
                    'and course_demand.course_id={demand} '
                    'and course_post.status_={status} '
                    'order by post_id {desc} limit {offset}, {limit}'.format(
@@ -126,15 +126,15 @@ class CoursePost(db.Model):
         desc = 'desc' if order is OrderType.descending else ''
         sql = ('select course_supply.post_id as post_id '
                'from course_supply join course_demand '
-               'where course_supply.post_id=course_demand.post_id '
-               'and course_supply.course_id={supply} '
+               'on course_supply.post_id=course_demand.post_id '
+               'where course_supply.course_id={supply} '
                'order by post_id {desc} limit {offset}, {limit}'.format(
                    supply=supply, desc=desc, offset=offset, limit=limit))
         if not closed:
             sql = ('select course_supply.post_id as post_id '
                    'from course_supply join course_demand join course_post '
-                   'where course_supply.post_id=course_demand.post_id '
-                   'and course_supply.course_id={supply} '
+                   'on course_supply.post_id=course_demand.post_id '
+                   'where course_supply.course_id={supply} '
                    'and course_post.status_={status} '
                    'order by post_id {desc} limit {offset}, {limit}'.format(
                        supply=supply, status=PostStatus.normal.value,
@@ -147,15 +147,15 @@ class CoursePost(db.Model):
         desc = 'desc' if order is OrderType.descending else ''
         sql = ('select course_supply.post_id as post_id '
                'from course_supply join course_demand '
-               'where course_supply.post_id=course_demand.post_id '
-               'and course_demand.course_id={demand} '
+               'on course_supply.post_id=course_demand.post_id '
+               'where course_demand.course_id={demand} '
                'order by post_id {desc} limit {offset}, {limit}'.format(
                    demand=demand, desc=desc, offset=offset, limit=limit))
         if not closed:
             sql = ('select course_supply.post_id as post_id '
                    'from course_supply join course_demand join course_post '
-                   'where course_supply.post_id=course_demand.post_id '
-                   'and course_demand.course_id={demand} '
+                   'on course_supply.post_id=course_demand.post_id '
+                   'where course_demand.course_id={demand} '
                    'and course_post.status_={status} '
                    'order by post_id {desc} limit {offset}, {limit}'.format(
                        demand=demand, status=PostStatus.normal.value,
@@ -186,8 +186,8 @@ class CoursePost(db.Model):
     def existed(cls, student_id, supply, demand):
         sql = ('select course_supply.post_id as post_id '
                'from course_supply join course_demand '
-               'where course_supply.post_id=course_demand.post_id '
-               'and course_supply.course_id={supply} '
+               'on course_supply.post_id=course_demand.post_id '
+               'where course_supply.course_id={supply} '
                'and course_demand.course_id={demand}').format(
                    supply=supply, demand=demand)
         rs = db.engine.execute(sql)
