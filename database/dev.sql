@@ -1,19 +1,3 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : 115.28.212.24
- Source Server Type    : MySQL
- Source Server Version : 50552
- Source Host           : localhost:3306
- Source Schema         : blackmarket
-
- Target Server Type    : MySQL
- Target Server Version : 50552
- File Encoding         : 65001
-
- Date: 28/11/2017 14:46:55
-*/
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
