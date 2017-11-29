@@ -1,16 +1,22 @@
-# BlackMarket
-> BlackMarket is an infomation exchange platform that helps NSDers **trade** their courses in the first week of every semester. It is intended to reduce the **asymmetry of infomation** during the **grabbing-course** period. 
+# BlackMarket ![](https://travis-ci.org/wangzhihao1995/BlackMarket.svg?branch=master) [![codecov](https://codecov.io/gh/wangzhihao1995/BlackMarket/branch/master/graph/badge.svg)](https://codecov.io/gh/wangzhihao1995/BlackMarket)
 
-The new version of [Black Market](https://pkublackmarket.cn/) for 2017 Fall has been published.
+> BlackMarket is an infomation exchange platform that helps NSDers **trade** their courses and **more** in the future. It is intended to reduce the **asymmetry of infomation**.
 
+### ...Ready for it?
 
-### Get Started
+The next version Black Market is under development. ![](https://travis-ci.org/wangzhihao1995/BlackMarket.svg?branch=2018-spring) [![codecov](https://codecov.io/gh/wangzhihao1995/BlackMarket/branch/2018-spring/graph/badge.svg)](https://codecov.io/gh/wangzhihao1995/BlackMarket)
 
-Open WeChat App, then scan the QRCodes below.
+### Black Market for 2017 Fall
 
-![](black_market/static/img/app-qrcode.jpg)
+[Black Market](https://pkublackmarket.cn/) for the semester 2017 Fall has been published.
 
-![](black_market/static/img/qrcode.jpg)
+#### Get Started
+
+It's really easy. Open WeChat App, then scan the QRCodes below.
+
+![](src/main/resources/static/img/app-qrcode.jpg)
+
+![](src/main/resources/static/img/qrcode.jpg)
 
 ### ABOUT BLACK MARKET
 
