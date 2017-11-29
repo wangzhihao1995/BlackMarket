@@ -18,7 +18,6 @@ spring:
     jmx-enabled: true
 
 blackmarket:
-  # config
   config:
     debug: true
   sentry:
@@ -29,17 +28,11 @@ blackmarket:
   qiniu:
     qiniuAccessKey:
     qiniuSecretKey:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
 
-# redis cluster配置
-#  redis:
-#    cluster:
-#      nodes: 172.16.169.250:6379,172.16.169.250:6380,172.16.169.250:6381
-# 配置单点的redis
-#    host: 127.0.0.1
-#    port: 6379
-#    database: 0
-
-#以下配置不要在线上开启
 logging:
   level:
     com.wangzhihao.blackmarket: DEBUG
