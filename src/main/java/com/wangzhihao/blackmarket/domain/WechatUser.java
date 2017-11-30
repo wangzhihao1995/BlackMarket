@@ -1,5 +1,7 @@
 package com.wangzhihao.blackmarket.domain;
 
+import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
+
 import java.util.Date;
 
 /**
@@ -109,6 +111,17 @@ public class WechatUser {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public void setByUpdateWechatUserDto(UpdateWechatUserDto updateWechatUserDto) {
+        this.openId = updateWechatUserDto.getOpenId();
+        this.nickname = updateWechatUserDto.getNickname();
+        this.avatarUrl = updateWechatUserDto.getAvatarUrl();
+        this.city = updateWechatUserDto.getCity();
+        this.country = updateWechatUserDto.getCountry();
+        this.gender = updateWechatUserDto.getGender();
+        this.language = updateWechatUserDto.getLanguage();
+        this.province = updateWechatUserDto.getProvince();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.wangzhihao.blackmarket.service.impl;
 
 import com.wangzhihao.blackmarket.service.WechatService;
+import org.springframework.stereotype.Service;
 
 /**
  * Description
@@ -10,5 +11,6 @@ import com.wangzhihao.blackmarket.service.WechatService;
  *
  * @author Wang Zhihao.
  */
+@Service
 public class WechatServiceImpl implements WechatService {
 }

@@ -1,15 +1,18 @@
 package com.wangzhihao.blackmarket.service;
 
+import com.wangzhihao.blackmarket.domain.CoursePost;
 import org.springframework.stereotype.Service;
 
 /**
  * Description
  * <p>
  * </p>
- * DATE 2017/11/29.
+ * DATE 2017/11/30.
  *
  * @author Wang Zhihao.
  */
 @Service
-public interface WechatService {
+@FunctionalInterface
+public interface CoursePostService {
+    CoursePost getById(Long id);
 }

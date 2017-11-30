@@ -41,8 +41,8 @@ CREATE TABLE `course_post` (
   `message` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
   `pv_` int(11) DEFAULT NULL,
   `editable` smallint(6) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `student_id` (`student_id`),
   CONSTRAINT `course_post_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`)
@@ -89,8 +89,8 @@ CREATE TABLE `file_photo` (
   `filesize` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `hash` varchar(128) COLLATE utf8mb4_bin DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -109,8 +109,8 @@ CREATE TABLE `goods_post` (
   `imgs` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `pv_` int(11) DEFAULT NULL,
   `editable` smallint(6) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `student_id` (`student_id`),
   CONSTRAINT `goods_post_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`)
@@ -128,8 +128,8 @@ CREATE TABLE `student` (
   `type` smallint(6) DEFAULT NULL,
   `grade` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
   `status` smallint(6) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`mobile`),
   KEY `id` (`id`),
   KEY `open_id` (`open_id`),
@@ -147,7 +147,7 @@ CREATE TABLE `user_behavior` (
   `user_id` int(11) DEFAULT NULL,
   `type_` smallint(6) DEFAULT NULL,
   `detail` text COLLATE utf8mb4_bin,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3639 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -160,7 +160,7 @@ CREATE TABLE `user_view_record` (
   `student_id` varchar(56) COLLATE utf8mb4_bin DEFAULT NULL,
   `post_id` varchar(56) COLLATE utf8mb4_bin DEFAULT NULL,
   `post_type_` smallint(6) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -173,8 +173,8 @@ CREATE TABLE `wechat_session` (
   `open_id` varchar(80) COLLATE utf8mb4_bin NOT NULL,
   `session_key` varchar(80) COLLATE utf8mb4_bin NOT NULL,
   `third_session_key` varchar(80) COLLATE utf8mb4_bin NOT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `expire_time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `expire_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_wechat_session_third_session_key` (`third_session_key`),
   KEY `ix_wechat_session_open_id` (`open_id`)
@@ -194,8 +194,8 @@ CREATE TABLE `wechat_user` (
   `gender` smallint(6) DEFAULT NULL,
   `language` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `province` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_wechat_user_open_id` (`open_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1039 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;

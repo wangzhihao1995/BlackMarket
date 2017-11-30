@@ -1,5 +1,6 @@
 package com.wangzhihao.blackmarket.service;
 
+import com.wangzhihao.blackmarket.domain.GoodsPost;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,5 +12,7 @@ import org.springframework.stereotype.Service;
  * @author Wang Zhihao.
  */
 @Service
-public interface WechatService {
+@FunctionalInterface
+public interface GoodsPostService {
+    GoodsPost getById(Long id);
 }

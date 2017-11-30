@@ -35,6 +35,7 @@ blackmarket:
 
 logging:
   level:
+    root: WARN
     com.wangzhihao.blackmarket: DEBUG
 
 swagger:

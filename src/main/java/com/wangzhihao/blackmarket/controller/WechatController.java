@@ -1,10 +1,13 @@
 package com.wangzhihao.blackmarket.controller;
 
+import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
+import com.wangzhihao.blackmarket.service.WechatUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 /**
@@ -19,6 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/v1/wechat")
 public class WechatController {
 
+    @Autowired
+    WechatUserService wechatUserService;
+
     @RequestMapping(value = "/jscode2session", method = RequestMethod.GET)
     ResponseEntity jscode2session() {
         return new ResponseEntity<>("Jscode2Session", HttpStatus.OK);
@@ -32,7 +38,13 @@ public class WechatController {
 
 
     @RequestMapping(value = "/user", method = RequestMethod.PUT)
-    ResponseEntity updateWecahtUser() {
-        return new ResponseEntity<>("user", HttpStatus.OK);
+    ResponseEntity updateWecahtUser(@Valid @RequestBody UpdateWechatUserDto updateWechatUserDto) {
+        wechatUserService.updateWechatUser(updateWechatUserDto);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    ResponseEntity getWechatUser(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(wechatUserService.getById(id), HttpStatus.OK);
     }
 }
