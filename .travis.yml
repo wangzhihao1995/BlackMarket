@@ -1,8 +1,22 @@
 language: java
 jdk:
  - oraclejdk8
+services:
+  - mysql
+before_install:
+  - mysql -u root -e "CREATE DATABASE blackmarket;"
+  - mysql -u root -e "GRANT ALL ON blackmarket.* TO 'travis'@'localhost';"
+  - mysql -u root -e "status;"
+  - mysql -u root -e "select host, user, password from mysql.user;"
+  - cat /var/run/mysqld/mysqld.sock
+
+test:
+  adapter: mysql2
+  database: blackmarket
+  username: travis
+  encoding: utf8
 install:
 - cp ./src/main/resources/application.yml.example ./src/main/resources/application.yml
 - mvn -N io.takari:maven:wrapper
-- ./mvnw clean install
+- ./mvnw clean test
 - bash <(curl -s https://codecov.io/bash)

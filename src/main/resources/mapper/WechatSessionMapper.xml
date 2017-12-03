@@ -25,11 +25,37 @@
         id, open_id, session_key, third_session_key, create_time, update_time
     </sql>
 
-    <select id="findWechatSessionById" resultType="com.wangzhihao.blackmarket.domain.WechatSession">
+    <select id="findById" resultType="com.wangzhihao.blackmarket.domain.WechatSession">
         select
         <include refid="BeanProperty"/>
         from wechat_session
         where id = #{id}
     </select>
+
+
+    <select id="findByThirdSessionKey" resultType="com.wangzhihao.blackmarket.domain.WechatSession">
+        select
+        <include refid="BeanProperty"/>
+        from wechat_session
+        where third_session_key = #{thirdSessionKey}
+    </select>
+
+
+    <select id="findByOpenId" resultType="com.wangzhihao.blackmarket.domain.WechatSession">
+        select
+        <include refid="BeanProperty"/>
+        from wechat_session
+        where open_id = #{openId}
+    </select>
+
+
+    <select id="update">
+        update wechat_session
+        set session_key = #{sessionKey},
+        third_session_key = #{thirdSessionKey},
+        expire_time = #{expireTime},
+        where id = #{id}
+    </select>
+
 
 </mapper>

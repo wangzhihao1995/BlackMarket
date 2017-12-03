@@ -28,12 +28,12 @@ public class WechatUserServiceImpl implements WechatUserService {
 
     @Override
     public WechatUser getById(Long id) {
-        return wechatUserMapper.findWechatUserById(id);
+        return wechatUserMapper.findById(id);
     }
 
     @Override
     public WechatUser getByOpenId(String openId) {
-        return wechatUserMapper.findWechatUserByOpenId(openId);
+        return wechatUserMapper.findByOpenId(openId);
     }
 
     @Override

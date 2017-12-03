@@ -30,14 +30,14 @@
         values(#{openId}, #{nickname}, #{avatarUrl}, #{city}, #{country}, #{gender}, #{language}, #{province})
     </insert>
 
-    <select id="findWechatUserById" resultType="com.wangzhihao.blackmarket.domain.WechatUser">
+    <select id="findById" resultType="com.wangzhihao.blackmarket.domain.WechatUser">
         select
         <include refid="BeanProperty"/>
         from wechat_user
         where id = #{id}
     </select>
 
-    <select id="findWechatUserByOpenId" resultType="com.wangzhihao.blackmarket.domain.WechatUser">
+    <select id="findByOpenId" resultType="com.wangzhihao.blackmarket.domain.WechatUser">
         select
         <include refid="BeanProperty"/>
         from wechat_user

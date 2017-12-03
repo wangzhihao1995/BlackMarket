@@ -1,6 +1,7 @@
 package com.wangzhihao.blackmarket.service;
 
 import com.wangzhihao.blackmarket.domain.WechatSession;
+import com.wangzhihao.blackmarket.dto.UpdateWechatSessionDto;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +13,16 @@ import org.springframework.stereotype.Service;
  * @author Wang Zhihao.
  */
 @Service
-@FunctionalInterface
 public interface WechatSessionService {
+
+    void add(WechatSession wechatSession);
+
     WechatSession getById(Long id);
+
+    WechatSession getByThirdSessionKey(String thirdSessionKey);
+
+    WechatSession getByOpenId(String openId);
+
+    void update(UpdateWechatSessionDto updateWechatSessionDto);
+
 }

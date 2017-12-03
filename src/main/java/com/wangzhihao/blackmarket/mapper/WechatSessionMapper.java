@@ -1,6 +1,7 @@
 package com.wangzhihao.blackmarket.mapper;
 
 import com.wangzhihao.blackmarket.domain.WechatSession;
+import com.wangzhihao.blackmarket.dto.UpdateWechatSessionDto;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -12,7 +13,16 @@ import org.apache.ibatis.annotations.Mapper;
  * @author Wang Zhihao.
  */
 @Mapper
-@FunctionalInterface
 public interface WechatSessionMapper {
-    WechatSession findWechatSessionById(Long id);
+
+    void insert(WechatSession wechatSession);
+
+    WechatSession findById(Long id);
+
+    WechatSession findByThirdSessionKey(String thirdSessionKey);
+
+    WechatSession findByOpenId(String openId);
+
+    void update(UpdateWechatSessionDto updateWechatSessionDto);
+
 }

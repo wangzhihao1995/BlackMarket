@@ -17,9 +17,9 @@ public interface WechatUserMapper {
 
     void insert(WechatUser wechatUser);
 
-    WechatUser findWechatUserById(Long id);
+    WechatUser findById(Long id);
 
-    WechatUser findWechatUserByOpenId(String openId);
+    WechatUser findByOpenId(String openId);
 
     void update(UpdateWechatUserDto updateWechatUserDto);
 }
