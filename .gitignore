@@ -95,7 +95,7 @@ ENV/
 .DS_Store
 alchemydumps/
 
-
+.mvn/
 
 target/
 !.mvn/wrapper/maven-wrapper.jar

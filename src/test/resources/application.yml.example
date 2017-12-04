@@ -10,12 +10,10 @@ spring:
   application:
     name: blackmarket
   datasource:
-    url: jdbc:mysql://localhost:3306/blackmarket
-    username: travis
+    url: jdbc:mysql://127.0.0.1/blackmarket
+    username: root
     password:
     driverClassName: com.mysql.jdbc.Driver
-    connectionTestQuery: SELECT 1
-    jmx-enabled: true
 
 blackmarket:
   config:
