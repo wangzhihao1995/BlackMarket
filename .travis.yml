@@ -6,20 +6,13 @@ services:
   - mysql
 before_install:
   - mysql -u root -e "CREATE DATABASE blackmarket;"
-  - mysql -u root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('root');"
-  - mysql -u root -proot -e "FLUSH PRIVILEGES;"
 test:
   adapter: mysql2
   database: blackmarket
   username: root
-  password: root
   encoding: utf8
 install:
-- cp ./src/main/resources/application.yml.example ./src/main/resources/application.yml
+- cp ./src/test/resources/application.yml.example ./src/test/resources/application.yml
 - mvn -N io.takari:maven:wrapper
 - ./mvnw clean test
 - bash <(curl -s https://codecov.io/bash)
-cache:
-  directories:
-  - .autoconf
-  - $HOME/.m2
