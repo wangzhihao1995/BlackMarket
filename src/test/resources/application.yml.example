@@ -23,8 +23,9 @@ blackmarket:
   sentry:
     dsn:
   wechat:
-    appid:
-    appsecret:
+      miniapp:
+        appid:
+        appsecret:
   qiniu:
     qiniuAccessKey:
     qiniuSecretKey:

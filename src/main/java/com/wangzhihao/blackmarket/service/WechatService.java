@@ -11,5 +11,7 @@ import org.springframework.stereotype.Service;
  * @author Wang Zhihao.
  */
 @Service
+@FunctionalInterface
 public interface WechatService {
+    String jscode2session(String code);
 }
