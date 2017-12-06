@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+
+### BEGIN_COMMON
+#!/usr/bin/env bash
+
+fatal() {
+    echo fatal: "$@" >&2
+    exit 1
+}
+
+info() {
+    echo info: "$@"
+}
+
+print_files() {
+    [[ $# != 1 ]] || return
+    info $1
+    shift
+    for i; do
+        info "  $i"
+    done
+}
+
+if [ "$SKIPSONARLINT" ]; then
+    info "SKIPSONARLINT is set, skipping verification..."
+    exit 0
+fi
+
+if ! type sonarlint &>/dev/null; then
+    echo "fatal: cannot find 'sonarlint' on PATH"
+    echo "See setup steps in https://github.com/janosgyerik/sonarlint-git-hooks"
+    exit 1
+fi
+
+run() {
+    sources=()
+    sources_globs=
+    tests=()
+    tests_globs=
+    for file; do
+        if ! [ -f "$file" ]; then
+            info "skip deleted file: $file"
+            continue
+        fi
+        if [[ $file == *src/* ]]; then
+            if [[ $file == *[tT]est* ]]; then
+                tests+=("$file")
+                tests_globs="$tests_globs,$file"
+            else
+                if [[ $file != *Application.java* ]]; then
+                    if [[ $file != *src/main/resources/static* ]]; then
+                        if [[ $file != *src/main/resources/templates* ]]; then
+                            sources+=("$file")
+                        fi
+                    fi
+                fi
+            fi
+            if [[ $file != *Application.java* ]]; then
+                sources_globs="$sources_globs,$file"
+            fi
+            continue
+        fi
+        info "skip unknown file: $file"
+    done
+
+    if [ ${#sources} = 0 -a ${#tests} = 0 ]; then
+        info no files to analyze
+        return 2
+    fi
+
+    args=(--src "{${sources_globs:1}}")
+    # test "$tests_globs" && args+=(--tests "{${tests_globs:1}}")
+
+    print_files "source files to analyze:" "${sources[@]}"
+    print_files "test files to analyze:" "${tests[@]}"
+    info "analyzing..."
+    issues=$(sonarlint "${args[@]}" | sed -ne '/SonarLint Report/,/^---/p' -e '/Report generated/p')
+    echo "${issues}"
+
+    if ! [[ $issues == *"No issues to display"* ]]; then
+        fatal "hook abort: some analyses have failed"
+    fi
+}
+
+### END_COMMON
+
+files=($(git diff --name-only --diff-filter=AMR origin/master...))
+if run "${files[@]}"; then
+    cat << "EOF"
+  _______     ______      ______    ________            ___    ______    _______
+ /" _   "|   /    " \    /    " \  |"      "\          |"  |  /    " \  |   _  "\
+(: ( \___)  // ____  \  // ____  \ (.  ___  :)         ||  | // ____  \ (. |_)  :)
+ \/ \      /  /    ) :)/  /    ) :)|: \   ) ||         |:  |/  /    ) :)|:     \/
+ //  \ ___(: (____/ //(: (____/ // (| (___\ ||      ___|  /(: (____/ // (|  _  \\
+(:   _(  _|\        /  \        /  |:       :)     /  :|_/ )\        /  |: |_)  :)
+ \_______)  \"_____/    \"_____/   (________/     (_______/  \"_____/   (_______/
+
+EOF
+fi
