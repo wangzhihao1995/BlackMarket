@@ -10,6 +10,8 @@ CREATE TABLE `course` (
   `name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `teacher` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `credit` int(11) DEFAULT NULL,
+  `year` int(4) NOT NULL,
+  `semester` varchar(10) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;

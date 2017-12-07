@@ -6,6 +6,8 @@ import com.wangzhihao.blackmarket.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Description
  * <p>
@@ -23,5 +25,10 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course getById(Long id) {
         return courseMapper.findCourseById(id);
+    }
+
+    @Override
+    public List<Course> getListByYearAndSemester(Long year, String semester) {
+        return courseMapper.findByYearAndSemester(year, semester);
     }
 }

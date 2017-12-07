@@ -3,6 +3,8 @@ package com.wangzhihao.blackmarket.service;
 import com.wangzhihao.blackmarket.domain.Course;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Description
  * <p>
@@ -12,7 +14,8 @@ import org.springframework.stereotype.Service;
  * @author Wang Zhihao.
  */
 @Service
-@FunctionalInterface
 public interface CourseService {
     Course getById(Long id);
+
+    List<Course> getListByYearAndSemester(Long year, String semester);
 }

@@ -2,6 +2,9 @@ package com.wangzhihao.blackmarket.mapper;
 
 import com.wangzhihao.blackmarket.domain.Course;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * Description
@@ -12,7 +15,8 @@ import org.apache.ibatis.annotations.Mapper;
  * @author Wang Zhihao.
  */
 @Mapper
-@FunctionalInterface
 public interface CourseMapper {
     Course findCourseById(Long id);
+
+    List<Course> findByYearAndSemester(@Param("year") Long year, @Param("semester") String semester);
 }

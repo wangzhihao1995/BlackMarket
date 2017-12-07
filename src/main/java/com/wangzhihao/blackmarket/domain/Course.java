@@ -14,7 +14,7 @@ public class Course {
     private String teacher;
     private Long credit;
     private Long year;
-    private Long semester;
+    private String semester;
 
     public Long getId() {
         return id;
@@ -56,11 +56,11 @@ public class Course {
         this.year = year;
     }
 
-    public Long getSemester() {
+    public String getSemester() {
         return semester;
     }
 
-    public void setSemester(Long semester) {
+    public void setSemester(String semester) {
         this.semester = semester;
     }
 
@@ -72,7 +72,7 @@ public class Course {
                 ", teacher='" + teacher + '\'' +
                 ", credit=" + credit +
                 ", year=" + year +
-                ", semester=" + semester +
+                ", semester='" + semester + '\'' +
                 '}';
     }
 }

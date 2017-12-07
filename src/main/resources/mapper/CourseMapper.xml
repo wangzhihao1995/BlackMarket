@@ -32,4 +32,12 @@
         where id = #{id}
     </select>
 
+    <select id="findByYearAndSemester" resultType="com.wangzhihao.blackmarket.domain.Course">
+        select
+        <include refid="BeanProperty"/>
+        from course
+        where year = #{year} and semester = #{semester}
+        order by id
+    </select>
+
 </mapper>
