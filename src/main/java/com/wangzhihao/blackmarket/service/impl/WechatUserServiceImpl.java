@@ -47,6 +47,4 @@ public class WechatUserServiceImpl implements WechatUserService {
             this.add(wechatUser);
         }
     }
-
-
 }

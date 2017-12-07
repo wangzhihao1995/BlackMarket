@@ -1,13 +1,5 @@
 package com.wangzhihao.blackmarket.exception.handler;
 
-/**
- * Description
- * <p>
- * </p>
- * DATE 2017/12/6.
- *
- * @author Wang Zhihao.
- */
 
 class OutputErrorInfo {
     private String message;

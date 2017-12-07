@@ -9,18 +9,22 @@ package com.wangzhihao.blackmarket.exception;
  * @author Wang Zhihao.
  */
 
-public class GeneralException extends RuntimeException {
+public class BlackMarketException extends RuntimeException {
     private String message; //NOSONAR
     private String code; //NOSONAR
     private String traceId; //NOSONAR
     private String type; //NOSONAR
 
-    public GeneralException(String message) {
+    public BlackMarketException() {
+        // blank
+    }
+
+    public BlackMarketException(String message) {
         super(message);
         this.message = message;
     }
 
-    public GeneralException(Exception e) {
+    public BlackMarketException(Exception e) {
         super(e.getMessage());
     }
 

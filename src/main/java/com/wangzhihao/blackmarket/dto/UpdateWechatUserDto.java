@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
  * @author Wang Zhihao.
  */
 public class UpdateWechatUserDto {
-    @NotBlank
     private String openId;
     @NotBlank
     private String nickname;
