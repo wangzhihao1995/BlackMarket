@@ -1,9 +1,9 @@
 package com.wangzhihao.blackmarket.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wangzhihao.blackmarket.domain.WechatSession;
 import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
+import com.wangzhihao.blackmarket.exception.MissingJscodeException;
 import com.wangzhihao.blackmarket.service.WechatService;
 import com.wangzhihao.blackmarket.service.WechatSessionService;
 import com.wangzhihao.blackmarket.service.WechatUserService;
@@ -50,13 +50,16 @@ public class WechatController {
 
     @RequestMapping(value = "/jscode2session", method = RequestMethod.GET)
     ResponseEntity jscode2session(@Param("code") String code) {
-        JSONObject res = JSON.parseObject(wechatService.jscode2session(code));
-        String openId = (String) res.get(OPENID);
-        String sessionKey = (String) res.get(SESSION_KEY);
-        WechatSession wechatSession = wechatSessionService.add(openId, sessionKey);
-        HashMap<String, String> map = new HashMap<>();
-        map.put(SESSION_KEY, wechatSession.getThirdSessionKey());
-        return new ResponseEntity<>(map, HttpStatus.OK);
+        if (code != null) {
+            JSONObject res = wechatService.jscode2session(code);
+            String openId = (String) res.get(OPENID);
+            String sessionKey = (String) res.get(SESSION_KEY);
+            WechatSession wechatSession = wechatSessionService.add(openId, sessionKey);
+            HashMap<String, String> map = new HashMap<>();
+            map.put(SESSION_KEY, wechatSession.getThirdSessionKey());
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+        throw new MissingJscodeException();
     }
 
     @RequestMapping(value = "/check_session", method = RequestMethod.GET)

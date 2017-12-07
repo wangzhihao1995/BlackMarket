@@ -1,5 +1,6 @@
 package com.wangzhihao.blackmarket.service;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,5 +14,5 @@ import org.springframework.stereotype.Service;
 @Service
 @FunctionalInterface
 public interface WechatService {
-    String jscode2session(String code);
+    JSONObject jscode2session(String code);
 }

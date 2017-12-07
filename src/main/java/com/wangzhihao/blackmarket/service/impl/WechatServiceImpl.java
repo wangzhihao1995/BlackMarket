@@ -1,5 +1,8 @@
 package com.wangzhihao.blackmarket.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.wangzhihao.blackmarket.exception.Jscode2SessionException;
 import com.wangzhihao.blackmarket.service.WechatService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,7 +30,7 @@ public class WechatServiceImpl implements WechatService {
     public String appSecret;
 
     @Override
-    public String jscode2session(String code) {
+    public JSONObject jscode2session(String code) {
         RestTemplate restTemplate = new RestTemplate();
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString(JSCODE2SESSION_URL)
@@ -35,6 +38,10 @@ public class WechatServiceImpl implements WechatService {
                 .queryParam("secret", appSecret)
                 .queryParam("js_code", code)
                 .queryParam("grant_type", DEFAULT_GRANT_TYPE);
-        return restTemplate.getForObject(builder.toUriString(), String.class);
+        JSONObject res = JSON.parseObject(restTemplate.getForObject(builder.toUriString(), String.class));
+        if (res.get("errcode") != null) {
+            throw new Jscode2SessionException(String.format("[%s]%s", res.get("errcode"), res.get("errmsg")));
+        }
+        return res;
     }
 }

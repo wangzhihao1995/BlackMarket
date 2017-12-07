@@ -60,11 +60,31 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(output, e.getStatusCode());
     }
 
+    @ExceptionHandler(MissingJscodeException.class)
+    public ResponseEntity handleMissingJscodeException(MissingJscodeException e) {
+        logger.info(ERROR_MSG, e);
+        e.setMessage("Missing Jscode");
+        e.setCode("1001");
+        e.setType(MissingJscodeException.class.getName());
+        Object resp = genOutputException(e);
+        return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Jscode2SessionException.class)
+    public ResponseEntity handleJscode2SessionException(Jscode2SessionException e) {
+        logger.info(ERROR_MSG, e);
+        e.setMessage(e.getMessage());
+        e.setCode("1002");
+        e.setType(Jscode2SessionException.class.getName());
+        Object resp = genOutputException(e);
+        return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(MissingSessionKeyException.class)
     public ResponseEntity handleMissingSessionKeyException(MissingSessionKeyException e) {
         logger.info(ERROR_MSG, e);
         e.setMessage("Missing Session Key");
-        e.setCode("1001");
+        e.setCode("1003");
         e.setType(MissingSessionKeyException.class.getName());
         Object resp = genOutputException(e);
         return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
@@ -74,7 +94,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity handleWechatSessionNotFoundException(WechatSessionNotFoundException e) {
         logger.info(ERROR_MSG, e);
         e.setMessage("Wechat Session Not Found");
-        e.setCode("1002");
+        e.setCode("1004");
         e.setType(WechatSessionNotFoundException.class.getName());
         Object resp = genOutputException(e);
         return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
@@ -84,7 +104,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity handleWechatUserNotFoundException(WechatUserNotFoundException e) {
         logger.info(ERROR_MSG, e);
         e.setMessage("Wechat User Not Found");
-        e.setCode("1003");
+        e.setCode("1005");
         e.setType(WechatUserNotFoundException.class.getName());
         Object resp = genOutputException(e);
         return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
@@ -94,7 +114,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity handleStudentNotFoundException(StudentNotFoundException e) {
         logger.info(ERROR_MSG, e);
         e.setMessage("Student Not Found");
-        e.setCode("1004");
+        e.setCode("1006");
         e.setType(StudentNotFoundException.class.getName());
         Object resp = genOutputException(e);
         return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
