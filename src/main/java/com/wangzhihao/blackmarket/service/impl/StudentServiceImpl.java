@@ -1,6 +1,7 @@
 package com.wangzhihao.blackmarket.service.impl;
 
 import com.wangzhihao.blackmarket.domain.Student;
+import com.wangzhihao.blackmarket.dto.UpdateStudentDto;
 import com.wangzhihao.blackmarket.mapper.StudentMapper;
 import com.wangzhihao.blackmarket.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,17 @@ public class StudentServiceImpl implements StudentService {
     StudentMapper studentMapper;
 
     @Override
+    public void add(Student student) {
+        studentMapper.insert(student);
+    }
+
+    @Override
     public Student getById(Long id) {
         return studentMapper.findStudentById(id);
+    }
+
+    @Override
+    public void updateStudent(UpdateStudentDto updateStudentDto) {
+        studentMapper.update(updateStudentDto);
     }
 }

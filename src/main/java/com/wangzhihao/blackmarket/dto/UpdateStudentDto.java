@@ -1,8 +1,4 @@
-package com.wangzhihao.blackmarket.domain;
-
-import com.wangzhihao.blackmarket.dto.AddStudentDto;
-
-import java.util.Date;
+package com.wangzhihao.blackmarket.dto;
 
 /**
  * Description
@@ -12,16 +8,13 @@ import java.util.Date;
  *
  * @author Wang Zhihao.
  */
-public class Student {
+public class UpdateStudentDto {
     private Long id;
     private String name;
     private String mobile;
-    private String openId;
     private Long type;
     private String grade;
     private Long status;
-    private Date createTime;
-    private Date updateTime;
 
     public Long getId() {
         return id;
@@ -45,14 +38,6 @@ public class Student {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
-    }
-
-    public String getOpenId() {
-        return openId;
-    }
-
-    public void setOpenId(String openId) {
-        this.openId = openId;
     }
 
     public Long getType() {
@@ -79,44 +64,22 @@ public class Student {
         this.status = status;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public void setByAddStudentDto(AddStudentDto addStudentDto) {
-        id = addStudentDto.getId();
-        name = addStudentDto.getName();
-        mobile = addStudentDto.getMobile();
-        openId = addStudentDto.getOpenId();
-        type = addStudentDto.getType();
-        grade = addStudentDto.getGrade();
-        status = addStudentDto.getStatus();
+    @SuppressWarnings("squid:S1067")
+    public boolean isEmpty() {
+        return name.isEmpty() && mobile.isEmpty()
+                && type == null && grade.isEmpty()
+                && status == null;
     }
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "UpdateStudentDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", mobile='" + mobile + '\'' +
-                ", openId='" + openId + '\'' +
                 ", type=" + type +
                 ", grade='" + grade + '\'' +
                 ", status=" + status +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
                 '}';
     }
 }

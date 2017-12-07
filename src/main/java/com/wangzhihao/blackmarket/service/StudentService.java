@@ -1,6 +1,7 @@
 package com.wangzhihao.blackmarket.service;
 
 import com.wangzhihao.blackmarket.domain.Student;
+import com.wangzhihao.blackmarket.dto.UpdateStudentDto;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +13,10 @@ import org.springframework.stereotype.Service;
  * @author Wang Zhihao.
  */
 @Service
-@FunctionalInterface
 public interface StudentService {
+    void add(Student student);
+
     Student getById(Long id);
+
+    void updateStudent(UpdateStudentDto updateStudentDto);
 }

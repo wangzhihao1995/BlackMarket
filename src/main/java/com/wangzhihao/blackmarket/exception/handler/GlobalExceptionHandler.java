@@ -1,9 +1,6 @@
 package com.wangzhihao.blackmarket.exception.handler;
 
-import com.wangzhihao.blackmarket.exception.BlackMarketException;
-import com.wangzhihao.blackmarket.exception.MissingSessionKeyException;
-import com.wangzhihao.blackmarket.exception.WechatSessionNotFoundException;
-import com.wangzhihao.blackmarket.exception.WechatUserNotFoundException;
+import com.wangzhihao.blackmarket.exception.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -89,6 +86,16 @@ public class GlobalExceptionHandler {
         e.setMessage("Wechat User Not Found");
         e.setCode("1003");
         e.setType(WechatUserNotFoundException.class.getName());
+        Object resp = genOutputException(e);
+        return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(StudentNotFoundException.class)
+    public ResponseEntity handleStudentNotFoundException(StudentNotFoundException e) {
+        logger.info(ERROR_MSG, e);
+        e.setMessage("Student Not Found");
+        e.setCode("1004");
+        e.setType(StudentNotFoundException.class.getName());
         Object resp = genOutputException(e);
         return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
     }

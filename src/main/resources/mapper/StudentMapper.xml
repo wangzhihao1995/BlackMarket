@@ -25,11 +25,33 @@
         id, name, mobile, open_id, type, grade, status, create_time, update_time
     </sql>
 
+    <insert id="insert">
+        insert into student (id, name, mobile, open_id, type, grade, status)
+        values(#{id}, #{name}, #{mobile}, #{openId}, #{type}, #{grade}, #{status})
+    </insert>
+
     <select id="findStudentById" resultType="com.wangzhihao.blackmarket.domain.Student">
         select
         <include refid="BeanProperty"/>
         from student
         where id = #{id}
     </select>
+
+    <select id="findStudentByOpenId" resultType="com.wangzhihao.blackmarket.domain.Student">
+        select
+        <include refid="BeanProperty"/>
+        from student
+        where open_id = #{openId}
+    </select>
+
+    <update id="update">
+        update student set
+        <if test="name!=null">name = #{name},</if>
+        <if test="mobile!=null">mobile = #{mobile},</if>
+        <if test="type!=null">type = #{type},</if>
+        <if test="grade!=null">grade = #{grade},</if>
+        <if test="status!=null">status = #{status},</if>
+        where id = #{id}
+    </update>
 
 </mapper>
