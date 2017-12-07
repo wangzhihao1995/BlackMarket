@@ -174,7 +174,7 @@ CREATE TABLE `wechat_session` (
   `session_key` varchar(80) COLLATE utf8mb4_bin NOT NULL,
   `third_session_key` varchar(80) COLLATE utf8mb4_bin NOT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
-  `expire_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_wechat_session_third_session_key` (`third_session_key`),
   KEY `ix_wechat_session_open_id` (`open_id`)

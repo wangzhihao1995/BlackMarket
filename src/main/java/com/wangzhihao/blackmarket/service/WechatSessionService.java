@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface WechatSessionService {
 
-    void add(WechatSession wechatSession);
+    WechatSession add(String openId, String sessionKey);
 
     WechatSession getById(Long id);
 

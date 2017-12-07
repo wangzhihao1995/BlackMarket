@@ -66,8 +66,8 @@ public class UpdateStudentDto {
 
     @SuppressWarnings("squid:S1067")
     public boolean isEmpty() {
-        return name.isEmpty() && mobile.isEmpty()
-                && type == null && grade.isEmpty()
+        return name == null && mobile == null
+                && type == null && grade == null
                 && status == null;
     }
 

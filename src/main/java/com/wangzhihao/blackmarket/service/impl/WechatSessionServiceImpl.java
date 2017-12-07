@@ -7,6 +7,8 @@ import com.wangzhihao.blackmarket.service.WechatSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 /**
  * Description
  * <p>
@@ -22,8 +24,23 @@ public class WechatSessionServiceImpl implements WechatSessionService {
     WechatSessionMapper wechatSessionMapper;
 
     @Override
-    public void add(WechatSession wechatSession) {
-        wechatSessionMapper.insert(wechatSession);
+    public WechatSession add(String openId, String sessionKey) {
+        WechatSession wechatSession = getByOpenId(openId);
+        String thirdSessionKey = UUID.randomUUID().toString();
+        if (wechatSession == null) {
+            wechatSession = new WechatSession();
+            wechatSession.setOpenId(openId);
+            wechatSession.setSessionKey(sessionKey);
+            wechatSession.setThirdSessionKey(thirdSessionKey);
+            wechatSessionMapper.insert(wechatSession);
+            return wechatSession;
+        }
+        UpdateWechatSessionDto updateWechatSessionDto = new UpdateWechatSessionDto();
+        updateWechatSessionDto.setId(wechatSession.getId());
+        updateWechatSessionDto.setSessionKey(sessionKey);
+        updateWechatSessionDto.setThirdSessionKey(thirdSessionKey);
+        update(updateWechatSessionDto);
+        return getById(updateWechatSessionDto.getId());
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.wangzhihao.blackmarket.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.wangzhihao.blackmarket.domain.WechatSession;
 import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
 import com.wangzhihao.blackmarket.service.WechatService;
 import com.wangzhihao.blackmarket.service.WechatSessionService;
@@ -52,9 +53,9 @@ public class WechatController {
         JSONObject res = JSON.parseObject(wechatService.jscode2session(code));
         String openId = (String) res.get(OPENID);
         String sessionKey = (String) res.get(SESSION_KEY);
-        String thirdSessionKey = openId + sessionKey;
+        WechatSession wechatSession = wechatSessionService.add(openId, sessionKey);
         HashMap<String, String> map = new HashMap<>();
-        map.put(SESSION_KEY, thirdSessionKey);
+        map.put(SESSION_KEY, wechatSession.getThirdSessionKey());
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 

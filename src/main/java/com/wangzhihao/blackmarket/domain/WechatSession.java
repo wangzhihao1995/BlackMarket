@@ -1,5 +1,7 @@
 package com.wangzhihao.blackmarket.domain;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 /**
@@ -64,6 +66,13 @@ public class WechatSession {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public boolean isExpired() {
+        LocalDateTime now = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDateTime updateDateTime = updateTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDateTime expireDateTime = updateDateTime.plusWeeks(1);
+        return now.isAfter(expireDateTime);
     }
 
     @Override
