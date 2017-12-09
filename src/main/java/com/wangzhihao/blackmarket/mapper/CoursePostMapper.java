@@ -1,7 +1,11 @@
 package com.wangzhihao.blackmarket.mapper;
 
 import com.wangzhihao.blackmarket.domain.CoursePost;
+import com.wangzhihao.blackmarket.dto.GetCoursePostListDto;
+import com.wangzhihao.blackmarket.dto.UpdateCoursePostDto;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * Description
@@ -12,7 +16,14 @@ import org.apache.ibatis.annotations.Mapper;
  * @author Wang Zhihao.
  */
 @Mapper
-@FunctionalInterface
 public interface CoursePostMapper {
+    void insert(CoursePost coursePost);
+
     CoursePost findCoursePostById(Long id);
+
+    List<CoursePost> findCoursePosts(GetCoursePostListDto getCoursePostListDto);
+
+    void update(UpdateCoursePostDto updateCoursePostDto);
+
+    void incrPv(Long id);
 }

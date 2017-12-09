@@ -25,6 +25,11 @@
         id, student_id, status, mobile, wechat, message, imgs, pv, create_time, update_time
     </sql>
 
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into goods_post (student_id, status, mobile, wechat, message, imgs, pv)
+        values(#{student_id}, #{status}, #{mobile}, #{wechat}, #{message}, #{imgs}, #{pv})
+    </insert>
+
     <select id="findGoodsPostById" resultType="com.wangzhihao.blackmarket.domain.GoodsPost">
         select
         <include refid="BeanProperty"/>
@@ -32,4 +37,15 @@
         where id = #{id}
     </select>
 
+    <select id="findGoodsPosts" resultType="com.wangzhihao.blackmarket.domain.GoodsPost">
+        select
+        <include refid="BeanProperty"/>
+        from goods_post
+        where 1=1
+        <if test="supply!=null">and supply = #{supply}</if>
+        <if test="demand!=null">and demand = #{demand}</if>
+        <if test="status!=null">and status = #{status}</if>
+        order by id
+        <if test="order=='desc'">desc</if>
+    </select>
 </mapper>

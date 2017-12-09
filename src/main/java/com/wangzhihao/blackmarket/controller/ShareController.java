@@ -49,5 +49,4 @@ public class ShareController {
     ResponseEntity getShareGoodsPostImage(@PathVariable("id") long id) {
         return new ResponseEntity<>("get No.%d GoodsPost Share Image", HttpStatus.OK);
     }
-
 }

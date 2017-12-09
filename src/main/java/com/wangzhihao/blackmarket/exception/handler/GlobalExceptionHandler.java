@@ -119,4 +119,35 @@ public class GlobalExceptionHandler {
         Object resp = genOutputException(e);
         return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(CourseNotFoundException.class)
+    public ResponseEntity handleCourseNotFoundException(CourseNotFoundException e) {
+        logger.info(ERROR_MSG, e);
+        e.setMessage("Course Not Found");
+        e.setCode("1007");
+        e.setType(CourseNotFoundException.class.getName());
+        Object resp = genOutputException(e);
+        return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
+    }
+
+
+    @ExceptionHandler(CoursePostNotFoundException.class)
+    public ResponseEntity handleCoursePostNotFoundException(CoursePostNotFoundException e) {
+        logger.info(ERROR_MSG, e);
+        e.setMessage("Course Post Not Found");
+        e.setCode("1008");
+        e.setType(CoursePostNotFoundException.class.getName());
+        Object resp = genOutputException(e);
+        return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(GoodsPostNotFoundException.class)
+    public ResponseEntity handleGoodsPostNotFoundException(GoodsPostNotFoundException e) {
+        logger.info(ERROR_MSG, e);
+        e.setMessage("Goods Post Not Found");
+        e.setCode("1009");
+        e.setType(GoodsPostNotFoundException.class.getName());
+        Object resp = genOutputException(e);
+        return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
+    }
 }

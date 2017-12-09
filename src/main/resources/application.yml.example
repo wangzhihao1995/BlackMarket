@@ -27,8 +27,8 @@ blackmarket:
         appid:
         appsecret:
   qiniu:
-    qiniuAccessKey:
-    qiniuSecretKey:
+    accessKey: none
+    secretKey: none
   redis:
     host: 127.0.0.1
     port: 6379

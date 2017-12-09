@@ -17,31 +17,20 @@ CREATE TABLE `course` (
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
--- Table structure for course_demand
--- ----------------------------
-DROP TABLE IF EXISTS `course_demand`;
-CREATE TABLE `course_demand` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) DEFAULT NULL,
-  `course_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `post_id` (`post_id`),
-  CONSTRAINT `course_demand_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `course_post` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
--- ----------------------------
 -- Table structure for course_post
 -- ----------------------------
 DROP TABLE IF EXISTS `course_post`;
 CREATE TABLE `course_post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) DEFAULT NULL,
-  `status_` smallint(6) DEFAULT NULL,
+  `demand` int(11) DEFAULT NULL,
+  `supply` int(11) DEFAULT NULL,
+  `status` smallint(6) DEFAULT NULL,
   `switch` smallint(6) DEFAULT NULL,
   `mobile` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `wechat` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `message` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
-  `pv_` int(11) DEFAULT NULL,
+  `pv` int(11) DEFAULT NULL,
   `editable` smallint(6) DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -65,19 +54,6 @@ CREATE TABLE `course_schedule` (
   KEY `course_id` (`course_id`),
   CONSTRAINT `course_schedule_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
--- ----------------------------
--- Table structure for course_supply
--- ----------------------------
-DROP TABLE IF EXISTS `course_supply`;
-CREATE TABLE `course_supply` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) DEFAULT NULL,
-  `course_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `post_id` (`post_id`),
-  CONSTRAINT `course_supply_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `course_post` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Table structure for file_photo

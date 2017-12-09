@@ -1,7 +1,10 @@
 package com.wangzhihao.blackmarket.mapper;
 
 import com.wangzhihao.blackmarket.domain.GoodsPost;
+import com.wangzhihao.blackmarket.dto.GetGoodsPostListDto;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * Description
@@ -12,7 +15,10 @@ import org.apache.ibatis.annotations.Mapper;
  * @author Wang Zhihao.
  */
 @Mapper
-@FunctionalInterface
 public interface GoodsPostMapper {
+    void insert(GoodsPost goodsPost);
+
     GoodsPost findGoodsPostById(Long id);
+
+    List<GoodsPost> findGoodsPosts(GetGoodsPostListDto getGoodsPostListDto);
 }

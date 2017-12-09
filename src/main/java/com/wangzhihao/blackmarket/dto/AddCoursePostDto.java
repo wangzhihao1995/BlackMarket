@@ -9,19 +9,19 @@ package com.wangzhihao.blackmarket.dto;
  * @author Wang Zhihao.
  */
 public class AddCoursePostDto {
-    private String studentId;
+    private Long studentId;
     private Long mobileSwitch;
     private String mobile;
     private String wechat;
     private String message;
-    private Long supply;
-    private Long demand;
+    private String supply;
+    private String demand;
 
-    public String getStudentId() {
+    public Long getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
 
@@ -57,32 +57,32 @@ public class AddCoursePostDto {
         this.message = message;
     }
 
-    public Long getSupply() {
+    public String getSupply() {
         return supply;
     }
 
-    public void setSupply(Long supply) {
+    public void setSupply(String supply) {
         this.supply = supply;
     }
 
-    public Long getDemand() {
+    public String getDemand() {
         return demand;
     }
 
-    public void setDemand(Long demand) {
+    public void setDemand(String demand) {
         this.demand = demand;
     }
 
     @Override
     public String toString() {
         return "AddCoursePostDto{" +
-                "studentId='" + studentId + '\'' +
+                "studentId=" + studentId +
                 ", mobileSwitch=" + mobileSwitch +
                 ", mobile='" + mobile + '\'' +
                 ", wechat='" + wechat + '\'' +
                 ", message='" + message + '\'' +
-                ", supply=" + supply +
-                ", demand=" + demand +
+                ", supply='" + supply + '\'' +
+                ", demand='" + demand + '\'' +
                 '}';
     }
 }

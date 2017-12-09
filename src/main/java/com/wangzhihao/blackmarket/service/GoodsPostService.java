@@ -1,7 +1,10 @@
 package com.wangzhihao.blackmarket.service;
 
 import com.wangzhihao.blackmarket.domain.GoodsPost;
+import com.wangzhihao.blackmarket.dto.GetGoodsPostListDto;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Description
@@ -12,7 +15,10 @@ import org.springframework.stereotype.Service;
  * @author Wang Zhihao.
  */
 @Service
-@FunctionalInterface
 public interface GoodsPostService {
+    void add(GoodsPost goodsPost);
+
     GoodsPost getById(Long id);
+
+    List<GoodsPost> getGoodsPostList(GetGoodsPostListDto getGoodsPostListDto);
 }

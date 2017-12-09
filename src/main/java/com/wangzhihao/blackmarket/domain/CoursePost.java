@@ -1,5 +1,7 @@
 package com.wangzhihao.blackmarket.domain;
 
+import com.wangzhihao.blackmarket.dto.AddCoursePostDto;
+
 import java.util.Date;
 
 /**
@@ -109,6 +111,17 @@ public class CoursePost {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public void setByAddCoursePostDto(AddCoursePostDto addCoursePostDto) {
+        studentId = addCoursePostDto.getStudentId();
+        supply = addCoursePostDto.getSupply();
+        demand = addCoursePostDto.getDemand();
+        status = 0L;
+        mobile = addCoursePostDto.getMobile();
+        wechat = addCoursePostDto.getWechat();
+        message = addCoursePostDto.getMessage();
+        pv = 0L;
     }
 
     @Override

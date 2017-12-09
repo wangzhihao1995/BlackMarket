@@ -10,7 +10,7 @@ package com.wangzhihao.blackmarket.dto;
  */
 public class GetGoodsPostListDto {
     private String order = "desc";
-    private Long closed = 0L;
+    private Long status = 0L;
     private Long start = 0L;
     private Long limit = 10L;
 
@@ -22,12 +22,12 @@ public class GetGoodsPostListDto {
         this.order = order;
     }
 
-    public Long getClosed() {
-        return closed;
+    public Long getStatus() {
+        return status;
     }
 
-    public void setClosed(Long closed) {
-        this.closed = closed;
+    public void setStatus(Long status) {
+        this.status = status;
     }
 
     public Long getStart() {
@@ -44,5 +44,15 @@ public class GetGoodsPostListDto {
 
     public void setLimit(Long limit) {
         this.limit = limit;
+    }
+
+    @Override
+    public String toString() {
+        return "GetGoodsPostListDto{" +
+                "order='" + order + '\'' +
+                ", status=" + status +
+                ", start=" + start +
+                ", limit=" + limit +
+                '}';
     }
 }

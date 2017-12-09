@@ -9,26 +9,26 @@ package com.wangzhihao.blackmarket.dto;
  * @author Wang Zhihao.
  */
 public class GetCoursePostListDto {
-    private String supply;
-    private String demand;
+    private Long supply;
+    private Long demand;
     private String order = "desc";
-    private Long closed = 0L;
+    private Long status = 0L;
     private Long start = 0L;
     private Long limit = 10L;
 
-    public String getSupply() {
+    public Long getSupply() {
         return supply;
     }
 
-    public void setSupply(String supply) {
+    public void setSupply(Long supply) {
         this.supply = supply;
     }
 
-    public String getDemand() {
+    public Long getDemand() {
         return demand;
     }
 
-    public void setDemand(String demand) {
+    public void setDemand(Long demand) {
         this.demand = demand;
     }
 
@@ -40,12 +40,12 @@ public class GetCoursePostListDto {
         this.order = order;
     }
 
-    public Long getClosed() {
-        return closed;
+    public Long getStatus() {
+        return status;
     }
 
-    public void setClosed(Long closed) {
-        this.closed = closed;
+    public void setStatus(Long status) {
+        this.status = status;
     }
 
     public Long getStart() {
@@ -67,10 +67,10 @@ public class GetCoursePostListDto {
     @Override
     public String toString() {
         return "GetCoursePostListDto{" +
-                "supply='" + supply + '\'' +
-                ", demand='" + demand + '\'' +
+                "supply=" + supply +
+                ", demand=" + demand +
                 ", order='" + order + '\'' +
-                ", closed=" + closed +
+                ", status=" + status +
                 ", start=" + start +
                 ", limit=" + limit +
                 '}';
