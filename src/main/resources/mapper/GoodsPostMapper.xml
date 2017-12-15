@@ -27,7 +27,7 @@
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into goods_post (student_id, status, mobile, wechat, message, imgs, pv)
-        values(#{student_id}, #{status}, #{mobile}, #{wechat}, #{message}, #{imgs}, #{pv})
+        values(#{studentId}, #{status}, #{mobile}, #{wechat}, #{message}, #{imgs}, #{pv})
     </insert>
 
     <select id="findGoodsPostById" resultType="com.wangzhihao.blackmarket.domain.GoodsPost">

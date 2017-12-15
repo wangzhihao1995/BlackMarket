@@ -16,11 +16,11 @@ import java.util.List;
  */
 @Mapper
 public interface ImageMapper {
-    void insert(Image student);
+    void insert(Image image);
 
     Image findImageById(Long id);
 
-    List<Image> findImagesById(List<Long> ids);
+    List<Image> findImagesByIds(List<Long> ids);
 
     void update(UpdateImageDto updateImageDto);
 }

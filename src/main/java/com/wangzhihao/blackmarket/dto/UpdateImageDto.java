@@ -9,24 +9,15 @@ package com.wangzhihao.blackmarket.dto;
  * @author Wang Zhihao.
  */
 public class UpdateImageDto {
-    private String key;
-    private String bucket;
+    private Long id;
     private Long status;
 
-    public String getKey() {
-        return key;
+    public Long getId() {
+        return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getBucket() {
-        return bucket;
-    }
-
-    public void setBucket(String bucket) {
-        this.bucket = bucket;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getStatus() {
@@ -40,8 +31,7 @@ public class UpdateImageDto {
     @Override
     public String toString() {
         return "UpdateImageDto{" +
-                "key='" + key + '\'' +
-                ", bucket='" + bucket + '\'' +
+                "id=" + id +
                 ", status=" + status +
                 '}';
     }

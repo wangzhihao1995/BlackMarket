@@ -31,7 +31,7 @@ public class CourseUnitTest {
 
     @Test
     @Sql("/dev.sql")
-    public void testWechatSessionService() {
+    public void testCourseService() {
         Course mockCourse = MockDoamin.mockCourse();
         courseService.add(mockCourse);
         Course course = courseService.getById(mockCourse.getId());

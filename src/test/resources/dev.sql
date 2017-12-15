@@ -54,16 +54,14 @@ CREATE TABLE `course_schedule` (
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
--- Table structure for file_photo
+-- Table structure for image
 -- ----------------------------
-DROP TABLE IF EXISTS `file_photo`;
-CREATE TABLE `file_photo` (
+DROP TABLE IF EXISTS `image`;
+CREATE TABLE `image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `bucket` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `file_name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `filesize` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `hash` varchar(128) COLLATE utf8mb4_bin DEFAULT NULL,
+  `key` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

@@ -1,9 +1,6 @@
 package com.wangzhihao.blackmarket.data;
 
-import com.wangzhihao.blackmarket.domain.Course;
-import com.wangzhihao.blackmarket.domain.Student;
-import com.wangzhihao.blackmarket.domain.WechatSession;
-import com.wangzhihao.blackmarket.domain.WechatUser;
+import com.wangzhihao.blackmarket.domain.*;
 import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
 import com.wangzhihao.blackmarket.enums.GenderEnum;
 
@@ -67,5 +64,14 @@ public class MockDoamin {
         student.setGrade("2017");
         student.setStatus(1L);
         return student;
+    }
+
+    public static Image mockImage() {
+        Image image = new Image();
+        image.setKey("demo");
+        image.setBucket("blackmarket");
+        image.setUserId(1L);
+        image.setStatus(1L);
+        return image;
     }
 }

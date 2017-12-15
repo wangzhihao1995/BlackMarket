@@ -31,6 +31,7 @@ public class QiniuServiceImpl implements QiniuService {
         String key = String.format("img-stu%s-%s", studentId, UUID.randomUUID());
         StringMap putPolicy = new StringMap();
         putPolicy.put("callbackUrl", CALLBACK_URL);
+        // add id
         putPolicy.put("callbackBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)}");
         putPolicy.put("callbackBodyType", "application/json");
         return qiniuAuth.uploadToken(BUCKET, key, EXPIRE_SECONDS, putPolicy);

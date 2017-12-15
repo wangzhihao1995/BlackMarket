@@ -19,40 +19,40 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wangzhihao.blackmarket.mapper.StudentMapper">
+<mapper namespace="com.wangzhihao.blackmarket.mapper.ImageMapper">
 
     <sql id="BeanProperty">
-        id, name, mobile, open_id, type, grade, status, create_time, update_time
+        id, key, bucket, user_id, status, create_time, update_time
     </sql>
 
-    <insert id="insert">
-        insert into student (id, name, mobile, open_id, type, grade, status)
-        values(#{id}, #{name}, #{mobile}, #{openId}, #{type}, #{grade}, #{status})
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into image (key, bucket, user_id, status)
+        values(#{key}, #{bucket}, #{userId}, #{status})
     </insert>
 
-    <select id="findStudentById" resultType="com.wangzhihao.blackmarket.domain.Student">
+    <select id="findImageById" resultType="com.wangzhihao.blackmarket.domain.Image">
         select
         <include refid="BeanProperty"/>
-        from student
+        from image
         where id = #{id}
     </select>
 
-    <select id="findStudentByOpenId" resultType="com.wangzhihao.blackmarket.domain.Student">
+    <select id="findImagesByIds" resultType="com.wangzhihao.blackmarket.domain.Image">
         select
         <include refid="BeanProperty"/>
-        from student
-        where open_id = #{openId}
+        from image
+        where id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
     </select>
 
     <update id="update">
-        update student set
+        update image
         <set>
-            <if test="name!=null">name = #{name},</if>
-            <if test="mobile!=null">mobile = #{mobile},</if>
-            <if test="type!=null">type = #{type},</if>
-            <if test="grade!=null">grade = #{grade},</if>
             <if test="status!=null">status = #{status}</if>
         </set>
+        where id = #{id}
     </update>
 
 </mapper>

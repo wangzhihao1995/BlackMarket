@@ -35,7 +35,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public List<Image> getImageList(List<Long> ids) {
-        return imageMapper.findImagesById(ids);
+        return imageMapper.findImagesByIds(ids);
     }
 
     @Override
