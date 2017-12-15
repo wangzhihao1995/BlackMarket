@@ -35,8 +35,7 @@ CREATE TABLE `course_post` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `student_id` (`student_id`),
-  CONSTRAINT `course_post_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`)
+  KEY `student_id` (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
@@ -51,8 +50,7 @@ CREATE TABLE `course_schedule` (
   `end` int(11) DEFAULT NULL,
   `frequency` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `course_id` (`course_id`),
-  CONSTRAINT `course_schedule_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
+  KEY `course_id` (`course_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
@@ -90,8 +88,7 @@ CREATE TABLE `goods_post` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `student_id` (`student_id`),
-  CONSTRAINT `goods_post_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`)
+  KEY `student_id` (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
@@ -111,9 +108,7 @@ CREATE TABLE `student` (
   PRIMARY KEY (`mobile`),
   KEY `id` (`id`),
   KEY `open_id` (`open_id`),
-  KEY `ix_student_mobile` (`mobile`),
-  CONSTRAINT `student_ibfk_1` FOREIGN KEY (`id`) REFERENCES `wechat_user` (`id`),
-  CONSTRAINT `student_ibfk_2` FOREIGN KEY (`open_id`) REFERENCES `wechat_user` (`open_id`)
+  KEY `ix_student_mobile` (`mobile`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------

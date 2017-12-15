@@ -25,6 +25,11 @@
         id, name, teacher, credit, year, semester
     </sql>
 
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into course (name, teacher, credit, year, semester)
+        values(#{name}, #{teacher}, #{credit}, #{year}, #{semester})
+    </insert>
+
     <select id="findCourseById" resultType="com.wangzhihao.blackmarket.domain.Course">
         select
         <include refid="BeanProperty"/>

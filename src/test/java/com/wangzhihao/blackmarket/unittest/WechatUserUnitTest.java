@@ -59,5 +59,10 @@ public class WechatUserUnitTest {
         assertEquals(wechatUser.getOpenId(), mockWechatUser.getOpenId());
         assertEquals(wechatUser.getGender(), GenderEnum.UNKNOWN.getValue());
 
+        updateWechatUserDto.setOpenId("test" + updateWechatUserDto.getOpenId());
+        wechatUserService.updateWechatUser(updateWechatUserDto);
+        wechatUser = wechatUserService.getByOpenId(updateWechatUserDto.getOpenId());
+        assertNotEquals(wechatUser.getId(), mockWechatUser.getId());
+        assertNotEquals(wechatUser.getOpenId(), mockWechatUser.getOpenId());
     }
 }

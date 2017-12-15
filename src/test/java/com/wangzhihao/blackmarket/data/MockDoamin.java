@@ -1,5 +1,7 @@
 package com.wangzhihao.blackmarket.data;
 
+import com.wangzhihao.blackmarket.domain.Course;
+import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.domain.WechatSession;
 import com.wangzhihao.blackmarket.domain.WechatUser;
 import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
@@ -46,4 +48,24 @@ public class MockDoamin {
         return wechatSession;
     }
 
+    public static Course mockCourse() {
+        Course course = new Course();
+        course.setName("CNN");
+        course.setTeacher("Andrew");
+        course.setCredit(4L);
+        course.setYear(2018L);
+        course.setSemester("spring");
+        return course;
+    }
+
+    public static Student mockStudent() {
+        Student student = new Student();
+        student.setName("Mew");
+        student.setMobile("13000000000");
+        student.setOpenId(mockWechatSession().getOpenId());
+        student.setType(1L);
+        student.setGrade("2017");
+        student.setStatus(1L);
+        return student;
+    }
 }

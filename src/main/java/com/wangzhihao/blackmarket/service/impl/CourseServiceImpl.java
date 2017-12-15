@@ -23,6 +23,11 @@ public class CourseServiceImpl implements CourseService {
     CourseMapper courseMapper;
 
     @Override
+    public void add(Course course) {
+        courseMapper.insert(course);
+    }
+
+    @Override
     public Course getById(Long id) {
         return courseMapper.findCourseById(id);
     }

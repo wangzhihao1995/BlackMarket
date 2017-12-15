@@ -10,22 +10,11 @@ CREATE TABLE `course` (
   `name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `teacher` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `credit` int(11) DEFAULT NULL,
+  `year` int(4) NOT NULL,
+  `semester` varchar(10) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
--- ----------------------------
--- Table structure for course_demand
--- ----------------------------
-DROP TABLE IF EXISTS `course_demand`;
-CREATE TABLE `course_demand` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) DEFAULT NULL,
-  `course_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `post_id` (`post_id`),
-  CONSTRAINT `course_demand_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `course_post` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Table structure for course_post
@@ -34,18 +23,19 @@ DROP TABLE IF EXISTS `course_post`;
 CREATE TABLE `course_post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) DEFAULT NULL,
-  `status_` smallint(6) DEFAULT NULL,
+  `demand` int(11) DEFAULT NULL,
+  `supply` int(11) DEFAULT NULL,
+  `status` smallint(6) DEFAULT NULL,
   `switch` smallint(6) DEFAULT NULL,
   `mobile` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `wechat` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `message` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
-  `pv_` int(11) DEFAULT NULL,
+  `pv` int(11) DEFAULT NULL,
   `editable` smallint(6) DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `student_id` (`student_id`),
-  CONSTRAINT `course_post_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`)
+  KEY `student_id` (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
@@ -60,22 +50,8 @@ CREATE TABLE `course_schedule` (
   `end` int(11) DEFAULT NULL,
   `frequency` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `course_id` (`course_id`),
-  CONSTRAINT `course_schedule_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
+  KEY `course_id` (`course_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
--- ----------------------------
--- Table structure for course_supply
--- ----------------------------
-DROP TABLE IF EXISTS `course_supply`;
-CREATE TABLE `course_supply` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) DEFAULT NULL,
-  `course_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `post_id` (`post_id`),
-  CONSTRAINT `course_supply_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `course_post` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Table structure for file_photo
@@ -112,8 +88,7 @@ CREATE TABLE `goods_post` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `student_id` (`student_id`),
-  CONSTRAINT `goods_post_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`)
+  KEY `student_id` (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
@@ -133,9 +108,7 @@ CREATE TABLE `student` (
   PRIMARY KEY (`mobile`),
   KEY `id` (`id`),
   KEY `open_id` (`open_id`),
-  KEY `ix_student_mobile` (`mobile`),
-  CONSTRAINT `student_ibfk_1` FOREIGN KEY (`id`) REFERENCES `wechat_user` (`id`),
-  CONSTRAINT `student_ibfk_2` FOREIGN KEY (`open_id`) REFERENCES `wechat_user` (`open_id`)
+  KEY `ix_student_mobile` (`mobile`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
@@ -174,7 +147,7 @@ CREATE TABLE `wechat_session` (
   `session_key` varchar(80) COLLATE utf8mb4_bin NOT NULL,
   `third_session_key` varchar(80) COLLATE utf8mb4_bin NOT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
-  `expire_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_wechat_session_third_session_key` (`third_session_key`),
   KEY `ix_wechat_session_open_id` (`open_id`)

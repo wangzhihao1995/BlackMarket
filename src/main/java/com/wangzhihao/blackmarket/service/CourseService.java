@@ -15,6 +15,9 @@ import java.util.List;
  */
 @Service
 public interface CourseService {
+
+    void add(Course course);
+
     Course getById(Long id);
 
     List<Course> getListByYearAndSemester(Long year, String semester);

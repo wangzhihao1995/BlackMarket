@@ -16,6 +16,9 @@ import java.util.List;
  */
 @Mapper
 public interface CourseMapper {
+
+    void insert(Course course);
+
     Course findCourseById(Long id);
 
     List<Course> findByYearAndSemester(@Param("year") Long year, @Param("semester") String semester);

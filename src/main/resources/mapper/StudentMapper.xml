@@ -45,13 +45,14 @@
     </select>
 
     <update id="update">
-        update student set
-        <if test="name!=null">name = #{name},</if>
-        <if test="mobile!=null">mobile = #{mobile},</if>
-        <if test="type!=null">type = #{type},</if>
-        <if test="grade!=null">grade = #{grade},</if>
-        <if test="status!=null">status = #{status},</if>
-        where id = #{id}
+        update student
+        <set>
+            <if test="name!=null">name = #{name},</if>
+            <if test="mobile!=null">mobile = #{mobile},</if>
+            <if test="type!=null">type = #{type},</if>
+            <if test="grade!=null">grade = #{grade},</if>
+            <if test="status!=null">status = #{status}</if>
+        </set>
     </update>
 
 </mapper>
