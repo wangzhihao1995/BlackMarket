@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Wang Zhihao.
  */
 @RestController
-@RequestMapping(value = "/api/v1/qiniu")
+@RequestMapping(value = "/api/qiniu")
 public class QiniuController {
 
     @Autowired

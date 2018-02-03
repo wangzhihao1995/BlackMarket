@@ -30,8 +30,8 @@ public class FilterConfig {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(wechatSessionFilter);
         List<String> urlPatterns = new ArrayList<>();
-        urlPatterns.add("/api/v1/course/*");
-        urlPatterns.add("/api/v1/student/*");
+        urlPatterns.add("/api/course/*");
+        urlPatterns.add("/api/student/*");
         registrationBean.setUrlPatterns(urlPatterns);
         return registrationBean;
     }

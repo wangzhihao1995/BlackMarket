@@ -3,6 +3,9 @@ package com.wangzhihao.blackmarket.controller;
 import com.wangzhihao.blackmarket.domain.Course;
 import com.wangzhihao.blackmarket.dto.GetCourseListDto;
 import com.wangzhihao.blackmarket.service.CourseService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Wang Zhihao.
  */
 @RestController
-@RequestMapping(value = "/api/v1/course")
+@RequestMapping(value = "/api/course")
 public class CourseController {
 
     @Autowired
     CourseService courseService;
 
+    @ApiOperation(value = "Get Course List")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "", method = RequestMethod.GET)
     ResponseEntity getCourseList(GetCourseListDto getCourseListDto) {
         Long year = getCourseListDto.getYear();
@@ -34,6 +39,8 @@ public class CourseController {
         return new ResponseEntity<>(courseService.getListByYearAndSemester(year, semester), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Get Course By ID")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     ResponseEntity getCourse(@PathVariable("id") long id) {
         Course course = courseService.getById(id);

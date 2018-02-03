@@ -8,6 +8,9 @@ import com.wangzhihao.blackmarket.service.WechatService;
 import com.wangzhihao.blackmarket.service.WechatSessionService;
 import com.wangzhihao.blackmarket.service.WechatUserService;
 import com.wangzhihao.blackmarket.utils.WechatUtils;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +33,7 @@ import java.util.HashMap;
  * @author Wang Zhihao.
  */
 @RestController
-@RequestMapping(value = "/api/v1/wechat")
+@RequestMapping(value = "/api/wechat")
 public class WechatController {
 
     private static final String OPENID = "openid";
@@ -62,11 +65,15 @@ public class WechatController {
         throw new MissingJscodeException();
     }
 
+    @ApiOperation(value = "Check Session")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/check_session", method = RequestMethod.GET)
     ResponseEntity checkSession() {
         return new ResponseEntity<>(wechatUtils.requireWechatSession(), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Update Wechat User")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/user", method = {RequestMethod.POST, RequestMethod.PUT})
     ResponseEntity updateWecahtUser(@Valid @RequestBody UpdateWechatUserDto updateWechatUserDto) {
         updateWechatUserDto.setOpenId(wechatUtils.requireWechatSession().getOpenId());

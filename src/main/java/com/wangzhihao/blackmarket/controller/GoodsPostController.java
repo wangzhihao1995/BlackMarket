@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Wang Zhihao.
  */
 @RestController
-@RequestMapping(value = "/api/v1/goods/post")
+@RequestMapping(value = "/api/goods/post")
 public class GoodsPostController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)

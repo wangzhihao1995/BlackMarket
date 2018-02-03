@@ -9,6 +9,9 @@ import com.wangzhihao.blackmarket.exception.CoursePostNotFoundException;
 import com.wangzhihao.blackmarket.exception.UpdateCoursePostException;
 import com.wangzhihao.blackmarket.service.CoursePostService;
 import com.wangzhihao.blackmarket.utils.WechatUtils;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
  * @author Wang Zhihao.
  */
 @RestController
-@RequestMapping(value = "/api/v1/course/post")
+@RequestMapping(value = "/api/course/post")
 public class CoursePostController {
 
     @Autowired
@@ -33,11 +36,15 @@ public class CoursePostController {
     @Autowired
     WechatUtils wechatUtils;
 
+    @ApiOperation(value = "Get Course Post List")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "", method = RequestMethod.GET)
     ResponseEntity getCoursePostList(GetCoursePostListDto getCoursePostListDto) {
         return new ResponseEntity<>(coursePostService.getCoursePostList(getCoursePostListDto), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Get Course Post By ID")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     ResponseEntity getCoursePostById(@PathVariable("id") long id) {
         CoursePost coursePost = coursePostService.getById(id);
@@ -49,6 +56,8 @@ public class CoursePostController {
         throw new CoursePostNotFoundException();
     }
 
+    @ApiOperation(value = "Create New Course Post")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "", method = RequestMethod.POST)
     ResponseEntity createNewCoursePost(@RequestBody AddCoursePostDto addCoursePostDto) {
         WechatUser wechatUser = wechatUtils.requireWechatUser();
@@ -59,6 +68,8 @@ public class CoursePostController {
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Update Course Post")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     ResponseEntity updateCoursePost(@PathVariable("id") long id,
                                     @RequestBody UpdateCoursePostDto updateCoursePostDto) {
