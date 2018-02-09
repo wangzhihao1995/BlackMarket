@@ -12,9 +12,9 @@ import java.util.Date;
  */
 public class Image {
     private Long id;
-    private String key;
-    private String bucket;
     private Long userId;
+    private String bucket;
+    private String key;
     private Long status;
     private Date createTime;
     private Date updateTime;
@@ -27,12 +27,12 @@ public class Image {
         this.id = id;
     }
 
-    public String getKey() {
-        return key;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getBucket() {
@@ -43,12 +43,12 @@ public class Image {
         this.bucket = bucket;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getKey() {
+        return key;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Long getStatus() {
@@ -79,9 +79,9 @@ public class Image {
     public String toString() {
         return "Image{" +
                 "id=" + id +
-                ", key='" + key + '\'' +
-                ", bucket='" + bucket + '\'' +
                 ", userId=" + userId +
+                ", bucket='" + bucket + '\'' +
+                ", key='" + key + '\'' +
                 ", status=" + status +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
