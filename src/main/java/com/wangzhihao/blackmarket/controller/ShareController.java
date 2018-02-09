@@ -45,24 +45,24 @@ public class ShareController {
         return new ResponseEntity<>("shareCurrentStudent", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Share Student Image")
+    @ApiOperation(value = "Share Student File")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/student/{id}/image", method = RequestMethod.GET)
     ResponseEntity getShareStudentImage(@PathVariable("id") long id) {
-        return new ResponseEntity<>(String.format("get Student No.%d Share Image", id), HttpStatus.OK);
+        return new ResponseEntity<>(String.format("get Student No.%d Share File", id), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Get Share Course Post Image")
+    @ApiOperation(value = "Get Share Course Post File")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/coursepost/{id}/image", method = RequestMethod.GET)
     ResponseEntity getShareCoursePostImage(@PathVariable("id") long id) {
         return new ResponseEntity<>(String.format("get No.%d Course Post ShareImage", id), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Get Share Goods Post Image")
+    @ApiOperation(value = "Get Share Goods Post File")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/goodspost/{id}/image", method = RequestMethod.GET)
     ResponseEntity getShareGoodsPostImage(@PathVariable("id") long id) {
-        return new ResponseEntity<>("get No.%d GoodsPost Share Image", HttpStatus.OK);
+        return new ResponseEntity<>("get No.%d GoodsPost Share File", HttpStatus.OK);
     }
 }

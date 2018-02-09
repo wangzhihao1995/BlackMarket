@@ -2,6 +2,8 @@ package com.wangzhihao.blackmarket.data;
 
 import com.wangzhihao.blackmarket.domain.*;
 import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
+import com.wangzhihao.blackmarket.enums.FileStautsEnum;
+import com.wangzhihao.blackmarket.enums.FileTypeEnum;
 import com.wangzhihao.blackmarket.enums.GenderEnum;
 
 /**
@@ -66,12 +68,13 @@ public class MockDoamin {
         return student;
     }
 
-    public static Image mockImage() {
-        Image image = new Image();
-        image.setKey("demo");
-        image.setBucket("blackmarket");
-        image.setUserId(1L);
-        image.setStatus(1L);
-        return image;
+    public static File mockImage() {
+        File file = new File();
+        file.setType(FileTypeEnum.IMAGE.getValue());
+        file.setUploaderId(1L);
+        file.setStatus(FileStautsEnum.NOT_READY.getValue());
+        file.setKey("demo.jgp");
+        file.setUrl("https://blackmarket.com/file/demo.jgp");
+        return file;
     }
 }

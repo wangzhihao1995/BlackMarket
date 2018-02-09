@@ -1,6 +1,8 @@
 package com.wangzhihao.blackmarket.aspect;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,8 +16,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Description
@@ -34,12 +39,17 @@ public class WebLogAspect {
     private ThreadLocal<Long> startTime = new ThreadLocal<>();
 
     @Pointcut("execution(* com.wangzhihao.blackmarket.controller.*.*(..))")
-    public void webLog() {
-        // do nothing
+    public void webServiceLog() {
+        // empty
     }
 
-    @Before("webLog()")
-    public void beforeMethod(JoinPoint joinPoint) {
+    @Pointcut("execution(* com.wangzhihao.blackmarket.exception.*.*.*(..))")
+    public void errorLog() {
+        // empty
+    }
+
+    @Before("webServiceLog()")
+    public void beforeRequest(JoinPoint joinPoint) {
         startTime.set(System.currentTimeMillis());
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
@@ -48,26 +58,61 @@ public class WebLogAspect {
         json.put("HTTP_METHOD", request.getMethod());
         json.put("CLASS_METHOD", joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature()
                 .getName());
-        json.put("ARGS", Arrays.toString(joinPoint.getArgs()));
 
-        Enumeration<String> enu = request.getParameterNames();
-        while (enu.hasMoreElements()) {
-            String paraName = enu.nextElement();
-            json.put("param", paraName + "_" + request.getParameter(paraName));
+        List<Map<String, String>> args = Lists.newArrayList();
+        Enumeration<String> parameterNames = request.getParameterNames();
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (parameterNames.hasMoreElements()) {
+            String paraName = parameterNames.nextElement();
+            Map<String, String> arg = new HashMap<>();
+            arg.put(paraName, request.getParameter(paraName));
+            args.add(arg);
         }
-        logger.info("BlackMarketRequest:{}", json);
+        json.put("ARGS", args);
+
+        List<Map<String, String>> headers = Lists.newArrayList();
+        while (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            Map<String, String> header = new HashMap<>();
+            header.put(headerName, request.getHeader(headerName));
+            headers.add(header);
+        }
+        json.put("HEADERS", headers);
+        json.put("BODY", parseRequestBody(request));
+        logger.info("Request:{}", json);
     }
 
-    @AfterReturning(returning = "ret", pointcut = "webLog()")
-    public void doAfterReturning(JoinPoint joinPoint, Object ret) {
+    @AfterReturning(returning = "ret", pointcut = "webServiceLog()")
+    public void doAfterNormalReturning(JoinPoint joinPoint, Object ret) {
+        doAfterReturning(joinPoint, ret);
+    }
+
+    @AfterReturning(returning = "ret", pointcut = "errorLog()")
+    public void doAfterExceptionReturning(JoinPoint joinPoint, Object ret) {
+        doAfterReturning(joinPoint, ret);
+    }
+
+    @SuppressWarnings("squid:S1172")
+    private void doAfterReturning(JoinPoint joinPoint, Object ret) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletResponse response = attributes.getResponse();
         int status = response.getStatus();
         JSONObject json = new JSONObject();
-        json.put("RESPONSE", ret);
-        json.put("HTTP_STATUS_CODE", status);
+        json.put("RESPONSE_DATA", ret);
+        json.put("HTTP_STATUS", status);
         json.put("TIME_COST", System.currentTimeMillis() - startTime.get());
-        logger.info("BlackMarketResponse:{}", json);
+        logger.info("Response:{}", json);
         startTime.remove();
+    }
+
+    @SuppressWarnings("squid:S1166")
+    private String parseRequestBody(HttpServletRequest request) {
+        try {
+            String bodyString = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+            JSONObject bodyJson = JSON.parseObject(bodyString);
+            return bodyJson.toString();
+        } catch (Exception e) {
+            return "";
+        }
     }
 }

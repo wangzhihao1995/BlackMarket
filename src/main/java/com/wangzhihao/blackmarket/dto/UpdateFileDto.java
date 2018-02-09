@@ -8,9 +8,9 @@ package com.wangzhihao.blackmarket.dto;
  *
  * @author Wang Zhihao.
  */
-public class UpdateImageDto {
+public class UpdateFileDto {
     private Long id;
-    private Long status;
+    private Integer status;
 
     public Long getId() {
         return id;
@@ -20,17 +20,17 @@ public class UpdateImageDto {
         this.id = id;
     }
 
-    public Long getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return "UpdateImageDto{" +
+        return "UpdateFileDto{" +
                 "id=" + id +
                 ", status=" + status +
                 '}';

@@ -10,12 +10,13 @@ import java.util.Date;
  *
  * @author Wang Zhihao.
  */
-public class Image {
+public class File {
     private Long id;
-    private Long userId;
-    private String bucket;
+    private Integer type;
+    private Long uploaderId;
+    private Integer status;
     private String key;
-    private Long status;
+    private String url;
     private Date createTime;
     private Date updateTime;
 
@@ -27,20 +28,28 @@ public class Image {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Integer getType() {
+        return type;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
-    public String getBucket() {
-        return bucket;
+    public Long getUploaderId() {
+        return uploaderId;
     }
 
-    public void setBucket(String bucket) {
-        this.bucket = bucket;
+    public void setUploaderId(Long uploaderId) {
+        this.uploaderId = uploaderId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getKey() {
@@ -51,12 +60,12 @@ public class Image {
         this.key = key;
     }
 
-    public Long getStatus() {
-        return status;
+    public String getUrl() {
+        return url;
     }
 
-    public void setStatus(Long status) {
-        this.status = status;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Date getCreateTime() {
@@ -77,12 +86,13 @@ public class Image {
 
     @Override
     public String toString() {
-        return "Image{" +
+        return "File{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", bucket='" + bucket + '\'' +
-                ", key='" + key + '\'' +
+                ", type=" + type +
+                ", uploaderId=" + uploaderId +
                 ", status=" + status +
+                ", key='" + key + '\'' +
+                ", url='" + url + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';

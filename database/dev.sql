@@ -54,17 +54,18 @@ CREATE TABLE `course_schedule` (
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
--- Table structure for image
+-- Table structure for file
 -- ----------------------------
-DROP TABLE IF EXISTS `image`;
-CREATE TABLE `image` (
+DROP TABLE IF EXISTS `file`;
+CREATE TABLE `file` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `bucket` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `key` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
-  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `type` tinyint(2) unsigned NOT NULL COMMENT '文件类型, 1:图片, 2:文档, 3:音频, 4:视频, 5:其他',
+  `uploader_id` int(11) unsigned NOT NULL COMMENT '上传用户ID',
+  `status` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '文件上传状态',
+  `key` varchar(255) NOT NULL COMMENT '文件名',
+  `url` varchar(255) DEFAULT NULL COMMENT '文件地址',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
