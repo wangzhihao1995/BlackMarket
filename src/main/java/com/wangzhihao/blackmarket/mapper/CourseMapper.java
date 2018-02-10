@@ -21,5 +21,5 @@ public interface CourseMapper {
 
     Course findCourseById(Long id);
 
-    List<Course> findByYearAndSemester(@Param("year") Long year, @Param("semester") String semester);
+    List<Course> findByYearAndSemester(@Param("year") Integer year, @Param("semester") String semester);
 }

@@ -47,6 +47,7 @@ public class CoursePostController {
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     ResponseEntity getCoursePostById(@PathVariable("id") long id) {
+        wechatUtils.requireWechatUser();
         CoursePost coursePost = coursePostService.getById(id);
         if (coursePost != null) {
             coursePostService.incrPv(coursePost.getId());

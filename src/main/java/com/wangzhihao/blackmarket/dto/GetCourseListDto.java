@@ -9,14 +9,14 @@ package com.wangzhihao.blackmarket.dto;
  * @author Wang Zhihao.
  */
 public class GetCourseListDto {
-    private Long year = 2018L;
+    private Integer year = 2018;
     private String semester = "spring";
 
-    public Long getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(Long year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 

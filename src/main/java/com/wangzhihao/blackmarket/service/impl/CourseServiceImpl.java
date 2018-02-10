@@ -33,7 +33,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getListByYearAndSemester(Long year, String semester) {
+    public List<Course> getListByYearAndSemester(Integer year, String semester) {
         return courseMapper.findByYearAndSemester(year, semester);
     }
 }

@@ -91,6 +91,7 @@ public class StudentController {
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     ResponseEntity getCurrentStudentPostList() {
+        wechatUtils.requireWechatUser();
         return new ResponseEntity<>("getCurrentStudentPostList", HttpStatus.OK);
     }
 
@@ -98,6 +99,7 @@ public class StudentController {
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/{id}/post", method = RequestMethod.GET)
     ResponseEntity getStudentPostList(@PathVariable("id") long id) {
+        wechatUtils.requireWechatUser();
         return new ResponseEntity<>(String.format("getStudent No.%d PostList", id), HttpStatus.OK);
     }
 }

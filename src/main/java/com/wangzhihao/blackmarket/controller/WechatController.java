@@ -72,6 +72,13 @@ public class WechatController {
         return new ResponseEntity<>(wechatUtils.requireWechatSession(), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Get Wechat User")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
+    @RequestMapping(value = "/user", method = {RequestMethod.POST, RequestMethod.GET})
+    ResponseEntity getWecahtUser() {
+        return new ResponseEntity<>(wechatUtils.requireWechatUser(), HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Update Wechat User")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/user", method = {RequestMethod.POST, RequestMethod.PUT})
@@ -79,5 +86,7 @@ public class WechatController {
         updateWechatUserDto.setOpenId(wechatUtils.requireWechatSession().getOpenId());
         wechatUserService.updateWechatUser(updateWechatUserDto);
         return new ResponseEntity<>("ok", HttpStatus.OK);
+
+
     }
 }

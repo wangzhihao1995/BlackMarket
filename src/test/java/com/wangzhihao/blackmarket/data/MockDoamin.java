@@ -16,9 +16,9 @@ import com.wangzhihao.blackmarket.enums.GenderEnum;
  */
 public class MockDoamin {
 
-    public static final String OPENID = "o-irt0KDKL3neAUoa3HiKDnIxc_c";
-    public static final String SESSION_KEY = "AqZ0/be6x/Dnk3WTIJ+ywQ==";
-    public static final String THIRD_SESSION_KEY = "6de985a38e604485bb7fd63b5a2a1622";
+    public static final String OPENID = "o-irt0PDNL3neAUoa3HiKDnIxd_d";
+    public static final String SESSION_KEY = "Jvx8/G/0SAFaj+LlLP6d+w==";
+    public static final String THIRD_SESSION_KEY = "c27bd9dd5d3f41388b2658c8041d01ed";
 
     private MockDoamin() {
         throw new IllegalAccessError("Utility class");
@@ -51,7 +51,7 @@ public class MockDoamin {
         Course course = new Course();
         course.setName("CNN");
         course.setTeacher("Andrew");
-        course.setCredit(4L);
+        course.setCredit(4);
         course.setYear(2018L);
         course.setSemester("spring");
         return course;

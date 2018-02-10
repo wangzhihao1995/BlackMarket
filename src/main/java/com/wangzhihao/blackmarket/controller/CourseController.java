@@ -3,6 +3,7 @@ package com.wangzhihao.blackmarket.controller;
 import com.wangzhihao.blackmarket.domain.Course;
 import com.wangzhihao.blackmarket.dto.GetCourseListDto;
 import com.wangzhihao.blackmarket.service.CourseService;
+import com.wangzhihao.blackmarket.utils.WechatUtils;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -30,11 +31,15 @@ public class CourseController {
     @Autowired
     CourseService courseService;
 
+    @Autowired
+    WechatUtils wechatUtils;
+
     @ApiOperation(value = "Get Course List")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "", method = RequestMethod.GET)
     ResponseEntity getCourseList(GetCourseListDto getCourseListDto) {
-        Long year = getCourseListDto.getYear();
+        wechatUtils.requireWechatUser();
+        Integer year = getCourseListDto.getYear();
         String semester = getCourseListDto.getSemester();
         return new ResponseEntity<>(courseService.getListByYearAndSemester(year, semester), HttpStatus.OK);
     }
@@ -43,6 +48,7 @@ public class CourseController {
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     ResponseEntity getCourse(@PathVariable("id") long id) {
+        wechatUtils.requireWechatUser();
         Course course = courseService.getById(id);
         return new ResponseEntity<>(course, HttpStatus.OK);
     }

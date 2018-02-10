@@ -49,7 +49,7 @@ public class CourseUnitTest {
         mockCourse.setYear(2018L);
         courseService.add(mockCourse);
 
-        List<Course> courseList = courseService.getListByYearAndSemester(2018L, "spring");
+        List<Course> courseList = courseService.getListByYearAndSemester(2018, "spring");
         assertEquals(courseList.size(), 2);
         assertEquals(courseList.get(0).getName(), MockDoamin.mockCourse().getName());
         assertEquals(courseList.get(1).getName(), mockCourse.getName());
