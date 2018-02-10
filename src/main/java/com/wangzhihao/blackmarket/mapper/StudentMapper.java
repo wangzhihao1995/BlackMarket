@@ -20,5 +20,7 @@ public interface StudentMapper {
 
     Student findStudentByOpenId(String openId);
 
+    Student findStudentByWechatUserId(Long wechatUserId);
+
     void update(UpdateStudentDto updateStudentDto);
 }

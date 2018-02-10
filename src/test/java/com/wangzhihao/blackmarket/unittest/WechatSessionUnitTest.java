@@ -1,6 +1,6 @@
 package com.wangzhihao.blackmarket.unittest;
 
-import com.wangzhihao.blackmarket.data.MockDoamin;
+import com.wangzhihao.blackmarket.data.MockData;
 import com.wangzhihao.blackmarket.domain.WechatSession;
 import com.wangzhihao.blackmarket.service.WechatSessionService;
 import org.junit.Test;
@@ -31,17 +31,15 @@ public class WechatSessionUnitTest {
     @Test
     @Sql("/dev.sql")
     public void testWechatSessionService() {
-        WechatSession mockWechatSession = MockDoamin.mockWechatSession();
         WechatSession wechatSession = wechatSessionService.add(
-                mockWechatSession.getOpenId(), mockWechatSession.getSessionKey());
-        assertEquals(wechatSession.getOpenId(), mockWechatSession.getOpenId());
-        assertEquals(wechatSession.getSessionKey(), mockWechatSession.getSessionKey());
-        assertNotEquals(wechatSession.getThirdSessionKey(), mockWechatSession.getThirdSessionKey());
+                MockData.mockOpenID(), MockData.mockSessionKey());
+        assertEquals(wechatSession.getOpenId(), MockData.mockOpenID());
+        assertEquals(wechatSession.getSessionKey(), MockData.mockSessionKey());
 
         WechatSession anotherSession = wechatSessionService.add(
-                mockWechatSession.getOpenId(), mockWechatSession.getSessionKey());
-        assertEquals(anotherSession.getOpenId(), mockWechatSession.getOpenId());
-        assertEquals(anotherSession.getSessionKey(), mockWechatSession.getSessionKey());
+                MockData.mockOpenID(), MockData.mockSessionKey());
+        assertEquals(anotherSession.getOpenId(), MockData.mockOpenID());
+        assertEquals(anotherSession.getSessionKey(), MockData.mockSessionKey());
         assertNotEquals(wechatSession.getThirdSessionKey(), anotherSession.getThirdSessionKey());
 
         wechatSession = wechatSessionService.getByThirdSessionKey(anotherSession.getThirdSessionKey());

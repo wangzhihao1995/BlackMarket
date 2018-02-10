@@ -1,6 +1,6 @@
 package com.wangzhihao.blackmarket.unittest;
 
-import com.wangzhihao.blackmarket.data.MockDoamin;
+import com.wangzhihao.blackmarket.data.MockData;
 import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.domain.WechatUser;
 import com.wangzhihao.blackmarket.dto.UpdateStudentDto;
@@ -38,10 +38,10 @@ public class StudentUnitTest {
     @Sql("/dev.sql")
     public void testStudentService() {
 
-        WechatUser mockWechatUser = MockDoamin.mockWechatUser();
+        WechatUser mockWechatUser = MockData.mockWechatUser();
         wechatUserService.add(mockWechatUser);
 
-        Student mockStudent = MockDoamin.mockStudent();
+        Student mockStudent = MockData.mockStudent();
         mockStudent.setId(mockWechatUser.getId());
         studentService.add(mockStudent);
         assertNotNull(mockStudent.getId());
@@ -54,5 +54,8 @@ public class StudentUnitTest {
         studentService.updateStudent(updateStudentDto);
         student = studentService.getById(mockStudent.getId());
         assertEquals(student.getMobile(), "15600000000");
+
+        student = studentService.getByOpenId(mockStudent.getOpenId());
+        assertEquals(student.getOpenId(), mockStudent.getOpenId());
     }
 }

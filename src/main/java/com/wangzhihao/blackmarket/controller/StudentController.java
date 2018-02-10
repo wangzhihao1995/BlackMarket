@@ -38,7 +38,11 @@ public class StudentController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     ResponseEntity getCurrentStudent() {
         WechatUser wechatUser = wechatUtils.requireWechatUser();
-        return new ResponseEntity<>(studentService.getById(wechatUser.getId()), HttpStatus.OK);
+        Student student = studentService.getByWechatUserId(wechatUser.getId());
+        if (student != null) {
+            return new ResponseEntity<>(student, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @ApiOperation(value = "Send Register Code")
@@ -51,14 +55,20 @@ public class StudentController {
     @ApiOperation(value = "Create New Student")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "", method = RequestMethod.POST)
-    ResponseEntity createNewStudent(AddStudentDto addStudentDto) {
+    ResponseEntity createNewStudent(@RequestBody AddStudentDto addStudentDto) {
         WechatUser wechatUser = wechatUtils.requireWechatUser();
-        addStudentDto.setId(wechatUser.getId());
+        addStudentDto.setWechatUserId(wechatUser.getId());
         addStudentDto.setOpenId(wechatUser.getOpenId());
         Student student = new Student();
-        student.setByAddStudentDto(addStudentDto);
+        student.setWechatUserId(addStudentDto.getWechatUserId());
+        student.setName(addStudentDto.getName());
+        student.setMobile(addStudentDto.getMobile());
+        student.setOpenId(addStudentDto.getOpenId());
+        student.setType(addStudentDto.getType());
+        student.setGrade(addStudentDto.getGrade());
+        student.setStatus(addStudentDto.getStatus());
         studentService.add(student);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        return new ResponseEntity<>("OK", HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Update Current Student")

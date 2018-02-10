@@ -1,6 +1,9 @@
 package com.wangzhihao.blackmarket.data;
 
-import com.wangzhihao.blackmarket.domain.*;
+import com.wangzhihao.blackmarket.domain.Course;
+import com.wangzhihao.blackmarket.domain.File;
+import com.wangzhihao.blackmarket.domain.Student;
+import com.wangzhihao.blackmarket.domain.WechatUser;
 import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
 import com.wangzhihao.blackmarket.enums.FileStautsEnum;
 import com.wangzhihao.blackmarket.enums.FileTypeEnum;
@@ -14,13 +17,12 @@ import com.wangzhihao.blackmarket.enums.GenderEnum;
  *
  * @author Wang Zhihao.
  */
-public class MockDoamin {
+public class MockData {
 
-    public static final String OPENID = "o-irt0PDNL3neAUoa3HiKDnIxd_d";
-    public static final String SESSION_KEY = "Jvx8/G/0SAFaj+LlLP6d+w==";
-    public static final String THIRD_SESSION_KEY = "c27bd9dd5d3f41388b2658c8041d01ed";
+    private static final String OPENID = "o-irt0PDNL3neAUoa3HiKDnIxd_d";
+    private static final String SESSION_KEY = "Jvx8/G/0SAFaj+LlLP6d+w==";
 
-    private MockDoamin() {
+    private MockData() {
         throw new IllegalAccessError("Utility class");
     }
 
@@ -39,12 +41,12 @@ public class MockDoamin {
         return wechatUser;
     }
 
-    public static WechatSession mockWechatSession() {
-        WechatSession wechatSession = new WechatSession();
-        wechatSession.setOpenId(OPENID);
-        wechatSession.setSessionKey(SESSION_KEY);
-        wechatSession.setThirdSessionKey(THIRD_SESSION_KEY);
-        return wechatSession;
+    public static String mockOpenID() {
+        return OPENID;
+    }
+
+    public static String mockSessionKey() {
+        return SESSION_KEY;
     }
 
     public static Course mockCourse() {
@@ -59,12 +61,13 @@ public class MockDoamin {
 
     public static Student mockStudent() {
         Student student = new Student();
+        student.setWechatUserId(1L);
         student.setName("Mew");
         student.setMobile("13000000000");
-        student.setOpenId(mockWechatSession().getOpenId());
-        student.setType(1L);
+        student.setOpenId(OPENID);
+        student.setType(1);
         student.setGrade("2017");
-        student.setStatus(1L);
+        student.setStatus(1);
         return student;
     }
 

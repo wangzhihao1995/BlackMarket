@@ -1,6 +1,6 @@
 package com.wangzhihao.blackmarket.unittest;
 
-import com.wangzhihao.blackmarket.data.MockDoamin;
+import com.wangzhihao.blackmarket.data.MockData;
 import com.wangzhihao.blackmarket.domain.File;
 import com.wangzhihao.blackmarket.dto.UpdateFileDto;
 import com.wangzhihao.blackmarket.enums.FileStautsEnum;
@@ -33,7 +33,7 @@ public class FileUnitTest {
     @Test
     @Sql("/dev.sql")
     public void testImageService() {
-        File mockFile = MockDoamin.mockImage();
+        File mockFile = MockData.mockImage();
         fileService.add(mockFile);
         assertNotNull(mockFile.getId());
         assertEquals(fileService.getById(mockFile.getId()).getKey(), mockFile.getKey());

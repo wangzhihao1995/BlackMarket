@@ -6,7 +6,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `teacher` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `credit` int(11) DEFAULT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE `course` (
 -- ----------------------------
 DROP TABLE IF EXISTS `course_post`;
 CREATE TABLE `course_post` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `student_id` int(11) DEFAULT NULL,
   `demand` int(11) DEFAULT NULL,
   `supply` int(11) DEFAULT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `course_post` (
 -- ----------------------------
 DROP TABLE IF EXISTS `course_schedule`;
 CREATE TABLE `course_schedule` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `course_id` int(11) DEFAULT NULL,
   `day` int(11) DEFAULT NULL,
   `start` int(11) DEFAULT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `course_schedule` (
 -- ----------------------------
 DROP TABLE IF EXISTS `file`;
 CREATE TABLE `file` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `type` tinyint(2) unsigned NOT NULL COMMENT '文件类型, 1:图片, 2:文档, 3:音频, 4:视频, 5:其他',
   `uploader_id` int(11) unsigned NOT NULL COMMENT '上传用户ID',
   `status` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '文件上传状态',
@@ -74,7 +74,7 @@ CREATE TABLE `file` (
 -- ----------------------------
 DROP TABLE IF EXISTS `goods_post`;
 CREATE TABLE `goods_post` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `student_id` int(11) DEFAULT NULL,
   `status_` smallint(6) DEFAULT NULL,
   `switch` smallint(6) DEFAULT NULL,
@@ -95,7 +95,8 @@ CREATE TABLE `goods_post` (
 -- ----------------------------
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `wechat_user_id` int(11) UNSIGNED NOT NULL,
   `name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `mobile` varchar(80) COLLATE utf8mb4_bin NOT NULL,
   `open_id` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
@@ -115,7 +116,7 @@ CREATE TABLE `student` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_behavior`;
 CREATE TABLE `user_behavior` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `type_` smallint(6) DEFAULT NULL,
   `detail` text COLLATE utf8mb4_bin,
@@ -128,7 +129,7 @@ CREATE TABLE `user_behavior` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_view_record`;
 CREATE TABLE `user_view_record` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `student_id` varchar(56) COLLATE utf8mb4_bin DEFAULT NULL,
   `post_id` varchar(56) COLLATE utf8mb4_bin DEFAULT NULL,
   `post_type_` smallint(6) DEFAULT NULL,
@@ -141,7 +142,7 @@ CREATE TABLE `user_view_record` (
 -- ----------------------------
 DROP TABLE IF EXISTS `wechat_session`;
 CREATE TABLE `wechat_session` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `open_id` varchar(80) COLLATE utf8mb4_bin NOT NULL,
   `session_key` varchar(80) COLLATE utf8mb4_bin NOT NULL,
   `third_session_key` varchar(80) COLLATE utf8mb4_bin NOT NULL,
@@ -157,7 +158,7 @@ CREATE TABLE `wechat_session` (
 -- ----------------------------
 DROP TABLE IF EXISTS `wechat_user`;
 CREATE TABLE `wechat_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `open_id` varchar(80) COLLATE utf8mb4_bin NOT NULL,
   `nickname` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `avatar_url` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,

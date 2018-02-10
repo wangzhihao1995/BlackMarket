@@ -1,6 +1,6 @@
 package com.wangzhihao.blackmarket.unittest;
 
-import com.wangzhihao.blackmarket.data.MockDoamin;
+import com.wangzhihao.blackmarket.data.MockData;
 import com.wangzhihao.blackmarket.domain.Course;
 import com.wangzhihao.blackmarket.service.CourseService;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class CourseUnitTest {
     @Test
     @Sql("/dev.sql")
     public void testCourseService() {
-        Course mockCourse = MockDoamin.mockCourse();
+        Course mockCourse = MockData.mockCourse();
         courseService.add(mockCourse);
         Course course = courseService.getById(mockCourse.getId());
         assertEquals(course.getId(), mockCourse.getId());
@@ -51,7 +51,7 @@ public class CourseUnitTest {
 
         List<Course> courseList = courseService.getListByYearAndSemester(2018, "spring");
         assertEquals(courseList.size(), 2);
-        assertEquals(courseList.get(0).getName(), MockDoamin.mockCourse().getName());
+        assertEquals(courseList.get(0).getName(), MockData.mockCourse().getName());
         assertEquals(courseList.get(1).getName(), mockCourse.getName());
     }
 }

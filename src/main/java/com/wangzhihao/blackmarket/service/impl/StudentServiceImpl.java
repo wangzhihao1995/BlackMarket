@@ -32,6 +32,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student getByWechatUserId(Long wechatUserId) {
+        return studentMapper.findStudentByWechatUserId(wechatUserId);
+    }
+
+    @Override
+    public Student getByOpenId(String openId) {
+        return studentMapper.findStudentByOpenId(openId);
+    }
+
+    @Override
     public void updateStudent(UpdateStudentDto updateStudentDto) {
         studentMapper.update(updateStudentDto);
     }

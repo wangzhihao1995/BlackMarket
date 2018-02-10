@@ -22,12 +22,12 @@
 <mapper namespace="com.wangzhihao.blackmarket.mapper.StudentMapper">
 
     <sql id="BeanProperty">
-        id, name, mobile, open_id, type, grade, status, create_time, update_time
+        id, wechat_user_id, `name`, mobile, open_id, `type`, grade, status, create_time, update_time
     </sql>
 
-    <insert id="insert">
-        insert into student (id, name, mobile, open_id, type, grade, status)
-        values(#{id}, #{name}, #{mobile}, #{openId}, #{type}, #{grade}, #{status})
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into student (wechat_user_id, name, mobile, open_id, type, grade, status)
+        values(#{wechatUserId}, #{name}, #{mobile}, #{openId}, #{type}, #{grade}, #{status})
     </insert>
 
     <select id="findStudentById" resultType="com.wangzhihao.blackmarket.domain.Student">
@@ -42,6 +42,13 @@
         <include refid="BeanProperty"/>
         from student
         where open_id = #{openId}
+    </select>
+
+    <select id="findStudentByWechatUserId" resultType="com.wangzhihao.blackmarket.domain.Student">
+        select
+        <include refid="BeanProperty"/>
+        from student
+        where wechat_user_id = #{wechatUserId}
     </select>
 
     <update id="update">

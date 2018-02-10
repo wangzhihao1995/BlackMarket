@@ -9,20 +9,20 @@ package com.wangzhihao.blackmarket.dto;
  * @author Wang Zhihao.
  */
 public class AddStudentDto {
-    private Long id;
+    private Long wechatUserId;
     private String name;
     private String mobile;
     private String openId;
-    private Long type;
+    private Integer type;
     private String grade;
-    private Long status;
+    private Integer status;
 
-    public Long getId() {
-        return id;
+    public Long getWechatUserId() {
+        return wechatUserId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setWechatUserId(Long wechatUserId) {
+        this.wechatUserId = wechatUserId;
     }
 
     public String getName() {
@@ -49,11 +49,11 @@ public class AddStudentDto {
         this.openId = openId;
     }
 
-    public Long getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Long type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -65,18 +65,18 @@ public class AddStudentDto {
         this.grade = grade;
     }
 
-    public Long getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
         return "AddStudentDto{" +
-                "id=" + id +
+                "wechatUserId=" + wechatUserId +
                 ", name='" + name + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", openId='" + openId + '\'' +

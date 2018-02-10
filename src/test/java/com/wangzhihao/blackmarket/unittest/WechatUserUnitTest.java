@@ -1,6 +1,6 @@
 package com.wangzhihao.blackmarket.unittest;
 
-import com.wangzhihao.blackmarket.data.MockDoamin;
+import com.wangzhihao.blackmarket.data.MockData;
 import com.wangzhihao.blackmarket.domain.WechatUser;
 import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
 import com.wangzhihao.blackmarket.enums.GenderEnum;
@@ -32,7 +32,7 @@ public class WechatUserUnitTest {
     @Test
     @Sql("/dev.sql")
     public void testWechatUserService() {
-        WechatUser mockWechatUser = MockDoamin.mockWechatUser();
+        WechatUser mockWechatUser = MockData.mockWechatUser();
         assertNull(mockWechatUser.getId());
         wechatUserService.add(mockWechatUser);
         assertNotNull(mockWechatUser.getId());

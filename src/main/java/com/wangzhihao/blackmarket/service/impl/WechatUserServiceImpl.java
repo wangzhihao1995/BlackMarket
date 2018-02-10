@@ -38,13 +38,13 @@ public class WechatUserServiceImpl implements WechatUserService {
 
     @Override
     public void updateWechatUser(UpdateWechatUserDto updateWechatUserDto) {
-        WechatUser wechatUser = this.getByOpenId(updateWechatUserDto.getOpenId());
+        WechatUser wechatUser = getByOpenId(updateWechatUserDto.getOpenId());
         if (wechatUser != null) {
             wechatUserMapper.update(updateWechatUserDto);
         } else {
             wechatUser = new WechatUser();
             wechatUser.setByUpdateWechatUserDto(updateWechatUserDto);
-            this.add(wechatUser);
+            add(wechatUser);
         }
     }
 }

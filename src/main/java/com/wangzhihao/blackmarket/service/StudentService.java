@@ -18,5 +18,9 @@ public interface StudentService {
 
     Student getById(Long id);
 
+    Student getByWechatUserId(Long wechatUserId);
+
+    Student getByOpenId(String openId);
+
     void updateStudent(UpdateStudentDto updateStudentDto);
 }
