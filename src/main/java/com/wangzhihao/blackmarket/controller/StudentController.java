@@ -3,14 +3,20 @@ package com.wangzhihao.blackmarket.controller;
 import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.domain.WechatUser;
 import com.wangzhihao.blackmarket.dto.AddStudentDto;
+import com.wangzhihao.blackmarket.dto.RegisterDto;
 import com.wangzhihao.blackmarket.dto.UpdateStudentDto;
+import com.wangzhihao.blackmarket.enums.SmsVerificationTypeEnum;
 import com.wangzhihao.blackmarket.exception.StudentNotFoundException;
+import com.wangzhihao.blackmarket.service.SmsService;
 import com.wangzhihao.blackmarket.service.StudentService;
 import com.wangzhihao.blackmarket.utils.WechatUtils;
+import com.yunpian.sdk.model.Result;
+import com.yunpian.sdk.model.SmsSingleSend;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +33,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/student")
 public class StudentController {
 
+    public static final String VERIFY_CODE_TEMPLATE = "【NSD黑市】欢迎使用BlackMarket，您的手机验证码是%s。本条信息无需回复";
+
     @Autowired
     StudentService studentService;
 
     @Autowired
+    SmsService smsService;
+
+    @Autowired
     WechatUtils wechatUtils;
+
+    @Value("${blackmarket.config.debug}")
+    private Boolean debug;
 
     @ApiOperation(value = "Get Current Student")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
@@ -48,8 +62,16 @@ public class StudentController {
     @ApiOperation(value = "Send Register Code")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    ResponseEntity sendRegisterCode() {
-        return new ResponseEntity<>("sendRegisterCode", HttpStatus.OK);
+    ResponseEntity sendRegisterCode(@RequestBody RegisterDto registerDto) {
+        wechatUtils.requireWechatUser();
+        String mobile = registerDto.getMobile();
+        String verificationCode = smsService.add(mobile, SmsVerificationTypeEnum.REGISTER);
+        String message = String.format(VERIFY_CODE_TEMPLATE, verificationCode);
+        if (!debug) {
+            Result<SmsSingleSend> result = smsService.singleSend(mobile, message);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Create New Student")
