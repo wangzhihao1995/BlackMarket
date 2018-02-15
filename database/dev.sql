@@ -29,11 +29,9 @@ CREATE TABLE `course_post` (
   `supply` int(11) DEFAULT NULL,
   `status` tinyint(6) DEFAULT NULL,
   `mobile_switch` tinyint(6) DEFAULT NULL,
-  `mobile` varchar(80) DEFAULT NULL,
   `wechat` varchar(80) DEFAULT NULL,
   `message` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
   `pv` int(11) DEFAULT NULL,
-  `editable` smallint(6) DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -80,18 +78,57 @@ DROP TABLE IF EXISTS `goods_post`;
 CREATE TABLE `goods_post` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `student_id` int(11) DEFAULT NULL,
-  `status_` smallint(6) DEFAULT NULL,
-  `switch` smallint(6) DEFAULT NULL,
-  `mobile` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `wechat` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `message` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
-  `imgs` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `pv_` int(11) DEFAULT NULL,
-  `editable` smallint(6) DEFAULT NULL,
+  `status` tinyint DEFAULT NULL,
+  `mobile_switch` tinyint DEFAULT NULL,
+  `wechat` varchar(32) COLLATE utf8mb4_bin DEFAULT NULL,
+  `title` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
+  `content` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
+  `pv` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idx_goods_post_student_id` (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- ----------------------------
+-- Table structure for goods_post_image
+-- ----------------------------
+DROP TABLE IF EXISTS `goods_post_image`;
+CREATE TABLE `goods_post_image` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) UNSIGNED NOT NULL,
+  `image_id` int(11) UNSIGNED NOT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_post_image` (`post_id`, `image_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- ----------------------------
+-- Table structure for tag
+-- ----------------------------
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE `tag` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_tag_name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- ----------------------------
+-- Table structure for tag_post
+-- ----------------------------
+DROP TABLE IF EXISTS `tag_post`;
+CREATE TABLE `tag_post` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `tag_id` int(11) UNSIGNED NOT NULL,
+  `post_id` int(11) UNSIGNED NOT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_tag_post` (`tag_id`, `post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------

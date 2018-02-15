@@ -30,7 +30,7 @@ public class GoodsPostServiceImpl implements GoodsPostService {
 
     @Override
     public GoodsPost getById(Long id) {
-        return goodsPostMapper.findGoodsPostById(id);
+        return goodsPostMapper.findById(id);
     }
 
     @Override

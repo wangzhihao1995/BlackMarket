@@ -16,9 +16,10 @@ import java.util.List;
  */
 @Mapper
 public interface GoodsPostMapper {
+
     void insert(GoodsPost goodsPost);
 
-    GoodsPost findGoodsPostById(Long id);
+    GoodsPost findById(Long id);
 
     List<GoodsPost> findGoodsPosts(GetGoodsPostListDto getGoodsPostListDto);
 }

@@ -19,33 +19,27 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wangzhihao.blackmarket.mapper.GoodsPostMapper">
+<mapper namespace="com.wangzhihao.blackmarket.mapper.GoodsPostImageMapper">
 
     <sql id="BeanProperty">
-        id, student_id, status, mobile_switch, wechat, title, content, pv, create_time, update_time
+        id, post_id, image_id, create_time, update_time
     </sql>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into goods_post (student_id, status, mobile_switch, wechat, title, content, pv)
-        values(#{studentId}, #{status}, #{mobileSwitch}, #{wechat}, #{title}, #{content}, #{pv})
+        insert into goods_post_image (post_id, image_id) values(#{postId}, #{imageId})
     </insert>
 
-    <select id="findById" resultType="com.wangzhihao.blackmarket.domain.GoodsPost">
+    <select id="findById" resultType="com.wangzhihao.blackmarket.domain.GoodsPostImage">
         select
         <include refid="BeanProperty"/>
-        from goods_post
+        from goods_post_image
         where id = #{id}
     </select>
 
-    <select id="findGoodsPosts" resultType="com.wangzhihao.blackmarket.domain.GoodsPost">
+    <select id="findByPostId" resultType="com.wangzhihao.blackmarket.domain.GoodsPostImage">
         select
         <include refid="BeanProperty"/>
-        from goods_post
-        where 1=1
-        <if test="supply!=null">and supply = #{supply}</if>
-        <if test="demand!=null">and demand = #{demand}</if>
-        <if test="status!=null">and status = #{status}</if>
-        order by id
-        <if test="order=='desc'">desc</if>
+        from goods_post_image
+        where post_id = #{postId}
     </select>
 </mapper>
