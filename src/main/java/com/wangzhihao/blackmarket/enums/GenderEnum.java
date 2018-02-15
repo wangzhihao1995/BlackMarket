@@ -8,19 +8,19 @@ package com.wangzhihao.blackmarket.enums;
  *
  * @author Wang Zhihao.
  */
-public enum GenderEnum {
+public enum GenderEnum implements BlackMarketBaseEnum {
     /**
      * UNKNOWN 未知
      * MALE 男
      * FEMALE 女
      */
-    UNKNOWN(0L, "未知"),
-    MALE(1L, "男"),
-    FEMALE(2L, "女");
+    UNKNOWN(0, "未知"),
+    MALE(1, "男"),
+    FEMALE(2, "女");
     /**
      * value
      */
-    private Long value;
+    private Integer value;
 
     /**
      * description
@@ -33,7 +33,7 @@ public enum GenderEnum {
      * @param value value
      * @param desc  desc
      */
-    GenderEnum(final Long value, final String desc) {
+    GenderEnum(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }
@@ -43,7 +43,8 @@ public enum GenderEnum {
      *
      * @return value
      */
-    public Long getValue() {
+    @Override
+    public Integer getValue() {
         return value;
     }
 

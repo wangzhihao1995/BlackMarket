@@ -2,6 +2,7 @@ package com.wangzhihao.blackmarket.service.impl;
 
 import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.dto.UpdateStudentDto;
+import com.wangzhihao.blackmarket.exception.StudentNotFoundException;
 import com.wangzhihao.blackmarket.mapper.StudentMapper;
 import com.wangzhihao.blackmarket.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student getByWechatUserId(Long wechatUserId) {
-        return studentMapper.findStudentByWechatUserId(wechatUserId);
+        Student student = studentMapper.findStudentByWechatUserId(wechatUserId);
+        if (student != null) {
+            return student;
+        }
+        throw new StudentNotFoundException();
     }
 
     @Override

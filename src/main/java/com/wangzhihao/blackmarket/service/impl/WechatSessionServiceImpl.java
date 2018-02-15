@@ -50,6 +50,8 @@ public class WechatSessionServiceImpl implements WechatSessionService {
 
     @Override
     public WechatSession getByThirdSessionKey(String thirdSessionKey) {
+
+
         return wechatSessionMapper.findByThirdSessionKey(thirdSessionKey);
     }
 

@@ -11,10 +11,12 @@ CREATE TABLE `course` (
   `teacher` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `credit` int(11) DEFAULT NULL,
   `year` int(4) NOT NULL,
-  `semester` varchar(10) NOT NULL,
+  `semester` tinyint NOT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+  KEY `idx_course_year_semester` (`year`, `semester`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for course_post
@@ -25,18 +27,18 @@ CREATE TABLE `course_post` (
   `student_id` int(11) DEFAULT NULL,
   `demand` int(11) DEFAULT NULL,
   `supply` int(11) DEFAULT NULL,
-  `status` smallint(6) DEFAULT NULL,
-  `switch` smallint(6) DEFAULT NULL,
-  `mobile` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `wechat` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
+  `status` tinyint(6) DEFAULT NULL,
+  `mobile_switch` tinyint(6) DEFAULT NULL,
+  `mobile` varchar(80) DEFAULT NULL,
+  `wechat` varchar(80) DEFAULT NULL,
   `message` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
   `pv` int(11) DEFAULT NULL,
   `editable` smallint(6) DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `student_id` (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+  KEY `idx_course_post_student_id` (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Table structure for course_schedule
@@ -48,10 +50,12 @@ CREATE TABLE `course_schedule` (
   `day` int(11) DEFAULT NULL,
   `start` int(11) DEFAULT NULL,
   `end` int(11) DEFAULT NULL,
-  `frequency` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
+  `frequency` varchar(10) DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for file
@@ -67,7 +71,7 @@ CREATE TABLE `file` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for goods_post
@@ -87,7 +91,7 @@ CREATE TABLE `goods_post` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `student_id` (`student_id`)
+  KEY `idx_goods_post_student_id` (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
@@ -100,15 +104,15 @@ CREATE TABLE `student` (
   `name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `mobile` varchar(80) COLLATE utf8mb4_bin NOT NULL,
   `open_id` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `type` smallint(6) DEFAULT NULL,
-  `grade` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
-  `status` smallint(6) DEFAULT NULL,
+  `type` int(6) DEFAULT NULL,
+  `grade` int(4) DEFAULT NULL,
+  `status` tinyint DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`mobile`),
   KEY `id` (`id`),
-  KEY `open_id` (`open_id`),
-  KEY `ix_student_mobile` (`mobile`)
+  KEY `idx_student_open_id` (`open_id`),
+  KEY `idx_student_mobile` (`mobile`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
@@ -122,7 +126,7 @@ CREATE TABLE `user_behavior` (
   `detail` text COLLATE utf8mb4_bin,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3639 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for user_view_record
@@ -135,7 +139,7 @@ CREATE TABLE `user_view_record` (
   `post_type_` smallint(6) DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for wechat_session
@@ -149,9 +153,9 @@ CREATE TABLE `wechat_session` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `ix_wechat_session_third_session_key` (`third_session_key`),
-  KEY `ix_wechat_session_open_id` (`open_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+  UNIQUE KEY `idx_wechat_session_third_session_key` (`third_session_key`),
+  KEY `idx_wechat_session_open_id` (`open_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for wechat_user
@@ -170,7 +174,7 @@ CREATE TABLE `wechat_user` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `ix_wechat_user_open_id` (`open_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1039 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+  UNIQUE KEY `idx_wechat_user_open_id` (`open_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,5 +1,7 @@
 package com.wangzhihao.blackmarket.dto;
 
+import com.wangzhihao.blackmarket.enums.SemesterEnum;
+
 /**
  * Description
  * <p>
@@ -10,7 +12,7 @@ package com.wangzhihao.blackmarket.dto;
  */
 public class GetCourseListDto {
     private Integer year = 2018;
-    private String semester = "spring";
+    private Integer semester = SemesterEnum.FALL.getValue();
 
     public Integer getYear() {
         return year;
@@ -20,11 +22,11 @@ public class GetCourseListDto {
         this.year = year;
     }
 
-    public String getSemester() {
+    public Integer getSemester() {
         return semester;
     }
 
-    public void setSemester(String semester) {
+    public void setSemester(Integer semester) {
         this.semester = semester;
     }
 
@@ -32,7 +34,7 @@ public class GetCourseListDto {
     public String toString() {
         return "GetCourseListDto{" +
                 "year=" + year +
-                ", semester='" + semester + '\'' +
+                ", semester=" + semester +
                 '}';
     }
 }

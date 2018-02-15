@@ -1,5 +1,11 @@
 package com.wangzhihao.blackmarket.dto;
 
+import com.wangzhihao.blackmarket.enums.BlackMarketEnum;
+import com.wangzhihao.blackmarket.enums.MobileSwitchEnum;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
+
 /**
  * Description
  * <p>
@@ -10,9 +16,11 @@ package com.wangzhihao.blackmarket.dto;
  */
 public class AddGoodsPostDto {
     private String studentId;
+    @BlackMarketEnum(enumClass = MobileSwitchEnum.class, message = "Invalid mobileSwitch!")
     private Long mobileSwitch;
-    private String mobile;
     private String wechat;
+    @NotNull
+    @NotBlank
     private String message;
     private String imgs;
 
@@ -30,14 +38,6 @@ public class AddGoodsPostDto {
 
     public void setMobileSwitch(Long mobileSwitch) {
         this.mobileSwitch = mobileSwitch;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
     }
 
     public String getWechat() {
@@ -69,7 +69,6 @@ public class AddGoodsPostDto {
         return "AddGoodsPostDto{" +
                 "studentId='" + studentId + '\'' +
                 ", mobileSwitch=" + mobileSwitch +
-                ", mobile='" + mobile + '\'' +
                 ", wechat='" + wechat + '\'' +
                 ", message='" + message + '\'' +
                 ", imgs='" + imgs + '\'' +

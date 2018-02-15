@@ -1,5 +1,7 @@
 package com.wangzhihao.blackmarket.dto;
 
+import com.wangzhihao.blackmarket.enums.BlackMarketEnum;
+import com.wangzhihao.blackmarket.enums.GenderEnum;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
@@ -17,7 +19,8 @@ public class UpdateWechatUserDto {
     @NotBlank
     private String nickname;
     @NotNull
-    private Long gender;
+    @BlackMarketEnum(enumClass = GenderEnum.class, message = "Invalid gender!")
+    private Integer gender;
     @NotNull
     private String language;
     @NotNull
@@ -45,11 +48,11 @@ public class UpdateWechatUserDto {
         this.nickname = nickname;
     }
 
-    public Long getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Long gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 

@@ -31,7 +31,6 @@ public class GoodsPostController {
         return new ResponseEntity<>("get post list", HttpStatus.OK);
     }
 
-
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     ResponseEntity getGoodsPost(@PathVariable("id") long id) {
         wechatUtils.requireWechatUser();

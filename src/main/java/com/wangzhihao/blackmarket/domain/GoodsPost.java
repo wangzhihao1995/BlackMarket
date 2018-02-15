@@ -13,7 +13,7 @@ import java.util.Date;
 public class GoodsPost {
     private Long id;
     private Long studentId;
-    private Long status;
+    private Integer status;
     private String mobile;
     private String wechat;
     private String message;
@@ -38,11 +38,11 @@ public class GoodsPost {
         this.studentId = studentId;
     }
 
-    public Long getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

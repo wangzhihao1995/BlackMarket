@@ -82,7 +82,7 @@ public class StudentApiTest {
             addStudentDto.setMobile("15600000000");
             addStudentDto.setStatus(1);
             addStudentDto.setType(1);
-            addStudentDto.setGrade("2017");
+            addStudentDto.setGrade(2017);
 
             request = post(STUDENT_API_PREFIX).header(X_USER_SESSION_KEY, thirdSessionKey)
                     .content(DtoUtils.toJsonString(addStudentDto))

@@ -130,7 +130,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
     }
 
-
     @ExceptionHandler(CoursePostNotFoundException.class)
     public ResponseEntity handleCoursePostNotFoundException(CoursePostNotFoundException e) {
         logger.info(ERROR_MSG, e);
@@ -150,4 +149,15 @@ public class GlobalExceptionHandler {
         Object resp = genOutputException(e);
         return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(AddCoursePostException.class)
+    public ResponseEntity handleAddCoursePostException(AddCoursePostException e) {
+        logger.info(ERROR_MSG, e);
+        e.setMessage(e.getMessage());
+        e.setCode("1010");
+        e.setType(AddCoursePostException.class.getName());
+        Object resp = genOutputException(e);
+        return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
+    }
+
 }

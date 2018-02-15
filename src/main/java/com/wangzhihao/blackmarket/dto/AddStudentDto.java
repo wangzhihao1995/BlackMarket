@@ -14,7 +14,7 @@ public class AddStudentDto {
     private String mobile;
     private String openId;
     private Integer type;
-    private String grade;
+    private Integer grade;
     private Integer status;
 
     public Long getWechatUserId() {
@@ -57,11 +57,11 @@ public class AddStudentDto {
         this.type = type;
     }
 
-    public String getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 

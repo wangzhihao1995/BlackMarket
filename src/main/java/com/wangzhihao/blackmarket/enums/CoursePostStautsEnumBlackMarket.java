@@ -8,19 +8,15 @@ package com.wangzhihao.blackmarket.enums;
  *
  * @author Wang Zhihao.
  */
-public enum FileTypeEnum implements BlackMarketBaseEnum {
+public enum CoursePostStautsEnumBlackMarket implements BlackMarketBaseEnum {
     /**
-     * OTHER 其它
-     * IMAGE 图片
-     * DOCUMENT 文档
-     * AUDIO 音频
-     * VIDEO 视频
+     * NORMAL
+     * SUCCEED
+     * CLOSED
      */
-    OTHER(0, "其它"),
-    IMAGE(1, "图片"),
-    DOCUMENT(2, "文档"),
-    AUDIO(3, "音频"),
-    VIDEO(4, "视频");
+    NORMAL(1, "正常"),
+    SUCCEED(2, "成功"),
+    CLOSED(3, "关闭");
     /**
      * value
      */
@@ -37,7 +33,7 @@ public enum FileTypeEnum implements BlackMarketBaseEnum {
      * @param value value
      * @param desc  desc
      */
-    FileTypeEnum(Integer value, String desc) {
+    CoursePostStautsEnumBlackMarket(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }

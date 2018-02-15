@@ -1,7 +1,9 @@
 package com.wangzhihao.blackmarket.controller;
 
+import com.wangzhihao.blackmarket.domain.WechatSession;
 import com.wangzhihao.blackmarket.enums.SmsVerificationTypeEnum;
 import com.wangzhihao.blackmarket.service.SmsService;
+import com.wangzhihao.blackmarket.service.WechatSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +27,22 @@ public class HealthController {
     @Autowired
     SmsService smsService;
 
+    @Autowired
+    WechatSessionService wechatSessionService;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     ResponseEntity health() {
         return new ResponseEntity<>("ok", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/key", method = RequestMethod.GET)
+    ResponseEntity getKey() {
+        WechatSession wechatSession = wechatSessionService.getByOpenId("o-irt0PDNL3neAUoa3HiKDnIxd_d");
+        if (wechatSession != null) {
+            return new ResponseEntity<>(wechatSession, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)

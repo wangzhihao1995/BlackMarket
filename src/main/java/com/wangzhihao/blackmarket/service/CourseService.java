@@ -20,5 +20,5 @@ public interface CourseService {
 
     Course getById(Long id);
 
-    List<Course> getListByYearAndSemester(Integer year, String semester);
+    List<Course> getListByYearAndSemester(Integer year, Integer semester);
 }

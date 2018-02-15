@@ -1,6 +1,7 @@
 package com.wangzhihao.blackmarket.domain;
 
 import com.wangzhihao.blackmarket.dto.AddCoursePostDto;
+import com.wangzhihao.blackmarket.enums.CoursePostStautsEnumBlackMarket;
 
 import java.util.Date;
 
@@ -15,13 +16,14 @@ import java.util.Date;
 public class CoursePost {
     private Long id;
     private Long studentId;
-    private String demand;
-    private String supply;
-    private Long status;
+    private Long demand;
+    private Long supply;
+    private Integer status;
+    private Integer mobileSwitch;
     private String mobile;
     private String wechat;
     private String message;
-    private Long pv = 0L;
+    private Long pv;
     private Date createTime;
     private Date updateTime;
 
@@ -41,28 +43,36 @@ public class CoursePost {
         this.studentId = studentId;
     }
 
-    public String getDemand() {
+    public Long getDemand() {
         return demand;
     }
 
-    public void setDemand(String demand) {
+    public void setDemand(Long demand) {
         this.demand = demand;
     }
 
-    public String getSupply() {
+    public Long getSupply() {
         return supply;
     }
 
-    public void setSupply(String supply) {
+    public void setSupply(Long supply) {
         this.supply = supply;
     }
 
-    public Long getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getMobileSwitch() {
+        return mobileSwitch;
+    }
+
+    public void setMobileSwitch(Integer mobileSwitch) {
+        this.mobileSwitch = mobileSwitch;
     }
 
     public String getMobile() {
@@ -113,15 +123,17 @@ public class CoursePost {
         this.updateTime = updateTime;
     }
 
-    public void setByAddCoursePostDto(AddCoursePostDto addCoursePostDto) {
-        studentId = addCoursePostDto.getStudentId();
-        supply = addCoursePostDto.getSupply();
-        demand = addCoursePostDto.getDemand();
-        status = 0L;
-        mobile = addCoursePostDto.getMobile();
-        wechat = addCoursePostDto.getWechat();
-        message = addCoursePostDto.getMessage();
-        pv = 0L;
+    public static CoursePost getByAddCoursePostDto(AddCoursePostDto addCoursePostDto) {
+        CoursePost coursePost = new CoursePost();
+        coursePost.setStudentId(addCoursePostDto.getStudentId());
+        coursePost.setSupply(addCoursePostDto.getSupply());
+        coursePost.setDemand(addCoursePostDto.getDemand());
+        coursePost.setStatus(CoursePostStautsEnumBlackMarket.NORMAL.getValue());
+        coursePost.setMobileSwitch(addCoursePostDto.getMobileSwitch());
+        coursePost.setWechat(addCoursePostDto.getWechat());
+        coursePost.setMessage(addCoursePostDto.getMessage());
+        coursePost.setPv(0L);
+        return coursePost;
     }
 
     @Override
@@ -129,9 +141,10 @@ public class CoursePost {
         return "CoursePost{" +
                 "id=" + id +
                 ", studentId=" + studentId +
-                ", demand='" + demand + '\'' +
-                ", supply='" + supply + '\'' +
+                ", demand=" + demand +
+                ", supply=" + supply +
                 ", status=" + status +
+                ", mobileSwitch=" + mobileSwitch +
                 ", mobile='" + mobile + '\'' +
                 ", wechat='" + wechat + '\'' +
                 ", message='" + message + '\'' +

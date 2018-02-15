@@ -1,5 +1,7 @@
 package com.wangzhihao.blackmarket.dto;
 
+import com.wangzhihao.blackmarket.enums.CoursePostStautsEnumBlackMarket;
+
 /**
  * Description
  * <p>
@@ -11,8 +13,9 @@ package com.wangzhihao.blackmarket.dto;
 public class GetCoursePostListDto {
     private Long supply;
     private Long demand;
+    private Long studentId;
     private String order = "desc";
-    private Long status = 0L;
+    private Integer status = CoursePostStautsEnumBlackMarket.NORMAL.getValue();
     private Long start = 0L;
     private Long limit = 10L;
 
@@ -32,6 +35,14 @@ public class GetCoursePostListDto {
         this.demand = demand;
     }
 
+    public Long getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
+
     public String getOrder() {
         return order;
     }
@@ -40,11 +51,11 @@ public class GetCoursePostListDto {
         this.order = order;
     }
 
-    public Long getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -69,6 +80,7 @@ public class GetCoursePostListDto {
         return "GetCoursePostListDto{" +
                 "supply=" + supply +
                 ", demand=" + demand +
+                ", studentId=" + studentId +
                 ", order='" + order + '\'' +
                 ", status=" + status +
                 ", start=" + start +

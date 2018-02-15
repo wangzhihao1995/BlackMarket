@@ -9,9 +9,19 @@ package com.wangzhihao.blackmarket.dto;
  * @author Wang Zhihao.
  */
 public class UpdateCoursePostDto {
+    private Long id;
     private Long status;
+    private Integer mobileSwitch;
     private String wechat;
     private String message;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getStatus() {
         return status;
@@ -19,6 +29,14 @@ public class UpdateCoursePostDto {
 
     public void setStatus(Long status) {
         this.status = status;
+    }
+
+    public Integer getMobileSwitch() {
+        return mobileSwitch;
+    }
+
+    public void setMobileSwitch(Integer mobileSwitch) {
+        this.mobileSwitch = mobileSwitch;
     }
 
     public String getWechat() {
@@ -40,7 +58,9 @@ public class UpdateCoursePostDto {
     @Override
     public String toString() {
         return "UpdateCoursePostDto{" +
-                "status=" + status +
+                "id=" + id +
+                ", status=" + status +
+                ", mobileSwitch=" + mobileSwitch +
                 ", wechat='" + wechat + '\'' +
                 ", message='" + message + '\'' +
                 '}';

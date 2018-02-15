@@ -1,7 +1,11 @@
 package com.wangzhihao.blackmarket.controller;
 
+import com.google.common.collect.Lists;
 import com.wangzhihao.blackmarket.domain.Course;
+import com.wangzhihao.blackmarket.domain.CourseSchedule;
+import com.wangzhihao.blackmarket.dto.CourseRespDto;
 import com.wangzhihao.blackmarket.dto.GetCourseListDto;
+import com.wangzhihao.blackmarket.service.CourseScheduleService;
 import com.wangzhihao.blackmarket.service.CourseService;
 import com.wangzhihao.blackmarket.utils.WechatUtils;
 import io.swagger.annotations.ApiImplicitParam;
@@ -14,6 +18,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 /**
@@ -32,6 +41,9 @@ public class CourseController {
     CourseService courseService;
 
     @Autowired
+    CourseScheduleService courseScheduleService;
+
+    @Autowired
     WechatUtils wechatUtils;
 
     @ApiOperation(value = "Get Course List")
@@ -40,8 +52,20 @@ public class CourseController {
     ResponseEntity getCourseList(GetCourseListDto getCourseListDto) {
         wechatUtils.requireWechatUser();
         Integer year = getCourseListDto.getYear();
-        String semester = getCourseListDto.getSemester();
-        return new ResponseEntity<>(courseService.getListByYearAndSemester(year, semester), HttpStatus.OK);
+        Integer semester = getCourseListDto.getSemester();
+        List<Course> courses = courseService.getListByYearAndSemester(year, semester);
+        List<CourseRespDto> courseRespDtos = Lists.newArrayList();
+        if (!courses.isEmpty()) {
+            Set<Long> courseIds = courses.stream().map(Course::getId).collect(Collectors.toSet());
+            Map<Long, List<CourseSchedule>> schedules = courseScheduleService.getCourseSchedulesByCourseIds(courseIds);
+            for (Course course : courses) {
+                CourseRespDto courseRespDto = new CourseRespDto();
+                courseRespDto.setCourse(course);
+                courseRespDto.setSchedules(schedules.get(course.getId()));
+                courseRespDtos.add(courseRespDto);
+            }
+        }
+        return new ResponseEntity<>(courseRespDtos, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get Course By ID")
@@ -50,6 +74,9 @@ public class CourseController {
     ResponseEntity getCourse(@PathVariable("id") long id) {
         wechatUtils.requireWechatUser();
         Course course = courseService.getById(id);
-        return new ResponseEntity<>(course, HttpStatus.OK);
+        CourseRespDto courseRespDto = new CourseRespDto();
+        courseRespDto.setCourse(course);
+        courseRespDto.setSchedules(courseScheduleService.getCourseSchedulesByCourseId(course.getId()));
+        return new ResponseEntity<>(courseRespDto, HttpStatus.OK);
     }
 }

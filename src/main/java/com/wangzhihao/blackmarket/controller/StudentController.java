@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/student")
 public class StudentController {
 
-    public static final String VERIFY_CODE_TEMPLATE = "【NSD黑市】欢迎使用BlackMarket，您的手机验证码是%s。本条信息无需回复";
+    private static final String VERIFY_CODE_TEMPLATE = "【NSD黑市】欢迎使用BlackMarket，您的手机验证码是%s。本条信息无需回复";
 
     @Autowired
     StudentService studentService;
@@ -53,10 +53,7 @@ public class StudentController {
     ResponseEntity getCurrentStudent() {
         WechatUser wechatUser = wechatUtils.requireWechatUser();
         Student student = studentService.getByWechatUserId(wechatUser.getId());
-        if (student != null) {
-            return new ResponseEntity<>(student, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Send Register Code")
@@ -117,7 +114,6 @@ public class StudentController {
         }
         throw new StudentNotFoundException();
     }
-
 
     @ApiOperation(value = "Get Current Student Post List")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})

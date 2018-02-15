@@ -4,6 +4,7 @@ import com.wangzhihao.blackmarket.domain.CoursePost;
 import com.wangzhihao.blackmarket.dto.GetCoursePostListDto;
 import com.wangzhihao.blackmarket.dto.UpdateCoursePostDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,5 +26,5 @@ public interface CoursePostMapper {
 
     void update(UpdateCoursePostDto updateCoursePostDto);
 
-    void incrPv(Long id);
+    void updatePv(@Param("id") Long id, @Param("pv") Long pv);
 }

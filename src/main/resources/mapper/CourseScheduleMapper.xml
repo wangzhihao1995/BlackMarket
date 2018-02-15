@@ -19,30 +19,38 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wangzhihao.blackmarket.mapper.CourseMapper">
+<mapper namespace="com.wangzhihao.blackmarket.mapper.CourseScheduleMapper">
 
     <sql id="BeanProperty">
-        id, name, teacher, credit, year, semester, create_time, update_time
+        id, course_id, day, start, end, frequency, create_time, update_time
     </sql>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into course (name, teacher, credit, year, semester)
-        values(#{name}, #{teacher}, #{credit}, #{year}, #{semester})
+        insert into course_schedule (course_id, day, start, end, frequency)
+        values(#{courseId}, #{day}, #{start}, #{end}, #{frequency})
     </insert>
 
-    <select id="findCourseById" resultType="com.wangzhihao.blackmarket.domain.Course">
+    <select id="findById" resultType="com.wangzhihao.blackmarket.domain.CourseSchedule">
         select
         <include refid="BeanProperty"/>
-        from course
+        from course_schedule
         where id = #{id}
     </select>
 
-    <select id="findByYearAndSemester" resultType="com.wangzhihao.blackmarket.domain.Course">
+    <select id="findByCourseId" resultType="com.wangzhihao.blackmarket.domain.CourseSchedule">
         select
         <include refid="BeanProperty"/>
-        from course
-        where year = #{year} and semester = #{semester}
-        order by id
+        from course_schedule
+        where course_id = #{courseId}
     </select>
 
+    <select id="findByCourseIds" resultType="com.wangzhihao.blackmarket.domain.CourseSchedule">
+        select
+        <include refid="BeanProperty"/>
+        from course_schedule
+        where course_id in
+        <foreach item="id" collection="courseIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

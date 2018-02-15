@@ -25,5 +25,5 @@ public interface CoursePostService {
 
     void update(UpdateCoursePostDto updateCoursePostDto);
 
-    void incrPv(Long id);
+    Long incrPv(CoursePost coursePost);
 }

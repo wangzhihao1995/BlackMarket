@@ -8,7 +8,7 @@ package com.wangzhihao.blackmarket.enums;
  *
  * @author Wang Zhihao.
  */
-public enum SmsVerificationTypeEnum {
+public enum SmsVerificationTypeEnum implements BlackMarketBaseEnum {
     /**
      * REGISTER 注册
      * RESET_PASSWORD 重置密码
@@ -41,6 +41,7 @@ public enum SmsVerificationTypeEnum {
      *
      * @return value
      */
+    @Override
     public Integer getValue() {
         return value;
     }

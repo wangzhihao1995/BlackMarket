@@ -8,6 +8,7 @@ import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
 import com.wangzhihao.blackmarket.enums.FileStautsEnum;
 import com.wangzhihao.blackmarket.enums.FileTypeEnum;
 import com.wangzhihao.blackmarket.enums.GenderEnum;
+import com.wangzhihao.blackmarket.enums.SemesterEnum;
 
 /**
  * Description
@@ -27,7 +28,6 @@ public class MockData {
     }
 
     public static WechatUser mockWechatUser() {
-        WechatUser wechatUser = new WechatUser();
         UpdateWechatUserDto updateWechatUserDto = new UpdateWechatUserDto();
         updateWechatUserDto.setOpenId(OPENID);
         updateWechatUserDto.setNickname("Mew_Wzh");
@@ -37,8 +37,7 @@ public class MockData {
         updateWechatUserDto.setProvince("Beijing");
         updateWechatUserDto.setCountry("China");
         updateWechatUserDto.setAvatarUrl("https://pkublackmarket.cn/static/img/app-qrcode.jpg");
-        wechatUser.setByUpdateWechatUserDto(updateWechatUserDto);
-        return wechatUser;
+        return WechatUser.getByUpdateWechatUserDto(updateWechatUserDto);
     }
 
     public static String mockOpenID() {
@@ -55,7 +54,7 @@ public class MockData {
         course.setTeacher("Andrew");
         course.setCredit(4);
         course.setYear(2018L);
-        course.setSemester("spring");
+        course.setSemester(SemesterEnum.SPRING.getValue());
         return course;
     }
 
@@ -66,7 +65,7 @@ public class MockData {
         student.setMobile("13000000000");
         student.setOpenId(OPENID);
         student.setType(1);
-        student.setGrade("2017");
+        student.setGrade(2017);
         student.setStatus(1);
         return student;
     }

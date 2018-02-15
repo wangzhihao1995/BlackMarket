@@ -42,9 +42,7 @@ public class WechatUserServiceImpl implements WechatUserService {
         if (wechatUser != null) {
             wechatUserMapper.update(updateWechatUserDto);
         } else {
-            wechatUser = new WechatUser();
-            wechatUser.setByUpdateWechatUserDto(updateWechatUserDto);
-            add(wechatUser);
+            add(WechatUser.getByUpdateWechatUserDto(updateWechatUserDto));
         }
     }
 }

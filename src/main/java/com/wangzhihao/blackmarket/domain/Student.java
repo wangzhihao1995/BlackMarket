@@ -17,7 +17,7 @@ public class Student {
     private String mobile;
     private String openId;
     private Integer type;
-    private String grade;
+    private Integer grade;
     private Integer status;
     private Date createTime;
     private Date updateTime;
@@ -70,11 +70,11 @@ public class Student {
         this.type = type;
     }
 
-    public String getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 
@@ -111,7 +111,7 @@ public class Student {
                 ", mobile='" + mobile + '\'' +
                 ", openId='" + openId + '\'' +
                 ", type=" + type +
-                ", grade='" + grade + '\'' +
+                ", grade=" + grade +
                 ", status=" + status +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

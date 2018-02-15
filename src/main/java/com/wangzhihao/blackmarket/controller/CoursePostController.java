@@ -1,13 +1,17 @@
 package com.wangzhihao.blackmarket.controller;
 
 import com.wangzhihao.blackmarket.domain.CoursePost;
+import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.domain.WechatUser;
 import com.wangzhihao.blackmarket.dto.AddCoursePostDto;
 import com.wangzhihao.blackmarket.dto.GetCoursePostListDto;
 import com.wangzhihao.blackmarket.dto.UpdateCoursePostDto;
+import com.wangzhihao.blackmarket.enums.CoursePostStautsEnumBlackMarket;
+import com.wangzhihao.blackmarket.exception.AddCoursePostException;
 import com.wangzhihao.blackmarket.exception.CoursePostNotFoundException;
 import com.wangzhihao.blackmarket.exception.UpdateCoursePostException;
 import com.wangzhihao.blackmarket.service.CoursePostService;
+import com.wangzhihao.blackmarket.service.StudentService;
 import com.wangzhihao.blackmarket.utils.WechatUtils;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -16,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -34,7 +40,24 @@ public class CoursePostController {
     CoursePostService coursePostService;
 
     @Autowired
+    StudentService studentService;
+
+    @Autowired
     WechatUtils wechatUtils;
+
+    private void validCoursePost(AddCoursePostDto addCoursePostDto) {
+        GetCoursePostListDto getCoursePostListDto = new GetCoursePostListDto();
+        getCoursePostListDto.setStudentId(addCoursePostDto.getStudentId());
+        getCoursePostListDto.setSupply(addCoursePostDto.getSupply());
+        getCoursePostListDto.setDemand(addCoursePostDto.getDemand());
+        getCoursePostListDto.setStatus(CoursePostStautsEnumBlackMarket.NORMAL.getValue());
+        getCoursePostListDto.setLimit(1L);
+        List<CoursePost> ids = coursePostService.getCoursePostList(getCoursePostListDto);
+        if (!ids.isEmpty()) {
+            throw new AddCoursePostException("Already existed!");
+        }
+
+    }
 
     @ApiOperation(value = "Get Course Post List")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
@@ -50,8 +73,8 @@ public class CoursePostController {
         wechatUtils.requireWechatUser();
         CoursePost coursePost = coursePostService.getById(id);
         if (coursePost != null) {
-            coursePostService.incrPv(coursePost.getId());
-            coursePost.setPv(coursePost.getPv() + 1);
+            Long pv = coursePostService.incrPv(coursePost);
+            coursePost.setPv(pv);
             return new ResponseEntity<>(coursePost, HttpStatus.OK);
         }
         throw new CoursePostNotFoundException();
@@ -62,9 +85,11 @@ public class CoursePostController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     ResponseEntity createNewCoursePost(@RequestBody AddCoursePostDto addCoursePostDto) {
         WechatUser wechatUser = wechatUtils.requireWechatUser();
-        addCoursePostDto.setStudentId(wechatUser.getId());
-        CoursePost coursePost = new CoursePost();
-        coursePost.setByAddCoursePostDto(addCoursePostDto);
+        Student student = studentService.getByWechatUserId(wechatUser.getId());
+        addCoursePostDto.setStudentId(student.getId());
+        validCoursePost(addCoursePostDto);
+        CoursePost coursePost = CoursePost.getByAddCoursePostDto(addCoursePostDto);
+        coursePost.setMobile(student.getMobile());
         coursePostService.add(coursePost);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
@@ -75,9 +100,11 @@ public class CoursePostController {
     ResponseEntity updateCoursePost(@PathVariable("id") long id,
                                     @RequestBody UpdateCoursePostDto updateCoursePostDto) {
         WechatUser wechatUser = wechatUtils.requireWechatUser();
+        Student student = studentService.getByWechatUserId(wechatUser.getId());
         CoursePost coursePost = coursePostService.getById(id);
         if (coursePost != null) {
-            if (coursePost.getStudentId().equals(wechatUser.getId())) {
+            if (coursePost.getStudentId().equals(student.getId())) {
+                updateCoursePostDto.setId(id);
                 coursePostService.update(updateCoursePostDto);
                 return new ResponseEntity<>("OK", HttpStatus.OK);
             }

@@ -19,7 +19,7 @@ public class WechatUser {
     private String avatarUrl;
     private String city;
     private String country;
-    private Long gender;
+    private Integer gender;
     private String language;
     private String province;
     private Date createTime;
@@ -73,11 +73,11 @@ public class WechatUser {
         this.country = country;
     }
 
-    public Long getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Long gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
@@ -113,15 +113,17 @@ public class WechatUser {
         this.updateTime = updateTime;
     }
 
-    public void setByUpdateWechatUserDto(UpdateWechatUserDto updateWechatUserDto) {
-        this.openId = updateWechatUserDto.getOpenId();
-        this.nickname = updateWechatUserDto.getNickname();
-        this.avatarUrl = updateWechatUserDto.getAvatarUrl();
-        this.city = updateWechatUserDto.getCity();
-        this.country = updateWechatUserDto.getCountry();
-        this.gender = updateWechatUserDto.getGender();
-        this.language = updateWechatUserDto.getLanguage();
-        this.province = updateWechatUserDto.getProvince();
+    public static WechatUser getByUpdateWechatUserDto(UpdateWechatUserDto updateWechatUserDto) {
+        WechatUser wechatUser = new WechatUser();
+        wechatUser.setOpenId(updateWechatUserDto.getOpenId());
+        wechatUser.setNickname(updateWechatUserDto.getNickname());
+        wechatUser.setAvatarUrl(updateWechatUserDto.getAvatarUrl());
+        wechatUser.setCity(updateWechatUserDto.getCity());
+        wechatUser.setCountry(updateWechatUserDto.getCountry());
+        wechatUser.setGender(updateWechatUserDto.getGender());
+        wechatUser.setLanguage(updateWechatUserDto.getLanguage());
+        wechatUser.setProvince(updateWechatUserDto.getProvince());
+        return wechatUser;
     }
 
     @Override

@@ -6,9 +6,11 @@ import com.wangzhihao.blackmarket.dto.UpdateCoursePostDto;
 import com.wangzhihao.blackmarket.mapper.CoursePostMapper;
 import com.wangzhihao.blackmarket.service.CoursePostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Description
@@ -21,8 +23,13 @@ import java.util.List;
 @Service
 public class CoursePostServiceImpl implements CoursePostService {
 
+    private static final String COURSE_POST_PV_CACHE_KEY = "course:post:pv:id:%s";
+
     @Autowired
     CoursePostMapper coursePostMapper;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public void add(CoursePost coursePost) {
@@ -45,7 +52,18 @@ public class CoursePostServiceImpl implements CoursePostService {
     }
 
     @Override
-    public void incrPv(Long id) {
-        coursePostMapper.incrPv(id);
+    public Long incrPv(CoursePost coursePost) {
+        Long pv = coursePost.getPv() + 1;
+        String key = String.format(COURSE_POST_PV_CACHE_KEY, coursePost.getId());
+        String val = stringRedisTemplate.opsForValue().get(key);
+        if (val != null) {
+            pv = Long.parseLong(val) + 1;
+        }
+        stringRedisTemplate.opsForValue().set(key, pv.toString());
+        stringRedisTemplate.expire(key, 14, TimeUnit.DAYS);
+        if (pv % 7 == 0) {
+            coursePostMapper.updatePv(coursePost.getId(), pv);
+        }
+        return pv;
     }
 }

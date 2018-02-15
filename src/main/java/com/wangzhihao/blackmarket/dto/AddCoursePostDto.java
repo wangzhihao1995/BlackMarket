@@ -1,5 +1,11 @@
 package com.wangzhihao.blackmarket.dto;
 
+import com.wangzhihao.blackmarket.enums.BlackMarketEnum;
+import com.wangzhihao.blackmarket.enums.MobileSwitchEnum;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
+
 /**
  * Description
  * <p>
@@ -10,12 +16,17 @@ package com.wangzhihao.blackmarket.dto;
  */
 public class AddCoursePostDto {
     private Long studentId;
-    private Long mobileSwitch;
-    private String mobile;
+    @NotNull
+    @BlackMarketEnum(enumClass = MobileSwitchEnum.class, message = "Invalid mobileSwitch!")
+    private Integer mobileSwitch;
     private String wechat;
+    @NotNull
+    @NotBlank
     private String message;
-    private String supply;
-    private String demand;
+    @NotNull
+    private Long supply;
+    @NotNull
+    private Long demand;
 
     public Long getStudentId() {
         return studentId;
@@ -25,20 +36,12 @@ public class AddCoursePostDto {
         this.studentId = studentId;
     }
 
-    public Long getMobileSwitch() {
+    public Integer getMobileSwitch() {
         return mobileSwitch;
     }
 
-    public void setMobileSwitch(Long mobileSwitch) {
+    public void setMobileSwitch(Integer mobileSwitch) {
         this.mobileSwitch = mobileSwitch;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
     }
 
     public String getWechat() {
@@ -57,19 +60,19 @@ public class AddCoursePostDto {
         this.message = message;
     }
 
-    public String getSupply() {
+    public Long getSupply() {
         return supply;
     }
 
-    public void setSupply(String supply) {
+    public void setSupply(Long supply) {
         this.supply = supply;
     }
 
-    public String getDemand() {
+    public Long getDemand() {
         return demand;
     }
 
-    public void setDemand(String demand) {
+    public void setDemand(Long demand) {
         this.demand = demand;
     }
 
@@ -78,11 +81,10 @@ public class AddCoursePostDto {
         return "AddCoursePostDto{" +
                 "studentId=" + studentId +
                 ", mobileSwitch=" + mobileSwitch +
-                ", mobile='" + mobile + '\'' +
                 ", wechat='" + wechat + '\'' +
                 ", message='" + message + '\'' +
-                ", supply='" + supply + '\'' +
-                ", demand='" + demand + '\'' +
+                ", supply=" + supply +
+                ", demand=" + demand +
                 '}';
     }
 }

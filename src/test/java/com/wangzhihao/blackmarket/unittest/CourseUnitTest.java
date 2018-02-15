@@ -2,6 +2,7 @@ package com.wangzhihao.blackmarket.unittest;
 
 import com.wangzhihao.blackmarket.data.MockData;
 import com.wangzhihao.blackmarket.domain.Course;
+import com.wangzhihao.blackmarket.enums.SemesterEnum;
 import com.wangzhihao.blackmarket.service.CourseService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,7 +50,7 @@ public class CourseUnitTest {
         mockCourse.setYear(2018L);
         courseService.add(mockCourse);
 
-        List<Course> courseList = courseService.getListByYearAndSemester(2018, "spring");
+        List<Course> courseList = courseService.getListByYearAndSemester(2018, SemesterEnum.SPRING.getValue());
         assertEquals(courseList.size(), 2);
         assertEquals(courseList.get(0).getName(), MockData.mockCourse().getName());
         assertEquals(courseList.get(1).getName(), mockCourse.getName());

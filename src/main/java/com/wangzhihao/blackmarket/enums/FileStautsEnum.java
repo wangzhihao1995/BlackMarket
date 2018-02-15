@@ -8,7 +8,7 @@ package com.wangzhihao.blackmarket.enums;
  *
  * @author Wang Zhihao.
  */
-public enum FileStautsEnum {
+public enum FileStautsEnum implements BlackMarketBaseEnum {
     /**
      * UNKNOWN 未知
      * MALE 男
@@ -43,6 +43,7 @@ public enum FileStautsEnum {
      *
      * @return value
      */
+    @Override
     public Integer getValue() {
         return value;
     }
