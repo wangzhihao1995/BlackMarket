@@ -15,7 +15,7 @@ import java.util.Date;
 public class WechatUser {
     private Long id;
     private String openId;
-    private String nickname;
+    private String nickName;
     private String avatarUrl;
     private String city;
     private String country;
@@ -41,12 +41,12 @@ public class WechatUser {
         this.openId = openId;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getAvatarUrl() {
@@ -116,7 +116,7 @@ public class WechatUser {
     public static WechatUser getByUpdateWechatUserDto(UpdateWechatUserDto updateWechatUserDto) {
         WechatUser wechatUser = new WechatUser();
         wechatUser.setOpenId(updateWechatUserDto.getOpenId());
-        wechatUser.setNickname(updateWechatUserDto.getNickname());
+        wechatUser.setNickName(updateWechatUserDto.getNickName());
         wechatUser.setAvatarUrl(updateWechatUserDto.getAvatarUrl());
         wechatUser.setCity(updateWechatUserDto.getCity());
         wechatUser.setCountry(updateWechatUserDto.getCountry());
@@ -131,7 +131,7 @@ public class WechatUser {
         return "WechatUser{" +
                 "id=" + id +
                 ", openId='" + openId + '\'' +
-                ", nickname='" + nickname + '\'' +
+                ", nickName='" + nickName + '\'' +
                 ", avatarUrl='" + avatarUrl + '\'' +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +

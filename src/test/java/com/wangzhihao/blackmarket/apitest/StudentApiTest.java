@@ -78,7 +78,7 @@ public class StudentApiTest {
 
             addStudentDto.setOpenId(wechatUser.getOpenId());
             addStudentDto.setWechatUserId(wechatUser.getId());
-            addStudentDto.setName(wechatUser.getNickname());
+            addStudentDto.setName(wechatUser.getNickName());
             addStudentDto.setMobile("15600000000");
             addStudentDto.setStatus(1);
             addStudentDto.setType(1);

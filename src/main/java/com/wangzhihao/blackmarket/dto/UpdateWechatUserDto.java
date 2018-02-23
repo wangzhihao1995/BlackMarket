@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class UpdateWechatUserDto {
     private String openId;
     @NotBlank
-    private String nickname;
+    private String nickName;
     @NotNull
     @BlackMarketEnum(enumClass = GenderEnum.class, message = "Invalid gender!")
     private Integer gender;
@@ -40,12 +40,12 @@ public class UpdateWechatUserDto {
         this.openId = openId;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public Integer getGender() {
@@ -100,7 +100,7 @@ public class UpdateWechatUserDto {
     public String toString() {
         return "UpdateWechatUserDto{" +
                 "openId='" + openId + '\'' +
-                ", nickname='" + nickname + '\'' +
+                ", nickName='" + nickName + '\'' +
                 ", gender=" + gender +
                 ", language='" + language + '\'' +
                 ", city='" + city + '\'' +

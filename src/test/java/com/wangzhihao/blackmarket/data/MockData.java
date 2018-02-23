@@ -30,7 +30,7 @@ public class MockData {
     public static WechatUser mockWechatUser() {
         UpdateWechatUserDto updateWechatUserDto = new UpdateWechatUserDto();
         updateWechatUserDto.setOpenId(OPENID);
-        updateWechatUserDto.setNickname("Mew_Wzh");
+        updateWechatUserDto.setNickName("Mew_Wzh");
         updateWechatUserDto.setGender(GenderEnum.MALE.getValue());
         updateWechatUserDto.setLanguage("en");
         updateWechatUserDto.setCity("Beijing");

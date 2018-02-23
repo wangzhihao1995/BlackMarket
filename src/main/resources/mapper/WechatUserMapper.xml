@@ -22,12 +22,12 @@
 <mapper namespace="com.wangzhihao.blackmarket.mapper.WechatUserMapper">
 
     <sql id="BeanProperty">
-        id, open_id, nickname, avatar_url, city, country, gender, language, province, create_time, update_time
+        id, open_id, nick_name, avatar_url, city, country, gender, language, province, create_time, update_time
     </sql>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into wechat_user (open_id, nickname, avatar_url, city, country, gender, language, province)
-        values(#{openId}, #{nickname}, #{avatarUrl}, #{city}, #{country}, #{gender}, #{language}, #{province})
+        insert into wechat_user (open_id, nick_name, avatar_url, city, country, gender, language, province)
+        values(#{openId}, #{nickName}, #{avatarUrl}, #{city}, #{country}, #{gender}, #{language}, #{province})
     </insert>
 
     <select id="findById" resultType="com.wangzhihao.blackmarket.domain.WechatUser">
@@ -46,7 +46,7 @@
 
     <select id="update">
         update wechat_user
-        set nickname = #{nickname},
+        set nick_name = #{nickName},
             avatar_url = #{avatarUrl},
             city = #{city},
             country = #{country},

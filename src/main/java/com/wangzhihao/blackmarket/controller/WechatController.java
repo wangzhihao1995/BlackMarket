@@ -86,7 +86,5 @@ public class WechatController {
         updateWechatUserDto.setOpenId(wechatUtils.requireWechatSession().getOpenId());
         wechatUserService.updateWechatUser(updateWechatUserDto);
         return new ResponseEntity<>("ok", HttpStatus.OK);
-
-
     }
 }

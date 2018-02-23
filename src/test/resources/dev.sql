@@ -175,7 +175,7 @@ DROP TABLE IF EXISTS `wechat_user`;
 CREATE TABLE `wechat_user` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `open_id` varchar(80) COLLATE utf8mb4_bin NOT NULL,
-  `nickname` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
+  `nick_name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `avatar_url` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
   `city` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
   `country` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
