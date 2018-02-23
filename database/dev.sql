@@ -153,32 +153,6 @@ CREATE TABLE `student` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
--- Table structure for user_behavior
--- ----------------------------
-DROP TABLE IF EXISTS `user_behavior`;
-CREATE TABLE `user_behavior` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `type_` smallint(6) DEFAULT NULL,
-  `detail` text COLLATE utf8mb4_bin,
-  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Table structure for user_view_record
--- ----------------------------
-DROP TABLE IF EXISTS `user_view_record`;
-CREATE TABLE `user_view_record` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `student_id` varchar(56) COLLATE utf8mb4_bin DEFAULT NULL,
-  `post_id` varchar(56) COLLATE utf8mb4_bin DEFAULT NULL,
-  `post_type_` smallint(6) DEFAULT NULL,
-  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
 -- Table structure for wechat_session
 -- ----------------------------
 DROP TABLE IF EXISTS `wechat_session`;
