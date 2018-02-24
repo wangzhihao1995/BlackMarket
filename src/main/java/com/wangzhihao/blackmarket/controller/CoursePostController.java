@@ -63,6 +63,12 @@ public class CoursePostController {
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "", method = RequestMethod.GET)
     ResponseEntity getCoursePostList(GetCoursePostListDto getCoursePostListDto) {
+        if (getCoursePostListDto.getDemand().equals(0L)) {
+            getCoursePostListDto.setDemand(null);
+        }
+        if (getCoursePostListDto.getSupply().equals(0L)) {
+            getCoursePostListDto.setSupply(null);
+        }
         return new ResponseEntity<>(coursePostService.getCoursePostList(getCoursePostListDto), HttpStatus.OK);
     }
 
