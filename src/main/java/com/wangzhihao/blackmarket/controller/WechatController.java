@@ -74,7 +74,7 @@ public class WechatController {
 
     @ApiOperation(value = "Get Wechat User")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
-    @RequestMapping(value = "/user", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
     ResponseEntity getWecahtUser() {
         return new ResponseEntity<>(wechatUtils.requireWechatUser(), HttpStatus.OK);
     }

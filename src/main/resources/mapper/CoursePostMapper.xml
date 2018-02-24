@@ -22,12 +22,12 @@
 <mapper namespace="com.wangzhihao.blackmarket.mapper.CoursePostMapper">
 
     <sql id="BeanProperty">
-        id, student_id, demand, supply, status, mobile_switch, mobile, wechat, message, pv, create_time, update_time
+        id, student_id, demand, supply, status, mobile_switch, wechat, message, pv, create_time, update_time
     </sql>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into course_post (student_id, demand, supply, status, mobile_switch, mobile, wechat, message, pv)
-        values(#{studentId}, #{demand}, #{supply}, #{status}, #{mobileSwitch}, #{mobile}, #{wechat}, #{message}, #{pv})
+        insert into course_post (student_id, demand, supply, status, mobile_switch, wechat, message, pv)
+        values(#{studentId}, #{demand}, #{supply}, #{status}, #{mobileSwitch}, #{wechat}, #{message}, #{pv})
     </insert>
 
     <select id="findCoursePostById" resultType="com.wangzhihao.blackmarket.domain.CoursePost">
