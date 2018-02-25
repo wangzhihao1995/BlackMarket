@@ -1,17 +1,19 @@
 package com.wangzhihao.blackmarket.controller;
 
+import com.google.common.collect.Lists;
+import com.wangzhihao.blackmarket.domain.Course;
 import com.wangzhihao.blackmarket.domain.CoursePost;
 import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.domain.WechatUser;
-import com.wangzhihao.blackmarket.dto.AddCoursePostDto;
-import com.wangzhihao.blackmarket.dto.GetCoursePostListDto;
-import com.wangzhihao.blackmarket.dto.UpdateCoursePostDto;
+import com.wangzhihao.blackmarket.dto.*;
 import com.wangzhihao.blackmarket.enums.CoursePostStautsEnumBlackMarket;
 import com.wangzhihao.blackmarket.exception.AddCoursePostException;
 import com.wangzhihao.blackmarket.exception.CoursePostNotFoundException;
 import com.wangzhihao.blackmarket.exception.UpdateCoursePostException;
 import com.wangzhihao.blackmarket.service.CoursePostService;
+import com.wangzhihao.blackmarket.service.CourseService;
 import com.wangzhihao.blackmarket.service.StudentService;
+import com.wangzhihao.blackmarket.service.WechatUserService;
 import com.wangzhihao.blackmarket.utils.WechatUtils;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -21,6 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -40,7 +43,13 @@ public class CoursePostController {
     CoursePostService coursePostService;
 
     @Autowired
+    CourseService courseService;
+
+    @Autowired
     StudentService studentService;
+
+    @Autowired
+    WechatUserService wechatUserService;
 
     @Autowired
     WechatUtils wechatUtils;
@@ -56,7 +65,40 @@ public class CoursePostController {
         if (!ids.isEmpty()) {
             throw new AddCoursePostException("Already existed!");
         }
+    }
 
+    private List<CoursePostResp> buildCoursePostResps(List<CoursePost> coursePosts) {
+        List<CoursePostResp> resps = Lists.newArrayList();
+        for (CoursePost coursePost : coursePosts) {
+            CoursePostResp coursePostResp = new CoursePostResp();
+            coursePostResp.setId(coursePost.getId());
+            Student student = studentService.getById(coursePost.getStudentId());
+            WechatUser wechatUser = wechatUserService.getByOpenId(student.getOpenId());
+
+            StudentResp studentResp = new StudentResp();
+            studentResp.setId(student.getId());
+            studentResp.setUsername(wechatUser.getNickName());
+            studentResp.setMobile(student.getMobile());
+            studentResp.setType(student.getType());
+            studentResp.setGrade(student.getGrade());
+            studentResp.setStatus(student.getStatus());
+            studentResp.setAvatarUrl(wechatUser.getAvatarUrl());
+            studentResp.setCreateTime(student.getCreateTime());
+            studentResp.setUpdateTime(student.getUpdateTime());
+
+            coursePostResp.setStudent(studentResp);
+            coursePostResp.setDemand(courseService.getById(coursePost.getDemand()));
+            coursePostResp.setSupply(courseService.getById(coursePost.getSupply()));
+            coursePostResp.setStatus(coursePost.getStatus());
+            coursePostResp.setMobileSwitch(coursePost.getMobileSwitch());
+            coursePostResp.setMobile(coursePost.getMobile());
+            coursePostResp.setWechat(coursePost.getWechat());
+            coursePostResp.setMessage(coursePost.getMessage());
+            coursePostResp.setPv(coursePost.getPv());
+            coursePostResp.setCreateTime(coursePost.getCreateTime());
+            coursePostResp.setUpdateTime(coursePost.getUpdateTime());
+        }
+        return resps;
     }
 
     @ApiOperation(value = "Get Course Post List")
@@ -69,7 +111,9 @@ public class CoursePostController {
         if (getCoursePostListDto.getSupply().equals(0L)) {
             getCoursePostListDto.setSupply(null);
         }
-        return new ResponseEntity<>(coursePostService.getCoursePostList(getCoursePostListDto), HttpStatus.OK);
+        List<CoursePost> coursePosts = coursePostService.getCoursePostList(getCoursePostListDto);
+        List<CoursePostResp> resps = buildCoursePostResps(coursePosts);
+        return new ResponseEntity<>(resps, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get Course Post By ID")
