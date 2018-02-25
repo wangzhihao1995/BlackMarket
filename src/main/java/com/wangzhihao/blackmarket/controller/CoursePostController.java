@@ -97,6 +97,8 @@ public class CoursePostController {
             coursePostResp.setPv(coursePost.getPv());
             coursePostResp.setCreateTime(coursePost.getCreateTime());
             coursePostResp.setUpdateTime(coursePost.getUpdateTime());
+
+            resps.add(coursePostResp);
         }
         return resps;
     }
