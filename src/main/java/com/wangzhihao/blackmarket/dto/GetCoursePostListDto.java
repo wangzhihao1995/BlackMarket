@@ -15,7 +15,7 @@ public class GetCoursePostListDto {
     private Long demand;
     private Long studentId;
     private String order = "desc";
-    private Integer status = CoursePostStautsEnumBlackMarket.NORMAL.getValue();
+    private Integer status;
     private Long start = 0L;
     private Long limit = 10L;
 

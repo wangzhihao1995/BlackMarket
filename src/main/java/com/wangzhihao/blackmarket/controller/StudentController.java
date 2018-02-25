@@ -115,7 +115,6 @@ public class StudentController {
         throw new StudentNotFoundException();
     }
 
-    @ApiOperation(value = "Get Current Student Post List")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     ResponseEntity getCurrentStudentPostList() {

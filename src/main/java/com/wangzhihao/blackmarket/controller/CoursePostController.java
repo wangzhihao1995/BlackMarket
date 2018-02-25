@@ -91,7 +91,6 @@ public class CoursePostController {
             coursePostResp.setSupply(courseService.getById(coursePost.getSupply()));
             coursePostResp.setStatus(coursePost.getStatus());
             coursePostResp.setMobileSwitch(coursePost.getMobileSwitch());
-            coursePostResp.setMobile(coursePost.getMobile());
             coursePostResp.setWechat(coursePost.getWechat());
             coursePostResp.setMessage(coursePost.getMessage());
             coursePostResp.setPv(coursePost.getPv());
@@ -113,6 +112,18 @@ public class CoursePostController {
         if (getCoursePostListDto.getSupply().equals(0L)) {
             getCoursePostListDto.setSupply(null);
         }
+        List<CoursePost> coursePosts = coursePostService.getCoursePostList(getCoursePostListDto);
+        List<CoursePostResp> resps = buildCoursePostResps(coursePosts);
+        return new ResponseEntity<>(resps, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Get Course Post List")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
+    @RequestMapping(value = "/mine", method = RequestMethod.GET)
+    ResponseEntity getMyCoursePostList(GetCoursePostListDto getCoursePostListDto) {
+        WechatUser wechatUser = wechatUtils.requireWechatUser();
+        Student student = studentService.getByOpenId(wechatUser.getOpenId());
+        getCoursePostListDto.setStudentId(student.getId());
         List<CoursePost> coursePosts = coursePostService.getCoursePostList(getCoursePostListDto);
         List<CoursePostResp> resps = buildCoursePostResps(coursePosts);
         return new ResponseEntity<>(resps, HttpStatus.OK);

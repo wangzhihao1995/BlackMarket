@@ -23,7 +23,6 @@ public class CoursePostResp {
     private Course supply;
     private Integer status;
     private Integer mobileSwitch;
-    private String mobile;
     private String wechat;
     private String message;
     private Long pv;
@@ -78,14 +77,6 @@ public class CoursePostResp {
         this.mobileSwitch = mobileSwitch;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
     public String getWechat() {
         return wechat;
     }
@@ -135,7 +126,6 @@ public class CoursePostResp {
                 ", supply=" + supply +
                 ", status=" + status +
                 ", mobileSwitch=" + mobileSwitch +
-                ", mobile='" + mobile + '\'' +
                 ", wechat='" + wechat + '\'' +
                 ", message='" + message + '\'' +
                 ", pv=" + pv +
