@@ -60,7 +60,12 @@ public class CourseController {
             Map<Long, List<CourseSchedule>> schedules = courseScheduleService.getCourseSchedulesByCourseIds(courseIds);
             for (Course course : courses) {
                 CourseRespDto courseRespDto = new CourseRespDto();
-                courseRespDto.setCourse(course);
+                courseRespDto.setId(course.getId());
+                courseRespDto.setName(course.getName());
+                courseRespDto.setCredit(course.getCredit());
+                courseRespDto.setTeacher(course.getTeacher());
+                courseRespDto.setYear(course.getYear());
+                courseRespDto.setSemester(course.getSemester());
                 courseRespDto.setSchedules(schedules.get(course.getId()));
                 courseRespDtos.add(courseRespDto);
             }
@@ -75,7 +80,12 @@ public class CourseController {
         wechatUtils.requireWechatUser();
         Course course = courseService.getById(id);
         CourseRespDto courseRespDto = new CourseRespDto();
-        courseRespDto.setCourse(course);
+        courseRespDto.setId(course.getId());
+        courseRespDto.setName(course.getName());
+        courseRespDto.setCredit(course.getCredit());
+        courseRespDto.setTeacher(course.getTeacher());
+        courseRespDto.setYear(course.getYear());
+        courseRespDto.setSemester(course.getSemester());
         courseRespDto.setSchedules(courseScheduleService.getCourseSchedulesByCourseId(course.getId()));
         return new ResponseEntity<>(courseRespDto, HttpStatus.OK);
     }
