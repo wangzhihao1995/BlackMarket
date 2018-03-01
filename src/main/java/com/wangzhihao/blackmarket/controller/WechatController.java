@@ -1,6 +1,7 @@
 package com.wangzhihao.blackmarket.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
 import com.wangzhihao.blackmarket.domain.WechatSession;
 import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
 import com.wangzhihao.blackmarket.exception.MissingJscodeException;
@@ -85,6 +86,6 @@ public class WechatController {
     ResponseEntity updateWecahtUser(@Valid @RequestBody UpdateWechatUserDto updateWechatUserDto) {
         updateWechatUserDto.setOpenId(wechatUtils.requireWechatSession().getOpenId());
         wechatUserService.updateWechatUser(updateWechatUserDto);
-        return new ResponseEntity<>("ok", HttpStatus.OK);
+        return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.OK);
     }
 }
