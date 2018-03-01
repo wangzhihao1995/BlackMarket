@@ -45,6 +45,7 @@
         <if test="supply!=null">and supply = #{supply}</if>
         <if test="demand!=null">and demand = #{demand}</if>
         <if test="status!=null">and status = #{status}</if>
+        <if test="studentId!=null">and student_id = #{studentId}</if>
         order by id
         <if test="order=='desc'">desc</if>
     </select>
