@@ -124,6 +124,12 @@ public class CoursePostController {
         WechatUser wechatUser = wechatUtils.requireWechatUser();
         Student student = studentService.getByOpenId(wechatUser.getOpenId());
         getCoursePostListDto.setStudentId(student.getId());
+        if (getCoursePostListDto.getDemand().equals(0L)) {
+            getCoursePostListDto.setDemand(null);
+        }
+        if (getCoursePostListDto.getSupply().equals(0L)) {
+            getCoursePostListDto.setSupply(null);
+        }
         List<CoursePost> coursePosts = coursePostService.getCoursePostList(getCoursePostListDto);
         List<CoursePostResp> resps = buildCoursePostResps(coursePosts);
         return new ResponseEntity<>(resps, HttpStatus.OK);
