@@ -1,5 +1,6 @@
 package com.wangzhihao.blackmarket.controller;
 
+import com.google.common.collect.Maps;
 import com.wangzhihao.blackmarket.domain.WechatSession;
 import com.wangzhihao.blackmarket.enums.SmsVerificationTypeEnum;
 import com.wangzhihao.blackmarket.service.SmsService;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Description
@@ -32,7 +36,9 @@ public class HealthController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     ResponseEntity health() {
-        return new ResponseEntity<>("ok", HttpStatus.OK);
+        Map<String, String> r = new HashMap<>();
+        r.put("status", "ok");
+        return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/key", method = RequestMethod.GET)
