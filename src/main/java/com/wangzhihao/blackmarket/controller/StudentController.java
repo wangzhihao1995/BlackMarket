@@ -10,6 +10,7 @@ import com.wangzhihao.blackmarket.exception.StudentNotFoundException;
 import com.wangzhihao.blackmarket.service.SmsService;
 import com.wangzhihao.blackmarket.service.StudentService;
 import com.wangzhihao.blackmarket.utils.WechatUtils;
+import com.google.common.collect.Maps;
 import com.yunpian.sdk.model.Result;
 import com.yunpian.sdk.model.SmsSingleSend;
 import io.swagger.annotations.ApiImplicitParam;
@@ -87,7 +88,7 @@ public class StudentController {
         student.setGrade(addStudentDto.getGrade());
         student.setStatus(addStudentDto.getStatus());
         studentService.add(student);
-        return new ResponseEntity<>("OK", HttpStatus.CREATED);
+        return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Update Current Student")
@@ -98,9 +99,9 @@ public class StudentController {
             WechatUser wechatUser = wechatUtils.requireWechatUser();
             updateStudentDto.setId(wechatUser.getId());
             studentService.updateStudent(updateStudentDto);
-            return new ResponseEntity<>("OK", HttpStatus.OK);
+            return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.OK);
         }
-        return new ResponseEntity<>("Nothing to update", HttpStatus.OK);
+        return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get Studnet By ID")
