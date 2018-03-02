@@ -28,6 +28,7 @@ public class CoursePostResp {
     private Long pv;
     private Date createTime;
     private Date updateTime;
+    private Boolean hasViewedContact = false;
 
     public Long getId() {
         return id;
@@ -117,6 +118,14 @@ public class CoursePostResp {
         this.updateTime = updateTime;
     }
 
+    public Boolean getHasViewedContact() {
+        return hasViewedContact;
+    }
+
+    public void setHasViewedContact(Boolean hasViewedContact) {
+        this.hasViewedContact = hasViewedContact;
+    }
+
     @Override
     public String toString() {
         return "CoursePostResp{" +
@@ -131,6 +140,7 @@ public class CoursePostResp {
                 ", pv=" + pv +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", hasViewedContact=" + hasViewedContact +
                 '}';
     }
 }

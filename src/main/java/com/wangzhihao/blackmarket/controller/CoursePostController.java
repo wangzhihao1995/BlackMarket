@@ -139,12 +139,37 @@ public class CoursePostController {
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     ResponseEntity getCoursePostById(@PathVariable("id") long id) {
-        wechatUtils.requireWechatUser();
+        WechatUser wechatUser = wechatUtils.requireWechatUser();
+        Student student = studentService.getByOpenId(wechatUser.getOpenId());
+        StudentResp studentResp = new StudentResp();
+        studentResp.setId(student.getId());
+        studentResp.setUsername(wechatUser.getNickName());
+        studentResp.setMobile(student.getMobile());
+        studentResp.setType(student.getType());
+        studentResp.setGrade(student.getGrade());
+        studentResp.setStatus(student.getStatus());
+        studentResp.setAvatarUrl(wechatUser.getAvatarUrl());
+        studentResp.setCreateTime(student.getCreateTime());
+        studentResp.setUpdateTime(student.getUpdateTime());
+
         CoursePost coursePost = coursePostService.getById(id);
         if (coursePost != null) {
             Long pv = coursePostService.incrPv(coursePost);
-            coursePost.setPv(pv);
-            return new ResponseEntity<>(coursePost, HttpStatus.OK);
+
+            CoursePostResp coursePostResp = new CoursePostResp();
+            coursePostResp.setId(coursePost.getId());
+            coursePostResp.setStudent(studentResp);
+            coursePostResp.setDemand(courseService.getById(coursePost.getDemand()));
+            coursePostResp.setSupply(courseService.getById(coursePost.getSupply()));
+            coursePostResp.setStatus(coursePost.getStatus());
+            coursePostResp.setMobileSwitch(coursePost.getMobileSwitch());
+            coursePostResp.setWechat(coursePost.getWechat());
+            coursePostResp.setMessage(coursePost.getMessage());
+            coursePostResp.setPv(pv);
+            coursePostResp.setCreateTime(coursePost.getCreateTime());
+            coursePostResp.setUpdateTime(coursePost.getUpdateTime());
+            coursePostResp.setHasViewedContact(false);
+            return new ResponseEntity<>(coursePostResp, HttpStatus.OK);
         }
         throw new CoursePostNotFoundException();
     }
