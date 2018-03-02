@@ -99,7 +99,8 @@ public class StudentController {
             WechatUser wechatUser = wechatUtils.requireWechatUser();
             updateStudentDto.setId(wechatUser.getId());
             studentService.updateStudent(updateStudentDto);
-            return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.OK);
+            Student student = studentService.getById(updateStudentDto.getId());
+            return new ResponseEntity<>(student, HttpStatus.OK);
         }
         return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.OK);
     }
