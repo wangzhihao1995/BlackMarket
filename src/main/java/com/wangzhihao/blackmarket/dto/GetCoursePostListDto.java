@@ -1,7 +1,5 @@
 package com.wangzhihao.blackmarket.dto;
 
-import com.wangzhihao.blackmarket.enums.CoursePostStautsEnumBlackMarket;
-
 /**
  * Description
  * <p>

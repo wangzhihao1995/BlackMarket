@@ -1,7 +1,7 @@
 package com.wangzhihao.blackmarket.domain;
 
 import com.wangzhihao.blackmarket.dto.AddCoursePostDto;
-import com.wangzhihao.blackmarket.enums.CoursePostStautsEnumBlackMarket;
+import com.wangzhihao.blackmarket.enums.CoursePostStautsEnum;
 
 import java.util.Date;
 
@@ -128,7 +128,7 @@ public class CoursePost {
         coursePost.setStudentId(addCoursePostDto.getStudentId());
         coursePost.setSupply(addCoursePostDto.getSupply());
         coursePost.setDemand(addCoursePostDto.getDemand());
-        coursePost.setStatus(CoursePostStautsEnumBlackMarket.NORMAL.getValue());
+        coursePost.setStatus(CoursePostStautsEnum.NORMAL.getValue());
         coursePost.setMobileSwitch(addCoursePostDto.getMobileSwitch());
         coursePost.setWechat(addCoursePostDto.getWechat());
         coursePost.setMessage(addCoursePostDto.getMessage());

@@ -8,15 +8,15 @@ package com.wangzhihao.blackmarket.enums;
  *
  * @author Wang Zhihao.
  */
-public enum CoursePostStautsEnumBlackMarket implements BlackMarketBaseEnum {
+public enum CoursePostStautsEnum implements BlackMarketBaseEnum {
     /**
      * NORMAL
      * SUCCEED
      * CLOSED
      */
-    NORMAL(1, "正常"),
-    SUCCEED(2, "成功"),
-    CLOSED(3, "关闭");
+    NORMAL(0, "正常"),
+    SUCCEED(1, "成功"),
+    CLOSED(2, "关闭");
     /**
      * value
      */
@@ -33,7 +33,7 @@ public enum CoursePostStautsEnumBlackMarket implements BlackMarketBaseEnum {
      * @param value value
      * @param desc  desc
      */
-    CoursePostStautsEnumBlackMarket(Integer value, String desc) {
+    CoursePostStautsEnum(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }

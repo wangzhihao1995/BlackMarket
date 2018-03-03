@@ -2,12 +2,11 @@ package com.wangzhihao.blackmarket.controller;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.wangzhihao.blackmarket.domain.Course;
 import com.wangzhihao.blackmarket.domain.CoursePost;
 import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.domain.WechatUser;
 import com.wangzhihao.blackmarket.dto.*;
-import com.wangzhihao.blackmarket.enums.CoursePostStautsEnumBlackMarket;
+import com.wangzhihao.blackmarket.enums.CoursePostStautsEnum;
 import com.wangzhihao.blackmarket.exception.AddCoursePostException;
 import com.wangzhihao.blackmarket.exception.CoursePostNotFoundException;
 import com.wangzhihao.blackmarket.exception.UpdateCoursePostException;
@@ -24,7 +23,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +59,7 @@ public class CoursePostController {
         getCoursePostListDto.setStudentId(addCoursePostDto.getStudentId());
         getCoursePostListDto.setSupply(addCoursePostDto.getSupply());
         getCoursePostListDto.setDemand(addCoursePostDto.getDemand());
-        getCoursePostListDto.setStatus(CoursePostStautsEnumBlackMarket.NORMAL.getValue());
+        getCoursePostListDto.setStatus(CoursePostStautsEnum.NORMAL.getValue());
         getCoursePostListDto.setLimit(1L);
         List<CoursePost> ids = coursePostService.getCoursePostList(getCoursePostListDto);
         if (!ids.isEmpty()) {
