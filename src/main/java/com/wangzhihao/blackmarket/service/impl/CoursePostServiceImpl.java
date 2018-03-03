@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class CoursePostServiceImpl implements CoursePostService {
 
-    private static final String COURSE_POST_PV_CACHE_KEY = "course:post:pv:id:%s";
-    private static final String STUDENT_VIEWED_POST_CONTACT_CACHE_KEY = "student:%s:viewed:contact:post:%s";
+    private static final String COURSE_POST_PV_CACHE_KEY = "course:post:pv:id:%d";
+    private static final String STUDENT_VIEWED_POST_CONTACT_CACHE_KEY = "student:%d:viewed:contact:post:%d";
 
     @Autowired
     CoursePostMapper coursePostMapper;
