@@ -74,9 +74,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Integer getRemainingViewContactCount(Long studentId) {
+        Integer viewCount = 0;
         String key = String.format(STUDENT_VIEW_POST_CONTACT_COUNT_CACHE_KEY, studentId);
         String val = stringRedisTemplate.opsForValue().get(key);
-        Integer viewCount = Integer.parseInt(val);
+        if (val != null) {
+            viewCount = Integer.parseInt(val);
+        }
         return TOTAL_AVAILABLE_VIEW_COUNT - viewCount;
     }
 }
