@@ -141,7 +141,8 @@ public class CoursePostController {
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     ResponseEntity getCoursePostById(@PathVariable("id") long id) {
-        wechatUtils.requireWechatUser();
+        WechatUser currentWechatUser = wechatUtils.requireWechatUser();
+        Student currentStudent = studentService.getByOpenId(currentWechatUser.getOpenId());
 
         CoursePost coursePost = coursePostService.getById(id);
         if (coursePost != null) {
@@ -173,7 +174,7 @@ public class CoursePostController {
             coursePostResp.setCreateTime(coursePost.getCreateTime());
             coursePostResp.setUpdateTime(coursePost.getUpdateTime());
             coursePostResp.setHasViewedContact(
-                    coursePostService.hasViewedPostContact(student.getId(), id));
+                    coursePostService.hasViewedPostContact(currentStudent.getId(), id));
             return new ResponseEntity<>(coursePostResp, HttpStatus.OK);
         }
         throw new CoursePostNotFoundException();
