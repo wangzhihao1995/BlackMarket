@@ -214,7 +214,7 @@ public class CoursePostController {
 
     @ApiOperation(value = "Update Course Post")
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
-    @RequestMapping(value = "/viewcount", method = RequestMethod.PUT)
+    @RequestMapping(value = "/viewcount", method = RequestMethod.GET)
     ResponseEntity getRemainingViewContactCount() {
         WechatUser wechatUser = wechatUtils.requireWechatUser();
         Student student = studentService.getByWechatUserId(wechatUser.getId());
