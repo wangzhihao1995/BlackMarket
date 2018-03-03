@@ -81,7 +81,7 @@ public class StudentController {
         addStudentDto.setOpenId(wechatUser.getOpenId());
         Student student = new Student();
         student.setWechatUserId(addStudentDto.getWechatUserId());
-        student.setName(addStudentDto.getName());
+        student.setName(wechatUser.getNickName());
         student.setMobile(addStudentDto.getMobile());
         student.setOpenId(addStudentDto.getOpenId());
         student.setType(addStudentDto.getType());

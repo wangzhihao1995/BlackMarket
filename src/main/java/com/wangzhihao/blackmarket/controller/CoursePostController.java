@@ -149,7 +149,7 @@ public class CoursePostController {
 
             StudentResp studentResp = new StudentResp();
             studentResp.setId(student.getId());
-            studentResp.setUsername(student.getName());
+            studentResp.setUsername(wechatUser.getNickName());
             studentResp.setMobile(student.getMobile());
             studentResp.setType(student.getType());
             studentResp.setGrade(student.getGrade());
