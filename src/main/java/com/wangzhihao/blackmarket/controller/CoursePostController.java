@@ -173,7 +173,7 @@ public class CoursePostController {
             coursePostResp.setCreateTime(coursePost.getCreateTime());
             coursePostResp.setUpdateTime(coursePost.getUpdateTime());
             coursePostResp.setHasViewedContact(
-                    coursePostService.hasViewedPostContact(student.getId(), coursePost.getId()));
+                    coursePostService.hasViewedPostContact(student.getId(), id));
             return new ResponseEntity<>(coursePostResp, HttpStatus.OK);
         }
         throw new CoursePostNotFoundException();
