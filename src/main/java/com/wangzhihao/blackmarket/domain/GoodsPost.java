@@ -13,12 +13,12 @@ import java.util.Date;
 public class GoodsPost {
     private Long id;
     private Long studentId;
-    private Long status;
-    private String mobile;
+    private Integer status;
+    private Integer mobileSwitch;
     private String wechat;
-    private String message;
-    private String imgs;
-    private Long pv = 0L;
+    private String title;
+    private String content;
+    private Long pv;
     private Date createTime;
     private Date updateTime;
 
@@ -38,20 +38,20 @@ public class GoodsPost {
         this.studentId = studentId;
     }
 
-    public Long getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public String getMobile() {
-        return mobile;
+    public Integer getMobileSwitch() {
+        return mobileSwitch;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setMobileSwitch(Integer mobileSwitch) {
+        this.mobileSwitch = mobileSwitch;
     }
 
     public String getWechat() {
@@ -62,20 +62,20 @@ public class GoodsPost {
         this.wechat = wechat;
     }
 
-    public String getMessage() {
-        return message;
+    public String getTitle() {
+        return title;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getImgs() {
-        return imgs;
+    public String getContent() {
+        return content;
     }
 
-    public void setImgs(String imgs) {
-        this.imgs = imgs;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Long getPv() {
@@ -108,10 +108,10 @@ public class GoodsPost {
                 "id=" + id +
                 ", studentId=" + studentId +
                 ", status=" + status +
-                ", mobile='" + mobile + '\'' +
+                ", mobileSwitch=" + mobileSwitch +
                 ", wechat='" + wechat + '\'' +
-                ", message='" + message + '\'' +
-                ", imgs='" + imgs + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
                 ", pv=" + pv +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

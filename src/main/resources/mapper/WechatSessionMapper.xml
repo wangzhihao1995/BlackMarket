@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+       Copyright 2015-2016 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangzhihao.blackmarket.mapper.WechatSessionMapper">
+
+    <sql id="BeanProperty">
+        id, open_id, session_key, third_session_key, create_time, update_time
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into wechat_session (open_id, session_key, third_session_key)
+        values(#{openId}, #{sessionKey}, #{thirdSessionKey})
+    </insert>
+
+    <select id="findById" resultType="com.wangzhihao.blackmarket.domain.WechatSession">
+        select
+        <include refid="BeanProperty"/>
+        from wechat_session
+        where id = #{id}
+    </select>
+
+
+    <select id="findByThirdSessionKey" resultType="com.wangzhihao.blackmarket.domain.WechatSession">
+        select
+        <include refid="BeanProperty"/>
+        from wechat_session
+        where third_session_key = #{thirdSessionKey}
+    </select>
+
+    <select id="findByOpenId" resultType="com.wangzhihao.blackmarket.domain.WechatSession">
+        select
+        <include refid="BeanProperty"/>
+        from wechat_session
+        where open_id = #{openId}
+    </select>
+
+    <select id="update">
+        update wechat_session
+        set session_key = #{sessionKey},
+        third_session_key = #{thirdSessionKey}
+        where id = #{id}
+    </select>
+</mapper>

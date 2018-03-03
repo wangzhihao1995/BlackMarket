@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+      map-underscore-to-camel-case: true
+
+spring:
+  application:
+    name: blackmarket
+  datasource:
+    url: jdbc:mysql://localhost:3306/blackmarket
+    username: root
+    password:
+    driverClassName: com.mysql.jdbc.Driver
+    connectionTestQuery: SELECT 1
+    jmx-enabled: true
+
+blackmarket:
+  config:
+    debug: true
+  sentry:
+    dsn:
+  wechat:
+      miniapp:
+        appid:
+        appsecret:
+  qiniu:
+    accessKey: none
+    secretKey: none
+  yunpian:
+    apikey:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+
+logging:
+  level:
+    root: WARN
+    com.wangzhihao.blackmarket: DEBUG
+
+swagger:
+  title: Black Market Serivce API Documentation
+  description: Black Market Serivce API Documentation
+  contact:
+    name: Wang Zhihao
+    email: wangzhihao0629@gmail.com
+  base-package: com.wangzhihao.blackmarket.controller
+  base-path: /**
+  exclude-path: /error, /ops/**

@@ -1,8 +1,20 @@
 language: java
 jdk:
  - oraclejdk8
+sudo: required
+dist: trusty
+group: deprecated-2017Q4
+services:
+  - mysql
+before_install:
+  - mysql -u root -e "CREATE DATABASE blackmarket;"
+test:
+  adapter: mysql2
+  database: blackmarket
+  username: root
+  encoding: utf8
 install:
-- cp ./src/main/resources/application.yml.example ./src/main/resources/application.yml
+- cp ./src/test/resources/application.yml.example ./src/test/resources/application.yml
 - mvn -N io.takari:maven:wrapper
-- ./mvnw clean install
+- ./mvnw clean test
 - bash <(curl -s https://codecov.io/bash)

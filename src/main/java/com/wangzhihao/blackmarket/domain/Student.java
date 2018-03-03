@@ -12,12 +12,13 @@ import java.util.Date;
  */
 public class Student {
     private Long id;
+    private Long wechatUserId;
     private String name;
     private String mobile;
     private String openId;
-    private Long type;
-    private String grade;
-    private Long status;
+    private Integer type;
+    private Integer grade;
+    private Integer status;
     private Date createTime;
     private Date updateTime;
 
@@ -27,6 +28,14 @@ public class Student {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getWechatUserId() {
+        return wechatUserId;
+    }
+
+    public void setWechatUserId(Long wechatUserId) {
+        this.wechatUserId = wechatUserId;
     }
 
     public String getName() {
@@ -53,27 +62,27 @@ public class Student {
         this.openId = openId;
     }
 
-    public Long getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Long type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public String getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 
-    public Long getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -97,11 +106,12 @@ public class Student {
     public String toString() {
         return "Student{" +
                 "id=" + id +
+                ", wechatUserId=" + wechatUserId +
                 ", name='" + name + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", openId='" + openId + '\'' +
                 ", type=" + type +
-                ", grade='" + grade + '\'' +
+                ", grade=" + grade +
                 ", status=" + status +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

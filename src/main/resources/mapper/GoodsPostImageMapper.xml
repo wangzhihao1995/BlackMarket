@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+       Copyright 2015-2016 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangzhihao.blackmarket.mapper.GoodsPostImageMapper">
+
+    <sql id="BeanProperty">
+        id, post_id, image_id, create_time, update_time
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into goods_post_image (post_id, image_id) values(#{postId}, #{imageId})
+    </insert>
+
+    <select id="findById" resultType="com.wangzhihao.blackmarket.domain.GoodsPostImage">
+        select
+        <include refid="BeanProperty"/>
+        from goods_post_image
+        where id = #{id}
+    </select>
+
+    <select id="findByPostId" resultType="com.wangzhihao.blackmarket.domain.GoodsPostImage">
+        select
+        <include refid="BeanProperty"/>
+        from goods_post_image
+        where post_id = #{postId}
+    </select>
+</mapper>

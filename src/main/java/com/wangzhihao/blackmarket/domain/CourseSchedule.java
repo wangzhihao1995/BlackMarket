@@ -11,10 +11,10 @@ package com.wangzhihao.blackmarket.domain;
 public class CourseSchedule {
     private Long id;
     private Long courseId;
-    private Long day;
-    private Long start;
-    private Long end;
-    private Long frequency;
+    private Integer day;
+    private Integer start;
+    private Integer end;
+    private Integer frequency;
 
     public Long getId() {
         return id;
@@ -32,35 +32,35 @@ public class CourseSchedule {
         this.courseId = courseId;
     }
 
-    public Long getDay() {
+    public Integer getDay() {
         return day;
     }
 
-    public void setDay(Long day) {
+    public void setDay(Integer day) {
         this.day = day;
     }
 
-    public Long getStart() {
+    public Integer getStart() {
         return start;
     }
 
-    public void setStart(Long start) {
+    public void setStart(Integer start) {
         this.start = start;
     }
 
-    public Long getEnd() {
+    public Integer getEnd() {
         return end;
     }
 
-    public void setEnd(Long end) {
+    public void setEnd(Integer end) {
         this.end = end;
     }
 
-    public Long getFrequency() {
+    public Integer getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(Long frequency) {
+    public void setFrequency(Integer frequency) {
         this.frequency = frequency;
     }
 

@@ -1,5 +1,7 @@
 package com.wangzhihao.blackmarket.domain;
 
+import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
+
 import java.util.Date;
 
 /**
@@ -13,11 +15,11 @@ import java.util.Date;
 public class WechatUser {
     private Long id;
     private String openId;
-    private String nickname;
+    private String nickName;
     private String avatarUrl;
     private String city;
     private String country;
-    private Long gender;
+    private Integer gender;
     private String language;
     private String province;
     private Date createTime;
@@ -39,12 +41,12 @@ public class WechatUser {
         this.openId = openId;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getAvatarUrl() {
@@ -71,11 +73,11 @@ public class WechatUser {
         this.country = country;
     }
 
-    public Long getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Long gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
@@ -111,12 +113,25 @@ public class WechatUser {
         this.updateTime = updateTime;
     }
 
+    public static WechatUser getByUpdateWechatUserDto(UpdateWechatUserDto updateWechatUserDto) {
+        WechatUser wechatUser = new WechatUser();
+        wechatUser.setOpenId(updateWechatUserDto.getOpenId());
+        wechatUser.setNickName(updateWechatUserDto.getNickName());
+        wechatUser.setAvatarUrl(updateWechatUserDto.getAvatarUrl());
+        wechatUser.setCity(updateWechatUserDto.getCity());
+        wechatUser.setCountry(updateWechatUserDto.getCountry());
+        wechatUser.setGender(updateWechatUserDto.getGender());
+        wechatUser.setLanguage(updateWechatUserDto.getLanguage());
+        wechatUser.setProvince(updateWechatUserDto.getProvince());
+        return wechatUser;
+    }
+
     @Override
     public String toString() {
         return "WechatUser{" +
                 "id=" + id +
                 ", openId='" + openId + '\'' +
-                ", nickname='" + nickname + '\'' +
+                ", nickName='" + nickName + '\'' +
                 ", avatarUrl='" + avatarUrl + '\'' +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +

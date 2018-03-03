@@ -12,9 +12,9 @@ public class Course {
     private Long id;
     private String name;
     private String teacher;
-    private Long credit;
+    private Integer credit;
     private Long year;
-    private Long semester;
+    private Integer semester;
 
     public Long getId() {
         return id;
@@ -40,11 +40,11 @@ public class Course {
         this.teacher = teacher;
     }
 
-    public Long getCredit() {
+    public Integer getCredit() {
         return credit;
     }
 
-    public void setCredit(Long credit) {
+    public void setCredit(Integer credit) {
         this.credit = credit;
     }
 
@@ -56,11 +56,11 @@ public class Course {
         this.year = year;
     }
 
-    public Long getSemester() {
+    public Integer getSemester() {
         return semester;
     }
 
-    public void setSemester(Long semester) {
+    public void setSemester(Integer semester) {
         this.semester = semester;
     }
 
