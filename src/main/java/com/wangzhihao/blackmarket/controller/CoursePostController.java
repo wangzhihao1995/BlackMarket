@@ -146,7 +146,10 @@ public class CoursePostController {
 
         CoursePost coursePost = coursePostService.getById(id);
         if (coursePost != null) {
-            Long pv = coursePostService.incrPv(coursePost);
+            Long pv = coursePost.getPv();
+            if (!currentStudent.getId().equals(coursePost.getStudentId())) {
+                pv = coursePostService.incrPv(coursePost);
+            }
             Student student = studentService.getById(coursePost.getStudentId());
             WechatUser wechatUser = wechatUserService.getByOpenId(student.getOpenId());
 
