@@ -206,7 +206,9 @@ public class CoursePostController {
             if (coursePost.getStudentId().equals(student.getId())) {
                 updateCoursePostDto.setId(id);
                 coursePostService.update(updateCoursePostDto);
-                return new ResponseEntity<>("OK", HttpStatus.OK);
+                Map<String, String> resp = Maps.newHashMap();
+                resp.put("status", "ok");
+                return new ResponseEntity<>(resp, HttpStatus.OK);
             }
             throw new UpdateCoursePostException("Cannot update other user's post!");
         }
