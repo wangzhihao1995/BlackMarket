@@ -139,22 +139,24 @@ public class CoursePostController {
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     ResponseEntity getCoursePostById(@PathVariable("id") long id) {
-        WechatUser wechatUser = wechatUtils.requireWechatUser();
-        Student student = studentService.getByOpenId(wechatUser.getOpenId());
-        StudentResp studentResp = new StudentResp();
-        studentResp.setId(student.getId());
-        studentResp.setUsername(wechatUser.getNickName());
-        studentResp.setMobile(student.getMobile());
-        studentResp.setType(student.getType());
-        studentResp.setGrade(student.getGrade());
-        studentResp.setStatus(student.getStatus());
-        studentResp.setAvatarUrl(wechatUser.getAvatarUrl());
-        studentResp.setCreateTime(student.getCreateTime());
-        studentResp.setUpdateTime(student.getUpdateTime());
+        wechatUtils.requireWechatUser();
 
         CoursePost coursePost = coursePostService.getById(id);
         if (coursePost != null) {
             Long pv = coursePostService.incrPv(coursePost);
+            Student student = studentService.getById(coursePost.getStudentId());
+            WechatUser wechatUser = wechatUserService.getByOpenId(student.getOpenId());
+
+            StudentResp studentResp = new StudentResp();
+            studentResp.setId(student.getId());
+            studentResp.setUsername(student.getName());
+            studentResp.setMobile(student.getMobile());
+            studentResp.setType(student.getType());
+            studentResp.setGrade(student.getGrade());
+            studentResp.setStatus(student.getStatus());
+            studentResp.setAvatarUrl(wechatUser.getAvatarUrl());
+            studentResp.setCreateTime(student.getCreateTime());
+            studentResp.setUpdateTime(student.getUpdateTime());
 
             CoursePostResp coursePostResp = new CoursePostResp();
             coursePostResp.setId(coursePost.getId());
