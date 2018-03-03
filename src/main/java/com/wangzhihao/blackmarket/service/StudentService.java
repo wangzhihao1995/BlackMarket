@@ -23,4 +23,8 @@ public interface StudentService {
     Student getByOpenId(String openId);
 
     void updateStudent(UpdateStudentDto updateStudentDto);
+
+    void incrViewContactCount(Long studentId);
+
+    Integer getRemainingViewContactCount(Long studentId);
 }

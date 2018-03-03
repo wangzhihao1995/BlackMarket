@@ -1,6 +1,7 @@
 package com.wangzhihao.blackmarket.controller;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.wangzhihao.blackmarket.domain.Course;
 import com.wangzhihao.blackmarket.domain.CoursePost;
 import com.wangzhihao.blackmarket.domain.Student;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -170,7 +172,8 @@ public class CoursePostController {
             coursePostResp.setPv(pv);
             coursePostResp.setCreateTime(coursePost.getCreateTime());
             coursePostResp.setUpdateTime(coursePost.getUpdateTime());
-            coursePostResp.setHasViewedContact(false);
+            coursePostResp.setHasViewedContact(
+                    coursePostService.hasViewedPostContact(student.getId(), coursePost.getId()));
             return new ResponseEntity<>(coursePostResp, HttpStatus.OK);
         }
         throw new CoursePostNotFoundException();
@@ -207,5 +210,28 @@ public class CoursePostController {
             throw new UpdateCoursePostException("Cannot update other user's post!");
         }
         throw new CoursePostNotFoundException();
+    }
+
+    @ApiOperation(value = "Update Course Post")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
+    @RequestMapping(value = "/viewcount", method = RequestMethod.PUT)
+    ResponseEntity getRemainingViewContactCount() {
+        WechatUser wechatUser = wechatUtils.requireWechatUser();
+        Student student = studentService.getByWechatUserId(wechatUser.getId());
+        Integer remainingViewCount = studentService.getRemainingViewContactCount(student.getId());
+        Map<String, Integer> resp = Maps.newHashMap();
+        resp.put("remainingViewCount", remainingViewCount);
+        return new ResponseEntity<>(resp, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Update Course Post")
+    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
+    @RequestMapping(value = "/viewcount", method = RequestMethod.PUT)
+    ResponseEntity viewCoursePostContact(@RequestBody UpdateCoursePostViewCountDto updateCoursePostViewCountDto) {
+        WechatUser wechatUser = wechatUtils.requireWechatUser();
+        Student student = studentService.getByWechatUserId(wechatUser.getId());
+        coursePostService.viewPostContact(student.getId(), updateCoursePostViewCountDto.getId());
+        studentService.incrViewContactCount(student.getId());
+        return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.OK);
     }
 }

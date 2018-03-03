@@ -6,6 +6,7 @@ import com.wangzhihao.blackmarket.dto.UpdateCoursePostDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Description
@@ -26,4 +27,8 @@ public interface CoursePostService {
     void update(UpdateCoursePostDto updateCoursePostDto);
 
     Long incrPv(CoursePost coursePost);
+
+    Boolean hasViewedPostContact(Long studentId, Long postId);
+
+    void viewPostContact(Long studentId, Long postId);
 }

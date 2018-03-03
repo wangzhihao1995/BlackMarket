@@ -1,6 +1,7 @@
 package com.wangzhihao.blackmarket.service.impl;
 
 import com.wangzhihao.blackmarket.domain.CoursePost;
+import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.dto.GetCoursePostListDto;
 import com.wangzhihao.blackmarket.dto.UpdateCoursePostDto;
 import com.wangzhihao.blackmarket.mapper.CoursePostMapper;
@@ -24,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class CoursePostServiceImpl implements CoursePostService {
 
     private static final String COURSE_POST_PV_CACHE_KEY = "course:post:pv:id:%s";
+    private static final String STUDENT_VIEWED_POST_CONTACT_CACHE_KEY = "student:%s:viewed:contact:post:%s";
 
     @Autowired
     CoursePostMapper coursePostMapper;
@@ -65,5 +67,19 @@ public class CoursePostServiceImpl implements CoursePostService {
             coursePostMapper.updatePv(coursePost.getId(), pv);
         }
         return pv;
+    }
+
+    @Override
+    public Boolean hasViewedPostContact(Long studentId, Long postId) {
+        String key = String.format(STUDENT_VIEWED_POST_CONTACT_CACHE_KEY, studentId, postId);
+        String val = stringRedisTemplate.opsForValue().get(key);
+        return val != null;
+    }
+
+    @Override
+    public void viewPostContact(Long studentId, Long postId) {
+        String key = String.format(STUDENT_VIEWED_POST_CONTACT_CACHE_KEY, studentId, postId);
+        stringRedisTemplate.opsForValue().set(key, "");
+        stringRedisTemplate.expire(key, 3, TimeUnit.DAYS);
     }
 }
