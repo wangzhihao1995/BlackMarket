@@ -13,20 +13,20 @@ import javax.validation.constraints.NotNull;
 public class UpdateCoursePostViewCountDto {
 
     @NotNull
-    private Long id;
+    private Long postId;
 
-    public Long getId() {
-        return id;
+    public Long getPostId() {
+        return postId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPostId(Long postId) {
+        this.postId = postId;
     }
 
     @Override
     public String toString() {
         return "UpdateCoursePostViewCountDto{" +
-                "id=" + id +
+                "postId=" + postId +
                 '}';
     }
 }

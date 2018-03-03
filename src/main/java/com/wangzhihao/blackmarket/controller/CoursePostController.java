@@ -231,7 +231,7 @@ public class CoursePostController {
     ResponseEntity viewCoursePostContact(@RequestBody UpdateCoursePostViewCountDto updateCoursePostViewCountDto) {
         WechatUser wechatUser = wechatUtils.requireWechatUser();
         Student student = studentService.getByWechatUserId(wechatUser.getId());
-        coursePostService.viewPostContact(student.getId(), updateCoursePostViewCountDto.getId());
+        coursePostService.viewPostContact(student.getId(), updateCoursePostViewCountDto.getPostId());
         studentService.incrViewContactCount(student.getId());
         return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.OK);
     }
