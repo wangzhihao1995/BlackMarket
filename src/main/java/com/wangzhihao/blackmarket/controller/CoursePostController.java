@@ -63,7 +63,7 @@ public class CoursePostController {
         getCoursePostListDto.setLimit(1L);
         List<CoursePost> ids = coursePostService.getCoursePostList(getCoursePostListDto);
         if (!ids.isEmpty()) {
-            throw new AddCoursePostException("Already existed!");
+            throw new AddCoursePostException("已存在同样的Post");
         }
     }
 
@@ -106,10 +106,10 @@ public class CoursePostController {
     @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
     @RequestMapping(value = "", method = RequestMethod.GET)
     ResponseEntity getCoursePostList(GetCoursePostListDto getCoursePostListDto) {
-        if (getCoursePostListDto.getDemand().equals(0L)) {
+        if (getCoursePostListDto.getDemand() < 0) {
             getCoursePostListDto.setDemand(null);
         }
-        if (getCoursePostListDto.getSupply().equals(0L)) {
+        if (getCoursePostListDto.getSupply() < 0L) {
             getCoursePostListDto.setSupply(null);
         }
         List<CoursePost> coursePosts = coursePostService.getCoursePostList(getCoursePostListDto);
