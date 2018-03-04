@@ -2,13 +2,12 @@ package com.wangzhihao.blackmarket.controller;
 
 import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.domain.WechatUser;
-import com.wangzhihao.blackmarket.dto.AddStudentDto;
-import com.wangzhihao.blackmarket.dto.RegisterDto;
-import com.wangzhihao.blackmarket.dto.UpdateStudentDto;
+import com.wangzhihao.blackmarket.dto.*;
 import com.wangzhihao.blackmarket.enums.SmsVerificationTypeEnum;
 import com.wangzhihao.blackmarket.exception.StudentNotFoundException;
 import com.wangzhihao.blackmarket.service.SmsService;
 import com.wangzhihao.blackmarket.service.StudentService;
+import com.wangzhihao.blackmarket.service.WechatUserService;
 import com.wangzhihao.blackmarket.utils.WechatUtils;
 import com.google.common.collect.Maps;
 import com.yunpian.sdk.model.Result;
@@ -38,6 +37,9 @@ public class StudentController {
 
     @Autowired
     StudentService studentService;
+
+    @Autowired
+    WechatUserService wechatUserService;
 
     @Autowired
     SmsService smsService;
@@ -130,5 +132,21 @@ public class StudentController {
     ResponseEntity getStudentPostList(@PathVariable("id") long id) {
         wechatUtils.requireWechatUser();
         return new ResponseEntity<>(String.format("getStudent No.%d PostList", id), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Get Current Student Share Profile")
+    @RequestMapping(value = "/share/profile/{id}", method = RequestMethod.GET)
+    ResponseEntity getStudentShareProfile(@PathVariable("id") long id) {
+        Student student = studentService.getById(id);
+        WechatUser wechatUser = wechatUserService.getByOpenId(student.getOpenId());
+        StudentShareResp studentShareResp = new StudentShareResp();
+        studentShareResp.setId(student.getId());
+        studentShareResp.setUsername(wechatUser.getNickName());
+        studentShareResp.setType(student.getType());
+        studentShareResp.setGrade(student.getGrade());
+        studentShareResp.setAvatarUrl(wechatUser.getAvatarUrl());
+        studentShareResp.setCreateTime(student.getCreateTime());
+        studentShareResp.setUpdateTime(student.getUpdateTime());
+        return new ResponseEntity<>(studentShareResp, HttpStatus.OK);
     }
 }
