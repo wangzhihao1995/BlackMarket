@@ -48,6 +48,7 @@
         <if test="studentId!=null">and student_id = #{studentId}</if>
         order by id
         <if test="order=='desc'">desc</if>
+        limit #{start}, #{limit}
     </select>
 
     <update id="update">

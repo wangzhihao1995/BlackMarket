@@ -47,5 +47,6 @@
         <if test="status!=null">and status = #{status}</if>
         order by id
         <if test="order=='desc'">desc</if>
+        limit #{start}, #{limit}
     </select>
 </mapper>
