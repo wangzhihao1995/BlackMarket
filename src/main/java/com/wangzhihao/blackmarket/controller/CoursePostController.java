@@ -192,7 +192,7 @@ public class CoursePostController {
         CoursePost coursePost = CoursePost.getByAddCoursePostDto(addCoursePostDto);
         coursePost.setMobile(student.getMobile());
         coursePostService.add(coursePost);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update Course Post")
