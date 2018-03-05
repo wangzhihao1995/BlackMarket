@@ -55,6 +55,7 @@
             <if test="status!=null">status = #{status},</if>
             <if test="mobileSwitch!=null">mobile_switch = #{mobileSwitch},</if>
             <if test="wechat!=null">wechat = #{wechat},</if>
+            <if test="content!=null">content = #{content},</if>
         </set>
         where id = #{id}
     </update>

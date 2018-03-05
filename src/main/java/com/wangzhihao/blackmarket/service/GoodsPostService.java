@@ -23,7 +23,6 @@ public interface GoodsPostService {
 
     List<GoodsPost> getGoodsPostList(GetGoodsPostListDto getGoodsPostListDto);
 
-
     void update(UpdateGoodsPostDto updateGoodsPostDto);
 
     Long incrPv(GoodsPost goodsPost);
