@@ -10,7 +10,8 @@ package com.wangzhihao.blackmarket.dto;
  */
 public class GetGoodsPostListDto {
     private String order = "desc";
-    private Long status = 0L;
+    private Long studentId;
+    private Long status;
     private Long start = 0L;
     private Long limit = 10L;
 
@@ -20,6 +21,14 @@ public class GetGoodsPostListDto {
 
     public void setOrder(String order) {
         this.order = order;
+    }
+
+    public Long getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
     public Long getStatus() {
@@ -50,6 +59,7 @@ public class GetGoodsPostListDto {
     public String toString() {
         return "GetGoodsPostListDto{" +
                 "order='" + order + '\'' +
+                ", studentId=" + studentId +
                 ", status=" + status +
                 ", start=" + start +
                 ", limit=" + limit +

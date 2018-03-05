@@ -1,11 +1,5 @@
 package com.wangzhihao.blackmarket.dto;
 
-import com.wangzhihao.blackmarket.enums.BlackMarketEnum;
-import com.wangzhihao.blackmarket.enums.MobileSwitchEnum;
-import org.hibernate.validator.constraints.NotBlank;
-
-import javax.validation.constraints.NotNull;
-
 /**
  * Description
  * <p>
@@ -14,24 +8,27 @@ import javax.validation.constraints.NotNull;
  *
  * @author Wang Zhihao.
  */
-public class AddGoodsPostDto {
-    private Long studentId;
-    @BlackMarketEnum(enumClass = MobileSwitchEnum.class, message = "Invalid mobileSwitch!")
+public class UpdateGoodsPostDto {
+    private Long id;
+    private Long status;
     private Integer mobileSwitch;
     private String wechat;
-    @NotNull
-    @NotBlank
-    private String title;
-    @NotNull
-    @NotBlank
     private String content;
 
-    public Long getStudentId() {
-        return studentId;
+    public Long getId() {
+        return id;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getStatus() {
+        return status;
+    }
+
+    public void setStatus(Long status) {
+        this.status = status;
     }
 
     public Integer getMobileSwitch() {
@@ -50,14 +47,6 @@ public class AddGoodsPostDto {
         this.wechat = wechat;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getContent() {
         return content;
     }
@@ -68,11 +57,11 @@ public class AddGoodsPostDto {
 
     @Override
     public String toString() {
-        return "AddGoodsPostDto{" +
-                "studentId=" + studentId +
+        return "UpdateGoodsPostDto{" +
+                "id=" + id +
+                ", status=" + status +
                 ", mobileSwitch=" + mobileSwitch +
                 ", wechat='" + wechat + '\'' +
-                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }

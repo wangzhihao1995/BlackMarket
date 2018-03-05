@@ -30,7 +30,7 @@
         values(#{studentId}, #{status}, #{mobileSwitch}, #{wechat}, #{title}, #{content}, #{pv})
     </insert>
 
-    <select id="findById" resultType="com.wangzhihao.blackmarket.domain.GoodsPost">
+    <select id="findGoodsPostById" resultType="com.wangzhihao.blackmarket.domain.GoodsPost">
         select
         <include refid="BeanProperty"/>
         from goods_post
@@ -41,12 +41,25 @@
         select
         <include refid="BeanProperty"/>
         from goods_post
-        where 1=1
-        <if test="supply!=null">and supply = #{supply}</if>
-        <if test="demand!=null">and demand = #{demand}</if>
+        where 1 = 1
         <if test="status!=null">and status = #{status}</if>
+        <if test="studentId!=null">and student_id = #{studentId}</if>
         order by id
         <if test="order=='desc'">desc</if>
         limit #{start}, #{limit}
     </select>
+
+    <update id="update">
+        update goods_post
+        <set>
+            <if test="status!=null">status = #{status},</if>
+            <if test="mobileSwitch!=null">mobile_switch = #{mobileSwitch},</if>
+            <if test="wechat!=null">wechat = #{wechat},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updatePv">
+        update goods_post <set>pv = #{pv}</set> where id = #{id}
+    </update>
 </mapper>

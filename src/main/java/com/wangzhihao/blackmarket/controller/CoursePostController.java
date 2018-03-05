@@ -6,10 +6,10 @@ import com.wangzhihao.blackmarket.domain.CoursePost;
 import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.domain.WechatUser;
 import com.wangzhihao.blackmarket.dto.*;
-import com.wangzhihao.blackmarket.enums.CoursePostStautsEnum;
+import com.wangzhihao.blackmarket.enums.PostStautsEnum;
 import com.wangzhihao.blackmarket.exception.AddCoursePostException;
 import com.wangzhihao.blackmarket.exception.CoursePostNotFoundException;
-import com.wangzhihao.blackmarket.exception.UpdateCoursePostException;
+import com.wangzhihao.blackmarket.exception.UpdatePostException;
 import com.wangzhihao.blackmarket.service.CoursePostService;
 import com.wangzhihao.blackmarket.service.CourseService;
 import com.wangzhihao.blackmarket.service.StudentService;
@@ -59,7 +59,7 @@ public class CoursePostController {
         getCoursePostListDto.setStudentId(addCoursePostDto.getStudentId());
         getCoursePostListDto.setSupply(addCoursePostDto.getSupply());
         getCoursePostListDto.setDemand(addCoursePostDto.getDemand());
-        getCoursePostListDto.setStatus(CoursePostStautsEnum.NORMAL.getValue());
+        getCoursePostListDto.setStatus(PostStautsEnum.NORMAL.getValue());
         getCoursePostListDto.setLimit(1L);
         List<CoursePost> ids = coursePostService.getCoursePostList(getCoursePostListDto);
         if (!ids.isEmpty()) {
@@ -190,7 +190,6 @@ public class CoursePostController {
         addCoursePostDto.setStudentId(student.getId());
         validCoursePost(addCoursePostDto);
         CoursePost coursePost = CoursePost.getByAddCoursePostDto(addCoursePostDto);
-        coursePost.setMobile(student.getMobile());
         coursePostService.add(coursePost);
         return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.OK);
     }
@@ -211,7 +210,7 @@ public class CoursePostController {
                 resp.put("status", "ok");
                 return new ResponseEntity<>(resp, HttpStatus.OK);
             }
-            throw new UpdateCoursePostException("Cannot update other user's post!");
+            throw new UpdatePostException("Cannot update other user's post!");
         }
         throw new CoursePostNotFoundException();
     }

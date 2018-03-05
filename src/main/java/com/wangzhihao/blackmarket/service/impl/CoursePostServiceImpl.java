@@ -1,7 +1,6 @@
 package com.wangzhihao.blackmarket.service.impl;
 
 import com.wangzhihao.blackmarket.domain.CoursePost;
-import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.dto.GetCoursePostListDto;
 import com.wangzhihao.blackmarket.dto.UpdateCoursePostDto;
 import com.wangzhihao.blackmarket.mapper.CoursePostMapper;
@@ -25,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class CoursePostServiceImpl implements CoursePostService {
 
     private static final String COURSE_POST_PV_CACHE_KEY = "course:post:pv:id:%d";
-    private static final String STUDENT_VIEWED_POST_CONTACT_CACHE_KEY = "student:%d:viewed:contact:post:%d";
+    private static final String STUDENT_VIEWED_POST_CONTACT_CACHE_KEY = "student:%d:viewed:contact:course:post:%d";
 
     @Autowired
     CoursePostMapper coursePostMapper;

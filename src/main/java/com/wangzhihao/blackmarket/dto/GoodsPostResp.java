@@ -1,7 +1,4 @@
-package com.wangzhihao.blackmarket.domain;
-
-import com.wangzhihao.blackmarket.dto.AddGoodsPostDto;
-import com.wangzhihao.blackmarket.enums.PostStautsEnum;
+package com.wangzhihao.blackmarket.dto;
 
 import java.util.Date;
 
@@ -13,9 +10,10 @@ import java.util.Date;
  *
  * @author Wang Zhihao.
  */
-public class GoodsPost {
+public class GoodsPostResp {
+
     private Long id;
-    private Long studentId;
+    private StudentResp student;
     private Integer status;
     private Integer mobileSwitch;
     private String wechat;
@@ -24,6 +22,7 @@ public class GoodsPost {
     private Long pv;
     private Date createTime;
     private Date updateTime;
+    private Boolean hasViewedContact = false;
 
     public Long getId() {
         return id;
@@ -33,12 +32,12 @@ public class GoodsPost {
         this.id = id;
     }
 
-    public Long getStudentId() {
-        return studentId;
+    public StudentResp getStudent() {
+        return student;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setStudent(StudentResp student) {
+        this.student = student;
     }
 
     public Integer getStatus() {
@@ -105,23 +104,19 @@ public class GoodsPost {
         this.updateTime = updateTime;
     }
 
-    public static GoodsPost getByAddGoodsPostDto(AddGoodsPostDto addGoodsPostDto) {
-        GoodsPost goodsPost = new GoodsPost();
-        goodsPost.setStudentId(addGoodsPostDto.getStudentId());
-        goodsPost.setStatus(PostStautsEnum.NORMAL.getValue());
-        goodsPost.setMobileSwitch(addGoodsPostDto.getMobileSwitch());
-        goodsPost.setWechat(addGoodsPostDto.getWechat());
-        goodsPost.setTitle(addGoodsPostDto.getTitle());
-        goodsPost.setContent(addGoodsPostDto.getContent());
-        goodsPost.setPv(0L);
-        return goodsPost;
+    public Boolean getHasViewedContact() {
+        return hasViewedContact;
+    }
+
+    public void setHasViewedContact(Boolean hasViewedContact) {
+        this.hasViewedContact = hasViewedContact;
     }
 
     @Override
     public String toString() {
-        return "GoodsPost{" +
+        return "GoodsPostResp{" +
                 "id=" + id +
-                ", studentId=" + studentId +
+                ", student=" + student +
                 ", status=" + status +
                 ", mobileSwitch=" + mobileSwitch +
                 ", wechat='" + wechat + '\'' +
@@ -130,6 +125,7 @@ public class GoodsPost {
                 ", pv=" + pv +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", hasViewedContact=" + hasViewedContact +
                 '}';
     }
 }

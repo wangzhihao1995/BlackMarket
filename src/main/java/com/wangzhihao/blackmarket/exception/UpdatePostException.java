@@ -9,8 +9,8 @@ package com.wangzhihao.blackmarket.exception;
  * @author Wang Zhihao.
  */
 @SuppressWarnings("squid:S2166")
-public class UpdateCoursePostException extends BlackMarketException {
-    public UpdateCoursePostException(String message) {
+public class UpdatePostException extends BlackMarketException {
+    public UpdatePostException(String message) {
         super(message);
     }
 }

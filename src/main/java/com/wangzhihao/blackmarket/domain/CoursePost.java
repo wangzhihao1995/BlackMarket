@@ -1,7 +1,7 @@
 package com.wangzhihao.blackmarket.domain;
 
 import com.wangzhihao.blackmarket.dto.AddCoursePostDto;
-import com.wangzhihao.blackmarket.enums.CoursePostStautsEnum;
+import com.wangzhihao.blackmarket.enums.PostStautsEnum;
 
 import java.util.Date;
 
@@ -20,7 +20,6 @@ public class CoursePost {
     private Long supply;
     private Integer status;
     private Integer mobileSwitch;
-    private String mobile;
     private String wechat;
     private String message;
     private Long pv;
@@ -75,14 +74,6 @@ public class CoursePost {
         this.mobileSwitch = mobileSwitch;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
     public String getWechat() {
         return wechat;
     }
@@ -128,7 +119,7 @@ public class CoursePost {
         coursePost.setStudentId(addCoursePostDto.getStudentId());
         coursePost.setSupply(addCoursePostDto.getSupply());
         coursePost.setDemand(addCoursePostDto.getDemand());
-        coursePost.setStatus(CoursePostStautsEnum.NORMAL.getValue());
+        coursePost.setStatus(PostStautsEnum.NORMAL.getValue());
         coursePost.setMobileSwitch(addCoursePostDto.getMobileSwitch());
         coursePost.setWechat(addCoursePostDto.getWechat());
         coursePost.setMessage(addCoursePostDto.getMessage());
@@ -145,7 +136,6 @@ public class CoursePost {
                 ", supply=" + supply +
                 ", status=" + status +
                 ", mobileSwitch=" + mobileSwitch +
-                ", mobile='" + mobile + '\'' +
                 ", wechat='" + wechat + '\'' +
                 ", message='" + message + '\'' +
                 ", pv=" + pv +
