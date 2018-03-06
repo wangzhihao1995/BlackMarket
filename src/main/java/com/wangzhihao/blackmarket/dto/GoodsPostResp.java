@@ -17,7 +17,6 @@ public class GoodsPostResp {
     private Integer status;
     private Integer mobileSwitch;
     private String wechat;
-    private String title;
     private String content;
     private Long pv;
     private Date createTime;
@@ -62,14 +61,6 @@ public class GoodsPostResp {
 
     public void setWechat(String wechat) {
         this.wechat = wechat;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getContent() {
@@ -120,7 +111,6 @@ public class GoodsPostResp {
                 ", status=" + status +
                 ", mobileSwitch=" + mobileSwitch +
                 ", wechat='" + wechat + '\'' +
-                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", pv=" + pv +
                 ", createTime=" + createTime +

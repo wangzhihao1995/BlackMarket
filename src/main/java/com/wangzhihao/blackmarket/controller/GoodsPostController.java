@@ -72,7 +72,6 @@ public class GoodsPostController {
             goodsPostResp.setStatus(goodsPost.getStatus());
             goodsPostResp.setMobileSwitch(goodsPost.getMobileSwitch());
             goodsPostResp.setWechat(goodsPost.getWechat());
-            goodsPostResp.setTitle(goodsPost.getTitle());
             goodsPostResp.setContent(goodsPost.getContent());
             goodsPostResp.setPv(goodsPost.getPv());
             goodsPostResp.setCreateTime(goodsPost.getCreateTime());
@@ -137,7 +136,6 @@ public class GoodsPostController {
             goodsPostResp.setStatus(goodsPost.getStatus());
             goodsPostResp.setMobileSwitch(goodsPost.getMobileSwitch());
             goodsPostResp.setWechat(goodsPost.getWechat());
-            goodsPostResp.setTitle(goodsPost.getTitle());
             goodsPostResp.setContent(goodsPost.getContent());
             goodsPostResp.setPv(pv);
             goodsPostResp.setCreateTime(goodsPost.getCreateTime());

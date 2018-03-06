@@ -21,9 +21,6 @@ public class AddGoodsPostDto {
     private String wechat;
     @NotNull
     @NotBlank
-    private String title;
-    @NotNull
-    @NotBlank
     private String content;
 
     public Long getStudentId() {
@@ -50,14 +47,6 @@ public class AddGoodsPostDto {
         this.wechat = wechat;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getContent() {
         return content;
     }
@@ -72,7 +61,6 @@ public class AddGoodsPostDto {
                 "studentId=" + studentId +
                 ", mobileSwitch=" + mobileSwitch +
                 ", wechat='" + wechat + '\'' +
-                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }

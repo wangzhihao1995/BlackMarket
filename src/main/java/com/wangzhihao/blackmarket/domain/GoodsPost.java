@@ -19,7 +19,6 @@ public class GoodsPost {
     private Integer status;
     private Integer mobileSwitch;
     private String wechat;
-    private String title;
     private String content;
     private Long pv;
     private Date createTime;
@@ -65,14 +64,6 @@ public class GoodsPost {
         this.wechat = wechat;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getContent() {
         return content;
     }
@@ -111,7 +102,6 @@ public class GoodsPost {
         goodsPost.setStatus(PostStautsEnum.NORMAL.getValue());
         goodsPost.setMobileSwitch(addGoodsPostDto.getMobileSwitch());
         goodsPost.setWechat(addGoodsPostDto.getWechat());
-        goodsPost.setTitle(addGoodsPostDto.getTitle());
         goodsPost.setContent(addGoodsPostDto.getContent());
         goodsPost.setPv(0L);
         return goodsPost;
@@ -125,7 +115,6 @@ public class GoodsPost {
                 ", status=" + status +
                 ", mobileSwitch=" + mobileSwitch +
                 ", wechat='" + wechat + '\'' +
-                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", pv=" + pv +
                 ", createTime=" + createTime +

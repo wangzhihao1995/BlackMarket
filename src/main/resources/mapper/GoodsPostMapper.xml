@@ -22,12 +22,12 @@
 <mapper namespace="com.wangzhihao.blackmarket.mapper.GoodsPostMapper">
 
     <sql id="BeanProperty">
-        id, student_id, status, mobile_switch, wechat, title, content, pv, create_time, update_time
+        id, student_id, status, mobile_switch, wechat, content, pv, create_time, update_time
     </sql>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into goods_post (student_id, status, mobile_switch, wechat, title, content, pv)
-        values(#{studentId}, #{status}, #{mobileSwitch}, #{wechat}, #{title}, #{content}, #{pv})
+        insert into goods_post (student_id, status, mobile_switch, wechat, content, pv)
+        values(#{studentId}, #{status}, #{mobileSwitch}, #{wechat}, #{content}, #{pv})
     </insert>
 
     <select id="findGoodsPostById" resultType="com.wangzhihao.blackmarket.domain.GoodsPost">
