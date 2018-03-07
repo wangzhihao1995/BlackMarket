@@ -44,8 +44,8 @@ public class IndexController {
             configService.add(config);
         }
         if (pageview < Long.parseLong(config.getV())) {
-            Long val = Long.parseLong(config.getV()) + 1;
-            configService.update(key, String.valueOf(val));
+            pageview = Long.parseLong(config.getV()) + 1;
+            configService.update(key, String.valueOf(pageview));
             return new ResponseEntity<>(Maps.immutableEntry("page_view", pageview), HttpStatus.OK);
         }
         configService.update(key, String.valueOf(pageview));
