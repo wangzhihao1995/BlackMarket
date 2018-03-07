@@ -1,15 +1,18 @@
 package com.wangzhihao.blackmarket.controller;
 
+import com.google.common.collect.Maps;
 import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.domain.WechatUser;
-import com.wangzhihao.blackmarket.dto.*;
+import com.wangzhihao.blackmarket.dto.AddStudentDto;
+import com.wangzhihao.blackmarket.dto.RegisterDto;
+import com.wangzhihao.blackmarket.dto.StudentShareResp;
+import com.wangzhihao.blackmarket.dto.UpdateStudentDto;
 import com.wangzhihao.blackmarket.enums.SmsVerificationTypeEnum;
 import com.wangzhihao.blackmarket.exception.StudentNotFoundException;
 import com.wangzhihao.blackmarket.service.SmsService;
 import com.wangzhihao.blackmarket.service.StudentService;
 import com.wangzhihao.blackmarket.service.WechatUserService;
 import com.wangzhihao.blackmarket.utils.WechatUtils;
-import com.google.common.collect.Maps;
 import com.yunpian.sdk.model.Result;
 import com.yunpian.sdk.model.SmsSingleSend;
 import io.swagger.annotations.ApiImplicitParam;
@@ -71,7 +74,7 @@ public class StudentController {
             Result<SmsSingleSend> result = smsService.singleSend(mobile, message);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
-        return new ResponseEntity<>(message, HttpStatus.OK);
+        return new ResponseEntity<>(Maps.immutableEntry("messgae", message), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Create New Student")
@@ -117,21 +120,6 @@ public class StudentController {
             return new ResponseEntity<>(student, HttpStatus.OK);
         }
         throw new StudentNotFoundException();
-    }
-
-    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
-    @RequestMapping(value = "/post", method = RequestMethod.GET)
-    ResponseEntity getCurrentStudentPostList() {
-        wechatUtils.requireWechatUser();
-        return new ResponseEntity<>("getCurrentStudentPostList", HttpStatus.OK);
-    }
-
-    @ApiOperation(value = "Get Student Post List")
-    @ApiImplicitParams({@ApiImplicitParam(name = "X-User-Session-Key", paramType = "header")})
-    @RequestMapping(value = "/{id}/post", method = RequestMethod.GET)
-    ResponseEntity getStudentPostList(@PathVariable("id") long id) {
-        wechatUtils.requireWechatUser();
-        return new ResponseEntity<>(String.format("getStudent No.%d PostList", id), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get Current Student Share Profile")
