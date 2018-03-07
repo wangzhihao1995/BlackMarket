@@ -2,6 +2,20 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+-- Table structure for config
+-- ----------------------------
+DROP TABLE IF EXISTS `config`;
+CREATE TABLE `config` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `k` varchar(80) NOT NULL,
+  `v` varchar(256) DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_key` (`k`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
 -- Table structure for course
 -- ----------------------------
 DROP TABLE IF EXISTS `course`;

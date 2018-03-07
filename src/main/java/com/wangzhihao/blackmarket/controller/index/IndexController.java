@@ -1,19 +1,16 @@
-package com.wangzhihao.blackmarket.controller;
+package com.wangzhihao.blackmarket.controller.index;
 
+import com.google.common.collect.Maps;
+import com.wangzhihao.blackmarket.domain.ConfigDomain;
 import com.wangzhihao.blackmarket.domain.WechatSession;
 import com.wangzhihao.blackmarket.enums.SmsVerificationTypeEnum;
+import com.wangzhihao.blackmarket.service.ConfigService;
 import com.wangzhihao.blackmarket.service.SmsService;
 import com.wangzhihao.blackmarket.service.WechatSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Description
@@ -24,8 +21,8 @@ import java.util.Map;
  * @author Wang Zhihao.
  */
 @RestController
-@RequestMapping(value = "/health")
-public class HealthController {
+@RequestMapping(value = "/index")
+public class IndexController {
 
     @Autowired
     SmsService smsService;
@@ -33,11 +30,26 @@ public class HealthController {
     @Autowired
     WechatSessionService wechatSessionService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    ResponseEntity health() {
-        Map<String, String> r = new HashMap<>();
-        r.put("status", "ok");
-        return new ResponseEntity<>(r, HttpStatus.OK);
+    @Autowired
+    ConfigService configService;
+
+    @RequestMapping(value = "/pageview/{pageview}", method = RequestMethod.PUT)
+    ResponseEntity incrPageView(@PathVariable Long pageview) {
+        String key = "black:market:index:page:view";
+        ConfigDomain config = configService.getByKey(key);
+        if (config == null) {
+            config = new ConfigDomain();
+            config.setK(key);
+            config.setV(String.valueOf(pageview));
+            configService.add(config);
+        }
+        if (pageview < Long.parseLong(config.getV())) {
+            Long val = Long.parseLong(config.getV()) + 1;
+            configService.update(key, String.valueOf(val));
+            return new ResponseEntity<>(Maps.immutableEntry("page_view", pageview), HttpStatus.OK);
+        }
+        configService.update(key, String.valueOf(pageview));
+        return new ResponseEntity<>(Maps.immutableEntry("page_view", pageview), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/key", method = RequestMethod.GET)
