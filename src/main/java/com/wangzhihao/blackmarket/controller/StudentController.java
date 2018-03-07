@@ -93,7 +93,7 @@ public class StudentController {
         student.setGrade(addStudentDto.getGrade());
         student.setStatus(addStudentDto.getStatus());
         studentService.add(student);
-        return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.CREATED);
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update Current Student")
