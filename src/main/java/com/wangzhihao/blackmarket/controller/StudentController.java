@@ -25,6 +25,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * Description
  * <p>
@@ -75,7 +77,10 @@ public class StudentController {
             Result<SmsSingleSend> result = smsService.singleSend(mobile, message);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
-        return new ResponseEntity<>(Maps.immutableEntry("messgae", message), HttpStatus.OK);
+        Map<String, String> resp = Maps.newHashMap();
+        resp.put("messgae", message);
+        resp.put("code", verificationCode);
+        return new ResponseEntity<>(resp, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Create New Student")
