@@ -43,7 +43,7 @@ public class HealthController {
 
     @RequestMapping(value = "/key", method = RequestMethod.GET)
     ResponseEntity getKey() {
-        WechatSession wechatSession = wechatSessionService.getByOpenId("o-irt0PDNL3neAUoa3HiKDnIxd_d");
+        WechatSession wechatSession = wechatSessionService.getByOpenId("o-irt0KDNL3neAUoa3HiKDnIxc_c");
         if (wechatSession != null) {
             return new ResponseEntity<>(wechatSession, HttpStatus.OK);
         } else {

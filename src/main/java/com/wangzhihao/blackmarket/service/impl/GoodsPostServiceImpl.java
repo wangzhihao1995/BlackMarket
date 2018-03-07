@@ -34,6 +34,9 @@ public class GoodsPostServiceImpl implements GoodsPostService {
 
     @Override
     public void add(GoodsPost goodsPost) {
+
+        System.out.println(goodsPost.getContent());
+
         goodsPostMapper.insert(goodsPost);
     }
 

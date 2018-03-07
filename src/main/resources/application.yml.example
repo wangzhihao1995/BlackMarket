@@ -10,12 +10,15 @@ spring:
   application:
     name: blackmarket
   datasource:
+    type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/blackmarket?useUnicode=true&characterEncoding=utf-8&autoReconnect=true
     username: root
     password: 123456
     driverClassName: com.mysql.jdbc.Driver
     connectionTestQuery: SELECT 1
     jmx-enabled: true
+    hikari:
+      connectionInitSql: SET NAMES utf8mb4
 
 blackmarket:
   config:

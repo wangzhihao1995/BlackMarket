@@ -7,8 +7,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `teacher` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
+  `name` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `teacher` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `credit` int(11) DEFAULT NULL,
   `year` int(4) NOT NULL,
   `semester` tinyint NOT NULL,
@@ -30,13 +30,13 @@ CREATE TABLE `course_post` (
   `status` tinyint(6) DEFAULT NULL,
   `mobile_switch` tinyint(6) DEFAULT NULL,
   `wechat` varchar(80) DEFAULT NULL,
-  `message` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
+  `message` varchar(256) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `pv` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idx_course_post_student_id` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Table structure for course_schedule
@@ -80,14 +80,14 @@ CREATE TABLE `goods_post` (
   `student_id` int(11) DEFAULT NULL,
   `status` tinyint DEFAULT NULL,
   `mobile_switch` tinyint DEFAULT NULL,
-  `wechat` varchar(32) COLLATE utf8mb4_bin DEFAULT NULL,
-  `content` varchar(512) COLLATE utf8mb4_bin DEFAULT NULL,
+  `wechat` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `content` varchar(512) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `pv` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idx_goods_post_student_id` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Table structure for goods_post_image
@@ -101,7 +101,7 @@ CREATE TABLE `goods_post_image` (
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_post_image` (`post_id`, `image_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Table structure for tag
@@ -109,12 +109,12 @@ CREATE TABLE `goods_post_image` (
 DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
+  `name` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_tag_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Table structure for tag_post
@@ -128,7 +128,7 @@ CREATE TABLE `tag_post` (
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_tag_post` (`tag_id`, `post_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Table structure for student
@@ -137,9 +137,9 @@ DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `wechat_user_id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `mobile` varchar(80) COLLATE utf8mb4_bin NOT NULL,
-  `open_id` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
+  `name` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `mobile` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
+  `open_id` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `type` int(6) DEFAULT NULL,
   `grade` int(4) DEFAULT NULL,
   `status` tinyint DEFAULT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE `student` (
   KEY `id` (`id`),
   KEY `idx_student_open_id` (`open_id`),
   KEY `idx_student_mobile` (`mobile`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Table structure for wechat_session
@@ -157,9 +157,9 @@ CREATE TABLE `student` (
 DROP TABLE IF EXISTS `wechat_session`;
 CREATE TABLE `wechat_session` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `open_id` varchar(80) COLLATE utf8mb4_bin NOT NULL,
-  `session_key` varchar(80) COLLATE utf8mb4_bin NOT NULL,
-  `third_session_key` varchar(80) COLLATE utf8mb4_bin NOT NULL,
+  `open_id` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
+  `session_key` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
+  `third_session_key` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -173,18 +173,18 @@ CREATE TABLE `wechat_session` (
 DROP TABLE IF EXISTS `wechat_user`;
 CREATE TABLE `wechat_user` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `open_id` varchar(80) COLLATE utf8mb4_bin NOT NULL,
-  `nick_name` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `avatar_url` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
-  `city` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `country` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
+  `open_id` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
+  `nick_name` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `avatar_url` varchar(256) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `city` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `country` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `gender` smallint(6) DEFAULT NULL,
-  `language` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
-  `province` varchar(80) COLLATE utf8mb4_bin DEFAULT NULL,
+  `language` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `province` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_wechat_user_open_id` (`open_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 SET FOREIGN_KEY_CHECKS = 1;
