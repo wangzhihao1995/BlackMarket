@@ -8,6 +8,7 @@ import com.wangzhihao.blackmarket.dto.RegisterDto;
 import com.wangzhihao.blackmarket.dto.StudentShareResp;
 import com.wangzhihao.blackmarket.dto.UpdateStudentDto;
 import com.wangzhihao.blackmarket.enums.SmsVerificationTypeEnum;
+import com.wangzhihao.blackmarket.exception.IncorrectVerificationCodeException;
 import com.wangzhihao.blackmarket.exception.StudentNotFoundException;
 import com.wangzhihao.blackmarket.service.SmsService;
 import com.wangzhihao.blackmarket.service.StudentService;
@@ -82,18 +83,23 @@ public class StudentController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     ResponseEntity createNewStudent(@RequestBody AddStudentDto addStudentDto) {
         WechatUser wechatUser = wechatUtils.requireWechatUser();
-        addStudentDto.setWechatUserId(wechatUser.getId());
-        addStudentDto.setOpenId(wechatUser.getOpenId());
-        Student student = new Student();
-        student.setWechatUserId(addStudentDto.getWechatUserId());
-        student.setName(wechatUser.getNickName());
-        student.setMobile(addStudentDto.getMobile());
-        student.setOpenId(addStudentDto.getOpenId());
-        student.setType(addStudentDto.getType());
-        student.setGrade(addStudentDto.getGrade());
-        student.setStatus(addStudentDto.getStatus());
-        studentService.add(student);
-        return new ResponseEntity<>(student, HttpStatus.OK);
+        String code = addStudentDto.getVerifyCode();
+        if (smsService.verify(addStudentDto.getMobile(), code, SmsVerificationTypeEnum.REGISTER)) {
+            addStudentDto.setWechatUserId(wechatUser.getId());
+            addStudentDto.setOpenId(wechatUser.getOpenId());
+            Student student = new Student();
+            student.setWechatUserId(addStudentDto.getWechatUserId());
+            student.setName(wechatUser.getNickName());
+            student.setMobile(addStudentDto.getMobile());
+            student.setOpenId(addStudentDto.getOpenId());
+            student.setType(addStudentDto.getType());
+            student.setGrade(addStudentDto.getGrade());
+            student.setStatus(addStudentDto.getStatus());
+            studentService.add(student);
+            return new ResponseEntity<>(student, HttpStatus.OK);
+        } else {
+            throw new IncorrectVerificationCodeException();
+        }
     }
 
     @ApiOperation(value = "Update Current Student")

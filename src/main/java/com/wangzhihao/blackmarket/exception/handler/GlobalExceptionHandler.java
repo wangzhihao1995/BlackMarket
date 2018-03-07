@@ -160,4 +160,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(IncorrectVerificationCodeException.class)
+    public ResponseEntity handleIncorrectVerificationCodeException(IncorrectVerificationCodeException e) {
+        logger.info(ERROR_MSG, e);
+        e.setMessage(e.getMessage());
+        e.setCode("1011");
+        e.setType(IncorrectVerificationCodeException.class.getName());
+        Object resp = genOutputException(e);
+        return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
+    }
+
 }

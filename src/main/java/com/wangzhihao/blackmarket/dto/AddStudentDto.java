@@ -16,6 +16,7 @@ public class AddStudentDto {
     private Integer type;
     private Integer grade;
     private Integer status;
+    private String verifyCode;
 
     public Long getWechatUserId() {
         return wechatUserId;
@@ -73,6 +74,14 @@ public class AddStudentDto {
         this.status = status;
     }
 
+    public String getVerifyCode() {
+        return verifyCode;
+    }
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
+    }
+
     @Override
     public String toString() {
         return "AddStudentDto{" +
@@ -81,8 +90,9 @@ public class AddStudentDto {
                 ", mobile='" + mobile + '\'' +
                 ", openId='" + openId + '\'' +
                 ", type=" + type +
-                ", grade='" + grade + '\'' +
+                ", grade=" + grade +
                 ", status=" + status +
+                ", verifyCode='" + verifyCode + '\'' +
                 '}';
     }
 }
