@@ -14,7 +14,7 @@ public class CourseSchedule {
     private Integer day;
     private Integer start;
     private Integer end;
-    private Integer frequency;
+    private String frequency;
 
     public Long getId() {
         return id;
@@ -56,11 +56,11 @@ public class CourseSchedule {
         this.end = end;
     }
 
-    public Integer getFrequency() {
+    public String getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(Integer frequency) {
+    public void setFrequency(String frequency) {
         this.frequency = frequency;
     }
 
@@ -72,7 +72,7 @@ public class CourseSchedule {
                 ", day=" + day +
                 ", start=" + start +
                 ", end=" + end +
-                ", frequency=" + frequency +
+                ", frequency='" + frequency + '\'' +
                 '}';
     }
 }
