@@ -12,7 +12,7 @@ import com.wangzhihao.blackmarket.enums.SemesterEnum;
  */
 public class GetCourseListDto {
     private Integer year = 2018;
-    private Integer semester = SemesterEnum.FALL.getValue();
+    private Integer semester = SemesterEnum.SPRING.getValue();
 
     public Integer getYear() {
         return year;
