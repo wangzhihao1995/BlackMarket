@@ -15,7 +15,7 @@ public class AddStudentDto {
     private String openId;
     private Integer type;
     private Integer grade;
-    private Integer status;
+    private Integer status = 1;
     private String verifyCode;
 
     public Long getWechatUserId() {
