@@ -2,9 +2,12 @@ package com.wangzhihao.blackmarket.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
+import com.wangzhihao.blackmarket.domain.Student;
 import com.wangzhihao.blackmarket.domain.WechatSession;
+import com.wangzhihao.blackmarket.dto.UpdateStudentDto;
 import com.wangzhihao.blackmarket.dto.UpdateWechatUserDto;
 import com.wangzhihao.blackmarket.exception.MissingJscodeException;
+import com.wangzhihao.blackmarket.service.StudentService;
 import com.wangzhihao.blackmarket.service.WechatService;
 import com.wangzhihao.blackmarket.service.WechatSessionService;
 import com.wangzhihao.blackmarket.service.WechatUserService;
@@ -50,6 +53,9 @@ public class WechatController {
     WechatSessionService wechatSessionService;
 
     @Autowired
+    StudentService studentService;
+
+    @Autowired
     WechatUtils wechatUtils;
 
     @RequestMapping(value = "/jscode2session", method = RequestMethod.GET)
@@ -86,6 +92,13 @@ public class WechatController {
     ResponseEntity updateWecahtUser(@Valid @RequestBody UpdateWechatUserDto updateWechatUserDto) {
         updateWechatUserDto.setOpenId(wechatUtils.requireWechatSession().getOpenId());
         wechatUserService.updateWechatUser(updateWechatUserDto);
+        Student student = studentService.getByOpenId(updateWechatUserDto.getOpenId());
+        if (student != null) {
+            UpdateStudentDto updateStudentDto = new UpdateStudentDto();
+            updateStudentDto.setId(student.getId());
+            updateStudentDto.setName(updateWechatUserDto.getNickName());
+            studentService.updateStudent(updateStudentDto);
+        }
         return new ResponseEntity<>(Maps.newHashMap(), HttpStatus.OK);
     }
 }
